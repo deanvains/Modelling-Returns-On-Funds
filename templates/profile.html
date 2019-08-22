@@ -7,22 +7,89 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+    <link rel="stylesheet" href="../static/stylesheet.css">
+
 </head>
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="mynav container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
+                <a class="navbar-brand" href="#"> <img src="../static/UWA-logo.png" alt=UWA height=50px; width=160px></a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+            <ul class="navlist nav navbar-nav navbar-right">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="calc.html">Calculate</a></li>
+                <li class="active"><a href="profile.html">Stored Data</a></li>
             </ul>
         </div>
     </nav>
+    <div class="container">
+        <div class="row">
+
+            <h1> *Users Name* </h1>
+            <div class="col-sm-6">
+                <h2> Past Returns </h2>
+                <h4> Return 1 </h4>
+                <table>
+                    <tr>
+                        <th>Year(s)</th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>100,000</td>
+                        <td>150,000</td>
+                        <td>200,000</td>
+                    </tr>
+                    <tr>
+                        <td>Spending</td>
+                        <td>-10,000</td>
+                        <td>-20,000</td>
+                        <td>-10,000</td>
+                    </tr>
+                    <tr>
+                        <td>Recapitalisation</td>
+                        <td>30,000</td>
+                        <td>40,000</td>
+                        <td>50,000</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h2> Estimate Returns</h2>
+                <h4>Return 1</h4>
+                <table>
+                    <tr>
+                        <th>Year(s)</th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>160,000</td>
+                        <td>190,000</td>
+                        <td>270,000</td>
+                    </tr>
+                    <tr>
+                        <td>Spending</td>
+                        <td>-15,000</td>
+                        <td>-29,000</td>
+                        <td>-18,000</td>
+                    </tr>
+                    <tr>
+                        <td>Recapitalisation</td>
+                        <td>37,000</td>
+                        <td>46,000</td>
+                        <td>57,000</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

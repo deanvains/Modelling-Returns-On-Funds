@@ -1,0 +1,41 @@
+body {
+    margin: -2px;
+}
+
+.mynav {
+    background-color: #2033a1 !important;
+    height: 80px;
+    vertical-align: middle;
+}
+
+.navlist li a {
+    height: 80px;
+    text-align: center;
+    line-height: 45px;
+    color: white !important;
+    font-size: 130%;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus,
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: inherit;
+    background: inherit;
+    text-decoration: underline;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    padding: 5px;
+}
