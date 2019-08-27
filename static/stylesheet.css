@@ -40,3 +40,31 @@ td {
     border: 1px solid #ececec;
     padding: 5px;
 }
+
+.jumbotron{
+    background-color: #27348b !important;
+     color: white;
+    text-align: center;
+}
+
+.profilebox{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #27348b !important;
+    color: white;
+    width: 25%;
+    height: 10%;
+    border-right: 1px solid white;
+}
+
+.profilebox ul{
+    text-align: left;
+}
+
+.profilebox {
+    text-align: left;
+}
+
+.firstbox{
+    border-left: 1px solid white;
+}
