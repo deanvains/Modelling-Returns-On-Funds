@@ -3,7 +3,7 @@ body {
 }
 
 .mynav {
-    background-color: #2033a1 !important;
+    background-color: #27348b !important;
     height: 80px;
     vertical-align: middle;
 }
@@ -28,7 +28,7 @@ body {
 .dropdown-menu>li>a:focus,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: inherit;
+    color: #e2b600 !important;
     background: inherit;
     text-decoration: underline;
 }
@@ -36,6 +36,6 @@ body {
 table,
 th,
 td {
-    border: 1px solid black;
+    border: 1px solid #ececec;
     padding: 5px;
 }
