@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <h1> Please fill in the boxes below: </h1>
+                <!--These can be validated client side using js and server side using flask-->
+                <form>
+                    <b>Date:</b><br>
+                    <input type="text" name="inputDate">
+                    <br> <br><b>Amount: </b><br>
+                    <input type="text" name="inputAmount">
+                    <br> <br><b>Amount Type:</b> <br>
+                    <input type="radio" name="inputAmountType" value="lump">Lump Sum
+                    <br>
+                    <input type="radio" name="inputAmountType" value="installments">Installments
+                    <br> <br><b>Interest Class:</b> <br>
+                    <input type="radio" name="interestClass" value="classE"> Class E <br>
+                    <input type="radio" name="interestClass" value="classF"> Class F <br>
+                    <input type="radio" name="interestClass" value="classG"> Class G <br>
+                    <input type="radio" name="interestClass" value="classH"> Class H <br>
+                    <input type="radio" name="interestClass" value="classA"> Class A <br>
+                    <input type="radio" name="interestClass" value="classN"> Class N <br>
+                    <input type="radio" name="interestClass" value="classQ"> Class Q <br>
+                    <input type="radio" name="interestClass" value="classS"> Class S <br>
+                    <br><b>Recapitalisation: </b><br>
+                    <input type="text" name="recap">
+                    <br><br>
+                    <input type="submit" value="Submit">
+                    <br>
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+{% endblock %}

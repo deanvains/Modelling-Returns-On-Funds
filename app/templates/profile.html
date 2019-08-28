@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class ="jumbotron">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 profilebox firstbox">
+                        <h2>User Info</h2>
+                        <ul>
+                            <li>Username:</li>
+                            <li>Full Name</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 profilebox">
+                        <h2>User Bio</h2>
+                        <p>Here is some info about the user</p>
+                    </div>
+                    <div class="col-lg-4 profilebox">
+                        <h2>Information</h2>
+                        <ul>
+                            <li>Last Login: Date</li>
+                            <li>Here is another information point</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 profilebox">
+                        <h2>Edit Info</h2>
+                        <button type="button" class="btn btn-primary">Click Here</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2> Past Returns </h2>
+                <h4> Return 1 </h4>
+                <table>
+                    <tr>
+                        <th>Year(s)</th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>100,000</td>
+                        <td>150,000</td>
+                        <td>200,000</td>
+                    </tr>
+                    <tr>
+                        <td>Spending</td>
+                        <td>-10,000</td>
+                        <td>-20,000</td>
+                        <td>-10,000</td>
+                    </tr>
+                    <tr>
+                        <td>Recapitalisation</td>
+                        <td>30,000</td>
+                        <td>40,000</td>
+                        <td>50,000</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h2> Estimate Returns</h2>
+                <h4>Return 1</h4>
+                <table>
+                    <tr>
+                        <th>Year(s)</th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>160,000</td>
+                        <td>190,000</td>
+                        <td>270,000</td>
+                    </tr>
+                    <tr>
+                        <td>Spending</td>
+                        <td>-15,000</td>
+                        <td>-29,000</td>
+                        <td>-18,000</td>
+                    </tr>
+                    <tr>
+                        <td>Recapitalisation</td>
+                        <td>37,000</td>
+                        <td>46,000</td>
+                        <td>57,000</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
