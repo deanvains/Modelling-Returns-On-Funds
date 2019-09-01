@@ -1,29 +1,33 @@
 <html>
-    <head>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<head>
 
-        <link rel="stylesheet" href="../static/stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-    </head>
-    <body>
-        <nav class="navbar navbar-default ml-auto">
-            <div class="mynav container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#"> <img src="../static/UWA-logo.png" alt=UWA height=50px; width=160px></a>
-                </div>
-                <ul class="navlist nav navbar-nav navbar-right">
+    <link rel="stylesheet" href="../static/stylesheet.css">
+    <script src="../static/scripts.js"></script>
 
-                    <li class="active"><a href="/">Homepage</a></li>
-                    <li><a href="{{ url_for('calcs') }}">Calculate</a></li>
-                    <li><a href="{{ url_for('profile') }}">Stored Data</a></li>
+</head>
 
-                </ul>
+<body>
+    <nav class="navbar navbar-default ml-auto">
+        <div class="mynav container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> <img src="../static/UWA-logo.png" alt=UWA height=50px; width=160px></a>
             </div>
-        </nav>
-        {% block content %}{% endblock %}
-    </body>
+            <ul class="navlist nav navbar-nav navbar-right">
+
+                <li class="active"><a href="/">Homepage</a></li>
+                <li><a href="{{ url_for('calcs') }}">Calculate</a></li>
+                <li><a href="{{ url_for('profile') }}">Stored Data</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+
 </html>

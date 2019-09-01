@@ -1,38 +1,142 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h1> Please fill in the boxes below: </h1>
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <h1> Please fill in the boxes below: </h1>
-                <!--These can be validated client side using js and server side using flask-->
-                <form>
-                    <b>Date:</b><br>
-                    <input type="text" name="inputDate">
-                    <br> <br><b>Amount: </b><br>
+            <form>
+                <br>
+                <b>Interest Class:</b>
+                <select id="interestclass">
+                    <option value="classNull" selected>Please Select an Option</option>
+                    <option value="classE">class E</option>
+                    <option value="classF">class F</option>
+                    <option value="classG">class G</option>
+                    <option value="classH">class H</option>
+                    <option value="classA">class A</option>
+                    <option value="classN">class N</option>
+                    <option value="classQ">class Q</option>
+                    <option value="classS">class S</option>
+                </select>
+                <div></div>
+                <br>
+
+                <br>
+                <fieldset id="FSOpeningBalance"> <b>Opening Balance: </b>
                     <input type="text" name="inputAmount">
-                    <br> <br><b>Amount Type:</b> <br>
-                    <input type="radio" name="inputAmountType" value="lump">Lump Sum
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSMonthOrYear"> <b> Starting Month: </b>
+                    <select name="inputDateMonth">
+                            <option value="null" selected> Please select a time period: </option>
+                            <option value="monthly"> Monthly </option>
+                            <option value="yearly"> Yearly </option>
+                    </select>
+                </fieldset>
+                <br>
+
+
+                <br>
+                <fieldset id="FSStartMonth"> <b> Starting Month: </b>
+                    <select name="inputDateMonth">
+                            <option value="jan"> January </option>
+                            <option value="feb"> February </option>
+                            <option value="mar"> March </option>
+                            <option value="apr"> April </option>
+                            <option value="may"> May </option>
+                            <option value="jun"> June </option>
+                            <option value="jul"> July </option>
+                            <option value="aug"> August </option>
+                            <option value="sep"> September </option>
+                            <option value="oct"> October</option>
+                            <option value="nov"> November </option>
+                            <option value="dec"> December</option>
+                          </select>
+
                     <br>
-                    <input type="radio" name="inputAmountType" value="installments">Installments
-                    <br> <br><b>Interest Class:</b> <br>
-                    <input type="radio" name="interestClass" value="classE"> Class E <br>
-                    <input type="radio" name="interestClass" value="classF"> Class F <br>
-                    <input type="radio" name="interestClass" value="classG"> Class G <br>
-                    <input type="radio" name="interestClass" value="classH"> Class H <br>
-                    <input type="radio" name="interestClass" value="classA"> Class A <br>
-                    <input type="radio" name="interestClass" value="classN"> Class N <br>
-                    <input type="radio" name="interestClass" value="classQ"> Class Q <br>
-                    <input type="radio" name="interestClass" value="classS"> Class S <br>
-                    <br><b>Recapitalisation: </b><br>
-                    <input type="text" name="recap">
-                    <br><br>
-                    <input type="submit" value="Submit">
+                    <b> Ending Month: </b>
+                    <select name="endDateMonth">
+                                  <option value="jan"> January </option>
+                                  <option value="feb"> February </option>
+                                  <option value="mar"> March </option>
+                                  <option value="apr"> April </option>
+                                  <option value="may"> May </option>
+                                  <option value="jun"> June </option>
+                                  <option value="jul"> July </option>
+                                  <option value="aug"> August </option>
+                                  <option value="sep"> September </option>
+                                  <option value="oct"> October</option>
+                                  <option value="nov"> November </option>
+                                  <option value="dec"> December</option>
+                                </select>
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSStartYear">
+                    <b> Starting Year: </b>
+                    <input type="number" name="inputDateYear">
                     <br>
-                </form>
-            </div>
-            <div class="col-sm-1"></div>
+                    <b> Ending Year: </b>
+                    <input type="number" name="EndDateYear">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSSpendingProfile">
+                    <b> Spending Profile: </b>
+                    <input type="number" name="SpendingProfile">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSProfileOfFunds">
+                    <b>Profile of Funds Receipt </b>
+                    <input type="text" name="inputAmount">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSChangeInSpending">
+                    <b>Change in spending profile </b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSAdditionalDonations">
+                    <b>Additional Doantions</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSRecapitalisation">
+                    <b>Recaptilisation</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSCapitolDistribution">
+                    <b>Capitol Distribution</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSCustomDistribution">
+                    <b>Custom Distribution</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+            </form>
         </div>
+        <div class="col-sm-1"></div>
     </div>
+</div>
 {% endblock %}
