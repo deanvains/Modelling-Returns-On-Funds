@@ -29,8 +29,8 @@
                 <br>
 
                 <br>
-                <fieldset id="FSMonthOrYear"> <b> Starting Month: </b>
-                    <select name="inputDateMonth">
+                <fieldset id="FSMonthOrYear"> <b> Monthly or Yearly?: </b>
+                    <select id="inputDateMonth">
                             <option value="null" selected> Please select a time period: </option>
                             <option value="monthly"> Monthly </option>
                             <option value="yearly"> Yearly </option>
@@ -55,6 +55,7 @@
                             <option value="nov"> November </option>
                             <option value="dec"> December</option>
                           </select>
+                    </br>
 
                     <br>
                     <b> Ending Month: </b>
@@ -86,6 +87,14 @@
                 <br>
 
                 <br>
+                <fieldset id="FSInterestRate">
+                    <b> Interest Ratio for this class: </b> <br>
+                    <input type="radio" name="rate1" value="2"> 2% <br>
+                    <input type="radio" name="rate2" value="5"> 5%<br>
+                </fieldset>
+                <br>
+
+                <br>
                 <fieldset id="FSSpendingProfile">
                     <b> Spending Profile: </b>
                     <input type="number" name="SpendingProfile">
@@ -93,15 +102,29 @@
                 <br>
 
                 <br>
-                <fieldset id="FSProfileOfFunds">
+                <fieldset id="FSProfileOfFundReceipts">
                     <b>Profile of Funds Receipt </b>
                     <input type="text" name="inputAmount">
                 </fieldset>
                 <br>
 
                 <br>
-                <fieldset id="FSChangeInSpending">
-                    <b>Change in spending profile </b>
+                <fieldset id="FSChangeInSpendingInt">
+                    <b>Change in spending profile Integer:</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSChangeInSpendingMonth">
+                    <b>Change in spending profile Monthly:</b>
+                    <input type="text" name="">
+                </fieldset>
+                <br>
+
+                <br>
+                <fieldset id="FSChangeInSpendingYear">
+                    <b>Change in spending profile Yearly:</b>
                     <input type="text" name="">
                 </fieldset>
                 <br>
@@ -121,8 +144,8 @@
                 <br>
 
                 <br>
-                <fieldset id="FSCapitolDistribution">
-                    <b>Capitol Distribution</b>
+                <fieldset id="FSCapitalDistribution">
+                    <b>Capital Distribution</b>
                     <input type="text" name="">
                 </fieldset>
                 <br>

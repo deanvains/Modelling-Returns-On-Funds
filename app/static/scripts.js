@@ -1,17 +1,31 @@
 $(document).ready(function() {
+
+
+    /**
+     * 
+     * 
+     * We need to go and hide the fieldsets that we aren't using so that
+     * when we select different interest class options it doesn't keep showing
+     * residual fields
+     * 
+     * i.e. we need to do what we are doing for $("#inputDateMonth").change(function(event)
+     */
     $("#interestclass").change(function(event) {
-        if ($("#interestclass").val() == "classE") {
+
+        var selected = $("#interestclass").val();
+
+        if (selected == "classE") {
             $("#FSOpeningBalance").show();
             $("#FSMonthOrYear").show();
 
-
-            $("#FSMonthOrYear").change(function(event) {
-                //this condition not being hit
-                if ($("#FSMonthOrYear").val() == "monthly") {
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
                     $("#FSStartMonth").show();
                     $("#FSStartYear").hide();
                     //neither is this one
-                } else if ($("#FSMonthOrYear").val() == "yearly") {
+                } else if (sel == "yearly") {
                     $("#FSStartYear").show();
                     $("#FSStartMonth").hide();
                 } else {
@@ -19,40 +33,202 @@ $(document).ready(function() {
                     $("#FSStartYear").hide();
                 }
             })
+
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSInterestRate").show();
+            $("#FSAdditionalDonations").show();
+            $("#FSRecapitalisation").show();
+            $("#FSCapitalDistribution").show();
         }
 
-        if ($("#interestclass").val() == "classF") {
+        if (selected == "classF") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
+
+
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSInterestRate").show();
+        }
+
+        if (selected == "classG") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
+
+
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSAdditionalDonations").show();
+            $("#FSRecapitalisation").show();
+            $("#FSInterestRate").show();
+            $("#FSCapitalDistribution").show();
+            $("#FSCustomDistribution").show();
 
         }
 
-        if ($("#interestclass").val() == "classG") {
+        if (selected == "classH") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
 
 
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+            $("#FSSpendingProfile").show();
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSChangeInSpendingInt").show();
+            $("#FSChangeInSpendingMonth").show();
+            $("#FSChangeInSpendingYear").show();
+            $("#FSInterestRate").show();
         }
 
-        if ($("#interestclass").val() == "classH") {
+        if (selected == "classA") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
 
 
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+
+            $("#FSSpendingProfile").show();
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSChangeInSpendingInt").show();
+            $("#FSChangeInSpendingMonth").show();
+            $("#FSChangeInSpendingYear").show();
+            $("#FSInterestRate").show();
+            $("#FSRecapitalisation").show();
+            $("#FSCapitalDistribution").show();
         }
 
-        if ($("#interestclass").val() == "classA") {
+        if (selected == "classN") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
 
-
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSInterestRate").show();
         }
 
-        if ($("#interestclass").val() == "classN") {
+        if (selected == "classQ") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
 
 
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSInterestRate").show();
         }
 
-        if ($("#interestclass").val() == "classQ") {
+        if (selected == "classS") {
+            $("#FSOpeningBalance").show();
+            $("#FSMonthOrYear").show();
 
 
-        }
+            $("#inputDateMonth").change(function(event) {
+                var sel = $("#inputDateMonth").val();
+                console.log(sel);
+                if (sel == "monthly") {
+                    $("#FSStartMonth").show();
+                    $("#FSStartYear").hide();
+                    //neither is this one
+                } else if (sel == "yearly") {
+                    $("#FSStartYear").show();
+                    $("#FSStartMonth").hide();
+                } else {
+                    $("#FSStartMonth").hide();
+                    $("#FSStartYear").hide();
+                }
+            })
 
-        if ($("#interestclass").val() == "classS") {
-
-
+            $("#FSSpendingProfile").show();
+            $("#FSProfileOfFundReceipts").show();
+            $("#FSChangeInSpendingInt").show();
+            $("#FSChangeInSpendingMonth").show();
+            $("#FSChangeInSpendingYear").show();
+            $("#FSInterestRate").show();
         }
     })
 });
+
+$("#FSCapitalDistribution").show();
