@@ -105,7 +105,6 @@ $(document).ready(function() {
                 if (sel == "monthly") {
                     $("#FSStartMonth").show();
                     $("#FSStartYear").hide();
-                    //neither is this one
                 } else if (sel == "yearly") {
                     $("#FSStartYear").show();
                     $("#FSStartMonth").hide();

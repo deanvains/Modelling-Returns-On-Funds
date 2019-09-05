@@ -1,4 +1,4 @@
-def longTermPool():
+def ClassEFG():
     
     monthDict = {"January" : 1,
                  "February" : 2,
