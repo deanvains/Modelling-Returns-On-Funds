@@ -23,19 +23,3 @@ class LoginForm(FlaskForm):
 #    capitalDistribution = 
 #    customDistribution = 
 
-#    if(interestClass == classE):
-#        return
-#    elif(interestClass == classF):
-#        return
-#    elif(interestClass == classG):
-#        return
-#    elif(interestClass == classH):
-#        return
-#   elif(interestClass == classA):
-#       return
-#    elif(interestClass == classN):
-#        return
-#    elif(interestClass == classQ):
-#        return
-#    elif(interestClass == classS):
-#        return
