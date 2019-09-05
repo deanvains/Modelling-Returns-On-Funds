@@ -4,6 +4,10 @@ from app.models import User
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+from app import myTest
+
+print(myTest.testFunction())
+
 
 @app.route('/')
 @app.route('/index')
