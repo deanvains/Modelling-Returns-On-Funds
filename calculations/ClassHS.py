@@ -30,7 +30,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
     monthlyReturn = {}
     annualAMB = {}
             
-        
+       
     for month in range(0,timeFrame):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
