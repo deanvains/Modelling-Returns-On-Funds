@@ -1,5 +1,4 @@
-def ClassHS():
-    
+def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
     monthDict = {"January" : 1,
                  "February" : 2,
                  "March" : 3,
@@ -13,57 +12,201 @@ def ClassHS():
                  "November" : 11,
                  "December" : 12}
     
-    OpeningBalance = int(input ("Please enter the opening balance: "))
-    OutflowSpending = int(input ("Please enter spending: "))
-    StartingMonth = input ("Please enter starting month: ")
-    StartingYear = int(input ("Please enter starting year: "))
-    EndingMonth = input ("Please enter ending month: ")
-    EndingYear = int(input ("Please enter ending year: "))
-    InterestRate = float(input ("Please enter an interest rate (%): "))
-    ChangeSpending = int(input ("Please enter new spending amount: "))
-    ChangeSpendingMonth = input ("Please enter change month: ")
-    ChangeSpendingYear = int(input ("Please enter change year: "))
     
-    #If the date entered by the user is incorrect, give an error message.
-    if StartingMonth not in monthDict:
-        print("Please enter a valid month.")
+    dateMonth = month
+    dateYear = year
+    timeFrame = timeframe
+    fundValue = value
+    fundProfile = fprofile
+    interestClass = intclass
+    interest = interest
+    spendingProfile = spending
+    additionalCapital = addContribution
+    
         
-    else:
-        #Search the month dictionary for the starting month value.
-        StartingMonthValue = monthDict[StartingMonth]
         
-        #Search the month dictionary for the ending month value.
-        EndingMonthValue = monthDict[EndingMonth]
-        
-        #Calculate the upper limit of the for loop range.
-        Upper = ((EndingYear - StartingYear)*12) + EndingMonthValue
-        
-        #Calculate when the spending amount change occurs.
-        ChangeMonth = ((ChangeSpendingYear - StartingYear)*12) + monthDict[ChangeSpendingMonth]
-        
-        #Initialise the Annual Balance list with the opening balance.
-        MonthlyBalance = [OpeningBalance]
-        
-        #For loop starting at the value of the starting month to the value of the upper limit of the loop.
-        for x in range(StartingMonthValue, Upper+1):
+    monthlyOpBalance = {}
+    monthlyClBalance = {}
+    monthlyReturn = {}
+    annualAMB = {}
             
-            #Check if spending amount to be changed for this and ongoing months.
-            if (x == ChangeMonth):
-                OutflowSpending = ChangeSpending
-            
-            #Calculate the monthly balance.
-            OpeningBalance = OpeningBalance - OutflowSpending
-            
-            #If the month is the first December, calculate and add the interest earned to the monthly balance.
-            #This is separate from the other interest calculations to take into account the fact that the starting month may not be January.
-            if (x == 12):
-                OpeningBalance = OpeningBalance + int(InterestRate/100*(sum(MonthlyBalance[:13-StartingMonthValue])/(13-StartingMonthValue)))
+        
+    for month in range(0,timeFrame):
+        if month == 0 and dateMonth == "December":
+            monthlyOpBalance[month] = fundValue
+            monthlyClBalance[month] = monthlyOpBalance[month]
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+            annualAMB[1] = int(monthlyOpBalance[month])   
 
-            #If the month is December but not the first December, calculate and add the interest earned to the monthly balance.
-            elif (x % 12 == 0 and x != 12):
-                OpeningBalance = OpeningBalance + int(InterestRate/100*(sum(MonthlyBalance[x-12-StartingMonthValue+1:x-StartingMonthValue+1])/12))
+        elif month == 0 and dateMonth != "December" :
+            monthlyOpBalance[month] = fundValue
+            monthlyClBalance[month] = int(monthlyOpBalance[month])
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+        
+        elif month > 0 and ((monthDict[dateMonth] + month ) % 12) == 0:
+            monthlyOpBalance[month] = monthlyClBalance[month-1]
+            sum = 0
+            sumAWB = 0
+            if month < 12:
+                for bal in range(month+1,0,-1):
+                    print(monthlyOpBalance[month - bal + 1])
+                    sum += monthlyOpBalance[month - bal + 1]
+                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / (month+1))
                 
-            #Append the total to the list.
-            MonthlyBalance.append(OpeningBalance)
+            else :
+                for bal in range(12,12-12,-1):
+                    sum += monthlyOpBalance[month - bal+1]
+                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / 12)
             
-            print(x, "$ ", OpeningBalance)
+            monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth] + month)/12] * float(interest))
+            monthlyClBalance[month] =  monthlyOpBalance[month] + monthlyReturn[month] 
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+
+          
+        else :
+            monthlyOpBalance[month] = int(monthlyClBalance[month-1])
+            monthlyClBalance[month] = int(monthlyOpBalance[month])
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+        
+    for x,y in monthlyReturn.items():
+        print(x,y)
+    
+    for x,y in monthlyOpBalance.items():
+        print(x,y)
+    for x,y in annualAMB.items():
+        print(x,y)
+
+        
+def classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
+    monthDict = {"January" : 1,
+                 "February" : 2,
+                 "March" : 3,
+                 "April" : 4,
+                 "May" : 5,
+                 "June" : 6,
+                 "July" : 7,
+                 "August" : 8,
+                 "September" : 9,
+                 "October" : 10,
+                 "November" : 11,
+                 "December" : 12}
+    
+    
+    dateMonth = month
+    dateYear = year
+    timeFrame = timeframe
+    fundValue = value
+    fundProfile = fprofile
+    interestClass = intclass
+    interest = interest
+    spendingProfile = spending
+    additionalCapital = addContribution
+    
+        
+        
+    monthlyOpBalance = {}
+    monthlyClBalance = {}
+    monthlyReturn = {}
+    annualAMB = {}
+            
+        
+    for month in range(0,timeFrame):
+        if month == 0 and dateMonth == "December":
+            monthlyOpBalance[month] = fundValue
+            monthlyClBalance[month] = monthlyOpBalance[month]
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+            annualAMB[1] = int(monthlyOpBalance[month])   
+
+        elif month == 0 and dateMonth != "December" :
+            monthlyOpBalance[month] = fundValue
+            monthlyClBalance[month] = int(monthlyOpBalance[month])
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+        
+        elif month > 0 and ((monthDict[dateMonth] + month ) % 12) == 0:
+            monthlyOpBalance[month] = monthlyClBalance[month-1]
+            sum = 0
+            sumAWB = 0
+            if month < 12:
+                for bal in range(month+1,0,-1):
+                    print(monthlyOpBalance[month - bal + 1])
+                    sum += monthlyOpBalance[month - bal + 1]
+                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / (month+1))
+                
+            else :
+                for bal in range(12,12-12,-1):
+                    sum += monthlyOpBalance[month - bal+1]
+                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / 12)
+            
+            monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth] + month)/12] * float(interest))
+            monthlyClBalance[month] =  monthlyOpBalance[month] + monthlyReturn[month] 
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+
+          
+        else :
+            monthlyOpBalance[month] = int(monthlyClBalance[month-1])
+            monthlyClBalance[month] = int(monthlyOpBalance[month])
+            if spendingProfile.get(month) != None:
+                 monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
+            if additionalCapital.get(month) != None:
+                monthlyClBalance[month] -= int(additionalCapital.get(month))
+        
+    for x,y in monthlyReturn.items():
+        print(x,y)
+    for x,y in monthlyOpBalance.items():
+        print(x,y)
+    for x,y in annualAMB.items():
+        print(x,y)
+
+
+
+
+
+def main():
+    month = 'January'
+    year = 2019
+    fundValue = 800000
+    fProfile = None
+    interestClass = 'N'
+    interest = 0.015
+    #i and spendAmount will not included in parameters, I used it here to populate the dictionary required for spending,
+    #in our project, form should have a variable that stores a dictionary that can be passed here
+    i = 0
+    spendAmount = 16000
+    
+    spending = {}
+    while i != 48:
+        spending[i] = spendAmount
+        i += 1
+        if i == 12:
+            spendAmount = 17000
+        if i == 24:
+            spendAmount = 17000
+        if i == 36:
+            spendAmount = 18000
+    addContri = {}
+    for i in range(48):
+        addContri[i] = None
+        
+    timeframe = 48
+    classS(month,year,fundValue,fProfile,interestClass,interest,spending,addContri,timeframe)
