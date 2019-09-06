@@ -1,4 +1,4 @@
-def ClassEFG():
+def longTermPool(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe):
     
     monthDict = {"January" : 1,
                  "February" : 2,
@@ -14,40 +14,17 @@ def ClassEFG():
                  "December" : 12}
     
     
-    dateMonth = input("Please enter Month, January to December")
-    dateYear = input("Please input Year")
-    fundValue = int(input("Please enter Fund Value"))
-    fundProfile = input("Please enter Fund Profile, 1 for Lump Sum, 2 for instalments over a period")
-    interestClass = input("Please enter Interest Class, E,F,G")
-    interest = float(input("Please enter LTP returns"))
+    dateMonth = month
+    dateYear = year
+    fundValue = value
+    fundProfile = fprofile
+    interestClass = intclass
+    interest = interest
+    donation = donation
+    recapital = recap
+    distribution = distribution
+    timeFrame = timeframe
     
-    addtionalDonation = int(input("Any additional Donation? 1 for yea, 2 for nah"))
-    donation = {}
-    while addtionalDonation == 1:
-        amountDonated = float(input("Enter Amount To Be Donated"))
-        monthDonated = int(input("Enter Months After Opening of Fund Where Donations Occur"))
-        donation[monthDonated] = amountDonated
-        addtionalDonation = int(input("Any additional Donation? 1 for yea, 2 for nah"))
-        
-    reCap = int(input("1 for adhoc Recap, 2 for End Year"))
-    recapital = {}
-    while reCap == 1:
-        amountRecap = float(input("Enter Amount To Be Recapitalized"))
-        monthRecap = int(input("Enter Months After Opening of Fund Where Recapitalization Occur"))
-        recapital[monthRecap] = amountRecap
-        reCap = int(input("Any more Recap? 1 for yeah, 2 for nah"))
-
-    
-    distribution = 0
-    if interestClass == 'E':
-        distribution = 0.05
-    elif interestClass == 'F':
-        distribution = float(0)
-    else:
-        distribution = float(input("Please enter custom distribution"))
-        
-    spendingProfile = input("Please enter Spending Profile")
-    timeFrame = int(input("Please enter a timeframe, How many months"))
     monthlyOpBalance = {}
     monthlyClBalance = {}
     monthlyCapDist = {}
@@ -56,7 +33,7 @@ def ClassEFG():
     annualAMB = {}
             
         
-    for month in range(0,timeFrame+1):
+    for month in range(0,timeFrame):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
             monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
@@ -66,9 +43,9 @@ def ClassEFG():
                 monthlyClBalance[month] += int(donation.get(month))
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
-                
             annualAMB[1] = int(monthlyOpBalance[month])
             AWB3yr[1] = int(monthlyOpBalance[month])
+            
         elif month == 0 and dateMonth != "December" :
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = int(monthlyOpBalance[month])
@@ -76,6 +53,7 @@ def ClassEFG():
                 monthlyClBalance[month] += int(donation.get(month))
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
+         
         elif month > 0 and ((monthDict[dateMonth] + month ) % 12) == 0:
             monthlyOpBalance[month] = monthlyClBalance[month-1]
             sum = 0
@@ -128,7 +106,26 @@ def ClassEFG():
             
 
 
+def main():
+    month = 'December'
+    year = 2018
+    fundValue = 10000000
+    fProfile = None
+    interestClass = 'E'
+    interest = 0.08
+    #dictionary of month with key value of donation
+    donation = {18:1000000}
+    recap = {30:10000}
+    distribution = 0.05
+    timeframe = 49
+    longTermPool(month,year,fundValue,fProfile,interestClass,interest,donation,recap,distribution,timeframe)
      
+        
+        
+    
+    
+    
+    
      
         
         
