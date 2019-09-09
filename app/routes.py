@@ -6,6 +6,7 @@ from calculations.ClassHS import classH, classS
 from calculations.ClassN import classN
 from calculations.ClassQ import classQ
 from calculations.ClassEFG import classEFG
+from calculations.ClassA import classA
 
 @app.route('/')
 @app.route('/homepage')
