@@ -1,7 +1,7 @@
 def calMonths(year1,year2,month1,month2):
     return int((year1-year2) * 12 +(month2-month1))
 
-def operatingAccount (month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe):
+def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe):
     
     monthDict = {"January" : 1,
                  "February" : 2,
