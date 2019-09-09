@@ -1,4 +1,4 @@
-def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
+def ClassH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
     monthDict = {"January" : 1,
                  "February" : 2,
                  "March" : 3,
@@ -89,7 +89,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
         print(x,y)
 
         
-def classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
+def ClassS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
     monthDict = {"January" : 1,
                  "February" : 2,
                  "March" : 3,
