@@ -1,4 +1,4 @@
-def ClassN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
+def classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe):
     monthDict = {"January" : 1,
                  "February" : 2,
                  "March" : 3,
