@@ -1,4 +1,4 @@
-def longTermPool(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe):
+def classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe):
     
     monthDict = {"January" : 1,
                  "February" : 2,
