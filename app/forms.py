@@ -16,7 +16,7 @@ class calculations(FlaskForm):
     #fProfile = none
     interestClass = StringField('interestClass')
     interest = DecimalField('interest')
-    donation = MultipleFileField('donation') #multiple file field could be incorrect
+    donation = MultipleFileField('donation') #multiple file field could be incorrect could also use FieldList
     spending = MultipleFileField('spending')
     recap = MultipleFileField('recap')
     distribution = DecimalField('distribution')
