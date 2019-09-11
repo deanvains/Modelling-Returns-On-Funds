@@ -28,6 +28,7 @@ def calcs():
         recap = request.calculations["recap"]
         distribution = request.calculations["distribution"]
         timeframe = request.calculations["timeframe"]
+        addContribution = request.calculations['additionalContribution']
 
         if(intclass == "E"):
             calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)

@@ -16,10 +16,11 @@ class calculations(FlaskForm):
     #fProfile = none
     interestClass = StringField('interestClass')
     interest = DecimalField('interest')
-    donation = MultipleFileField('donation')
+    donation = MultipleFileField('donation') #multiple file field could be incorrect
     spending = MultipleFileField('spending')
     recap = MultipleFileField('recap')
     distribution = DecimalField('distribution')
+    additionalContribution = MultipleFileField('additionalContribution')
     timeframe = IntegerField('timeframe')
     submit = SubmitField('Sign In')
 
