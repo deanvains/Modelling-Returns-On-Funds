@@ -34,21 +34,21 @@ def calcs():
 #    calc = null
     #need to put parameters in
 #    if(interestClass == classE):
-#        calc = ClassEFG()
+#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
 #    elif(interestClass == classF):
-#        calc = ClassEFG()
+#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
 #    elif(interestClass == classG):
-#        calc = ClassEFG()
+#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
 #    elif(interestClass == classH):
-#       calc = ClassHS()
+#       calc = ClassH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 #    elif(interestClass == classA):
-#        calc = ClassA()
+#        calc = ClassA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
 #    elif(interestClass == classN):
-#        calc = ClassN()
+#        calc = ClassN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 #   elif(interestClass == classQ):
-#        calc = ClassQ()
+#        calc = ClassQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 #    elif(interestClass == classS):
-#        calc = ClassHS()
+#        calc = ClassS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 
 
 

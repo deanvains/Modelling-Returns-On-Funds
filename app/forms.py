@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DecimalField, IntegerField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 class LoginForm(FlaskForm):
@@ -9,17 +9,16 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
-#class calculations(FlaskForm):
-#    interestClass = 
-#    openingBalance =
-#    StartMonth = 
-#    endMonth =
-#    interestRate = 
-#    SpendingProfile = 
-#    ProfileOfFundsReceipt = 
-#    ChangeInSpending =
-#    AdditionalDonations = 
-#    recapitalisation = 
-#    capitalDistribution = 
-#    customDistribution = 
+class calculations(FlaskForm):
+    month = StringField('month')
+    year = IntegerField('year')
+    fundvalue = IntegerField('fundvalue')
+    #fProfile = none
+    interestClass = StringField('interestClass')
+    interest = DecimalField('interest')
+    #donation = #TODO
+    #spending = #TODO
+    #recap = #TODO
+    distribution = DecimalField('distribution')
+    timeframe = IntegerField('timeframe')
 
