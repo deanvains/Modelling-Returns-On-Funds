@@ -19,33 +19,31 @@ def calcs():
     if request.method == "POST":
         month = request.calculations["month"]
         year = request.calculations["year"]
-        fundvalue = request.calculations["fundvalue"]
-        #fProfile = none
-        interestClass = request.calculations["interestClass"]
+        value = request.calculations["fundvalue"]
+        fprofile = None
+        intclass = request.calculations["interestClass"]
         interest = request.calculations["interest"]
-        #donation = request.calculations["donation"]
-        #spending = request.calculations["spending"]
-        #recap = request.calculations["recap"]
+        donation = request.calculations["donation"]
+        spending = request.calculations["spending"]
+        recap = request.calculations["recap"]
         distribution = request.calculations["distribution"]
         timeframe = request.calculations["timeframe"]
 
-        calc = null
-        #i
-        if(interestClass == "E"):
+        if(intclass == "E"):
             calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(interestClass == "F"):
+        elif(intclass == "F"):
             calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(interestClass == "G"):
+        elif(intclass == "G"):
             calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(interestClass == "G"):
+        elif(intclass == "H"):
             calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(interestClass == "A"):
+        elif(intclass == "A"):
             calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
-        elif(interestClass == "N"):
+        elif(intclass == "N"):
             calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(interestClass == "Q"):
+        elif(intclass == "Q"):
             calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(interestClass == "S"):
+        elif(intclass == "S"):
             calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 
         return render_template("calcs.html", title='Calculation Page', calc=calc)
