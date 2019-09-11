@@ -16,44 +16,40 @@ def homepage():
 
 @app.route('/calc',methods=["GET", "POST"])
 def calcs():
-#    if request.method == "POST":
-#        #might need to check form name match
-#        interestClass = request.calculations["interestClass"]
-#        openingBalance = request.calculations["openingBalance"]
-#        StartMonth = request.calculations["StartMonth"]
-#        endMonth = request.calculations["endMonth"]
-#        interestRate = request.calculations["interestRate"]
-#        SpendingProfile = request.calculations["SpendingProfile"]
-#        ProfileOfFundsReceipt = request.calculations["ProfileOfFundReceipts"]
-#        ChangeInSpending = request.calculations["ChangeInSpending"]
-#        AdditionalDonations = request.calculations["AdditionalDonations"]
-#        recapitalisation = request.calculations["recapitalisation"]
-#        capitalDistribution = request.calculations["capitalDistribution"]
-#        customDistribution = request.calculations["customDistribution"]
+    if request.method == "POST":
+        month = request.calculations["month"]
+        year = request.calculations["year"]
+        fundvalue = request.calculations["fundvalue"]
+        #fProfile = none
+        interestClass = request.calculations["interestClass"]
+        interest = request.calculations["interest"]
+        #donation = request.calculations["donation"]
+        #spending = request.calculations["spending"]
+        #recap = request.calculations["recap"]
+        distribution = request.calculations["distribution"]
+        timeframe = request.calculations["timeframe"]
 
-#    calc = null
-    #need to put parameters in
-#    if(interestClass == classE):
-#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-#    elif(interestClass == classF):
-#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-#    elif(interestClass == classG):
-#        calc = ClassEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-#    elif(interestClass == classH):
-#       calc = ClassH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-#    elif(interestClass == classA):
-#        calc = ClassA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
-#    elif(interestClass == classN):
-#        calc = ClassN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-#   elif(interestClass == classQ):
-#        calc = ClassQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-#    elif(interestClass == classS):
-#        calc = ClassS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        calc = null
+        #i
+        if(interestClass == "E"):
+            calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+        elif(interestClass == "F"):
+            calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+        elif(interestClass == "G"):
+            calc = classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+        elif(interestClass == "G"):
+            calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        elif(interestClass == "A"):
+            calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
+        elif(interestClass == "N"):
+            calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        elif(interestClass == "Q"):
+            calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        elif(interestClass == "S"):
+            calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 
-
-
+        return render_template("calcs.html", title='Calculation Page', calc=calc)
     return render_template("calcs.html", title='Calculation Page')
-    #return render_template("calcs.html", title='Calculation Page', calc=calc)
 
 @app.route('/profile')
 def profile():
