@@ -118,3 +118,4 @@ def main():
     distribution = {1:507500,2:523608,3:556729,4:591636}
     timeframe = 48
     result = classA(month,year,fundValue,fProfile,interestClass,interest,spending,recap,distribution,timeframe)
+    return result
