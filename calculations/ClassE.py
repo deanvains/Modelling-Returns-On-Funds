@@ -1,4 +1,4 @@
-def classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe):
+def classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe):
     
     monthDict = {"January" : 1,
                  "February" : 2,
@@ -75,7 +75,6 @@ def classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribu
                 elif (monthDict[dateMonth] + month)/12 == 1:
                     AWB3yr[(monthDict[dateMonth] + month)/12] = int(annualAMB[(monthDict[dateMonth] + month)/12])
                 else:
-                    print((monthDict[dateMonth] + month)/12)
                     for bal in range(int((monthDict[dateMonth] + month)/12),int(((monthDict[dateMonth] + month)/12) - 3),-1):
                         sumAWB += annualAMB[bal]
                     AWB3yr[(monthDict[dateMonth] + month)/12] = int(sumAWB/3)
@@ -95,14 +94,16 @@ def classEFG(month,year,value,fprofile,intclass,interest,donation,recap,distribu
                 monthlyClBalance[month] += int(donation.get(month))
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
-        
-    for x,y in monthlyReturn.items():
+                
+    result = [monthlyOpBalance,monthlyClBalance]
+    return result
+    """for x,y in monthlyReturn.items():
         print(x,y)
     
     for x,y in monthlyOpBalance.items():
         print(x,y)
     for x,y in annualAMB.items():
-        print(x,y)
+        print(x,y)"""
             
 
 
@@ -118,18 +119,5 @@ def main():
     recap = {30:10000}
     distribution = 0.05
     timeframe = 49
-    longTermPool(month,year,fundValue,fProfile,interestClass,interest,donation,recap,distribution,timeframe)
-     
-        
-        
-    
-    
-    
-    
-     
-        
-        
-    
-    
-    
-    
+    result = classE(month,year,fundValue,fProfile,interestClass,interest,donation,recap,distribution,timeframe)
+    return result    
