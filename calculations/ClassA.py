@@ -61,7 +61,6 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
             sumAWB = 0
             if month < 12:
                 for bal in range(month+1,0,-1):
-                    print(monthlyOpBalance[month - bal + 1])
                     sum += monthlyOpBalance[month - bal + 1]
                 annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / (month+1))
                 
@@ -88,13 +87,8 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
             if recapital.get(month) != None:
                 monthlyClBalance[month] -= int(recapital.get(month))
         
-    for x,y in monthlyReturn.items():
-        print(x,y)
-    
-    for x,y in monthlyOpBalance.items():
-        print(x,y)
-    for x,y in annualAMB.items():
-        print(x,y)
+    result = [monthlyOpBalance,monthlyClBalance]
+    return result
 
         
 def main():
@@ -123,4 +117,4 @@ def main():
     recap = {29:10000}
     distribution = {1:507500,2:523608,3:556729,4:591636}
     timeframe = 48
-    operatingAccount(month,year,fundValue,fProfile,interestClass,interest,spending,recap,distribution,timeframe)
+    result = classA(month,year,fundValue,fProfile,interestClass,interest,spending,recap,distribution,timeframe)
