@@ -1,0 +1,54 @@
+{% extends "topbar.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="leftSide col-lg-1">
+
+  </div>
+
+  <div class="mainArea col-lg-10">
+
+    <div class="signin container-fluid">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <div class="special">
+          <h1>Sign In To Your Account </h1>
+        </div>
+
+        <div class="form">
+          <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+              {{ form.username.label }}<br>
+              {{ form.username(size=32) }}<br>
+              {% for error in form.username.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </p>
+            <p>
+              {{ form.password.label }}<br>
+              {{ form.password(size=32) }}<br>
+              {% for error in form.password.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </p>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p>{{ form.submit() }}</p>
+          </form>
+        </div>
+
+        <div class="link">
+          <p> <a href="{{ url_for('signup') }}">Don't have an account yet? Folllow this link
+              to create one! </a> </p>
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+
+    </div>
+
+
+    <div class="rightSide col-lg-1">
+
+    </div>
+  </div>
+  {% endblock %}

@@ -1,275 +1,314 @@
 {% extends "base.html" %} {% block content %}
 
+<!--
+Sample flask form that works
+
+
+  <form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=64) }}<br>
+        {% for error in form.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.password2.label }}<br>
+        {{ form.password2(size=32) }}<br>
+        {% for error in form.password2.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>{{ form.submit() }}</p>
+    </form>
+-->
+
+
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Calculator </h1>
-          </div>
-
-                    <button type="button" class="btn btn-primary" id="formButton">Capital Account</button>
-
-                    <button type="button" class="btn btn-primary" id="formButton2">Operating Accounts</button>
-
-                    <form id="calcForm">
-                      <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <fieldset id="month">
-                          <label for="month">Month</label>
-                          <input type="text" class="form-control" id="month" placeholder="e.g December">
-                            </fieldset>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <fieldset id="year">
-                          <label for="year">Year</label>
-                          <input type="text" class="form-control" id="year" placeholder="e.g 2019">
-                          </fieldset>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <fieldset id="fundValue">
-                          <label for="fundValue">Fund Value</label>
-                          <input type="text" class="form-control" id="fundValue" placeholder="e.g 1000000">
-                          </fieldset>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <fieldset id="fProfile">
-                          <label for="fProfile">Fund Profile</label>
-                          <input type="text" class="form-control" id="fProfile" placeholder="e.g None">
-                            </fieldset>
-                        </div>
-                            <div class="form-group col-md-4">
-                                <fieldset id="interestClass">
-                          <label for="interestClass">Interest Class</label>
-                          <input type="text" class="form-control" id="interestClass" placeholder="e.g 'E'">
-                          </fieldset>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <fieldset id="intrestClass">
-                      <label for="interest">Interest</label>
-                      <input type="text" class="form-control" id="interest" placeholder="eg. 0.08">
-                      </fieldset>
-                    </div>
-                            <div class="form-group col-md-4">
-                                <fieldset id="donation">
-                          <label for="donation">Donation</label>
-                          <input type="text" class="form-control" id="donation" placeholder="e.g 18">
-                          <input type="text" class="form-control" id="donation" placeholder="e.g 10000000">
-                                </fieldset>
-                        </div>
-                            <div class="form-group col-md-4">
-                                <fieldset id="spending">
-                          <label for="spending">Spending</label>
-                          <input type="text" class="form-control" id="spending" placeholder="e.g 18">
-                          <input type="text" class="form-control" id="spending" placeholder="e.g 10000000">
-                          </fieldset>
-                        </div>
-                            <div class="form-group col-md-4">
-                                <fieldset id="recap">
-                          <label for="recap">Recapitalization</label>
-                          <input type="text" class="form-control" id="recap" placeholder="e.g 30">
-                          <input type="text" class="form-control" id="recap" placeholder="e.g 10000">
-                          </fieldset>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <fieldset id="addContri">
-                      <label for="addContri">Additional Contribution</label>
-                      <input type="text" class="form-control" id="addContri" placeholder="e.g 0.05">
-                            </fieldset>
-                        </div>
-                            <div class="form-group col-md-4">
-                                <fieldset id="distribution">
-                          <label for="distribution">Distribution</label>
-                          <input type="text" class="form-control" id="distribution" placeholder="e.g 0.05">
-                                </fieldset>
-                        </div>
-                          <div class="form-group col-md-4">
-                              <fieldset id="timeframe">
-                          <label for="timeframe">Time Frame</label>
-                          <input type="text" class="form-control" id="timeframe" placeholder="e.g 49">
-                          </fieldset>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Calculate</button>
-                      </div>
-                    </form>
-
-                   
-
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Results </h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-
-            </div>
-          </div>
-
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                  <td>data</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </main>
-      </div>
     </div>
 
+    <button type="button" class="btn btn-primary" id="formButton">Capital Account</button>
+
+    <button type="button" class="btn btn-primary" id="formButton2">Operating Accounts</button>
+
+    <form id="calcForm">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <fieldset id="month">
+                    <label for="month">Month</label>
+                    <input type="text" class="form-control" id="month" placeholder="e.g December">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="year">
+                    <label for="year">Year</label>
+                    <input type="text" class="form-control" id="year" placeholder="e.g 2019">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="fundValue">
+                    <label for="fundValue">Fund Value</label>
+                    <input type="text" class="form-control" id="fundValue" placeholder="e.g 1000000">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="fProfile">
+                    <label for="fProfile">Fund Profile</label>
+                    <input type="text" class="form-control" id="fProfile" placeholder="e.g None">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="interestClass">
+                    <label for="interestClass">Interest Class</label>
+                    <input type="text" class="form-control" id="interestClass" placeholder="e.g 'E'">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="intrestClass">
+                    <label for="interest">Interest</label>
+                    <input type="text" class="form-control" id="interest" placeholder="eg. 0.08">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="donation">
+                    <label for="donation">Donation</label>
+                    <input type="text" class="form-control" id="donation" placeholder="e.g 18">
+                    <input type="text" class="form-control" id="donation" placeholder="e.g 10000000">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="spending">
+                    <label for="spending">Spending</label>
+                    <input type="text" class="form-control" id="spending" placeholder="e.g 18">
+                    <input type="text" class="form-control" id="spending" placeholder="e.g 10000000">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="recap">
+                    <label for="recap">Recapitalization</label>
+                    <input type="text" class="form-control" id="recap" placeholder="e.g 30">
+                    <input type="text" class="form-control" id="recap" placeholder="e.g 10000">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="addContri">
+                    <label for="addContri">Additional Contribution</label>
+                    <input type="text" class="form-control" id="addContri" placeholder="e.g 0.05">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="distribution">
+                    <label for="distribution">Distribution</label>
+                    <input type="text" class="form-control" id="distribution" placeholder="e.g 0.05">
+                </fieldset>
+            </div>
+            <div class="form-group col-md-4">
+                <fieldset id="timeframe">
+                    <label for="timeframe">Time Frame</label>
+                    <input type="text" class="form-control" id="timeframe" placeholder="e.g 49">
+                </fieldset>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+    </form>
 
 
 
-       <!-- Graphs -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-       <script>
-         var ctx = document.getElementById("myChart");
-         var myChart = new Chart(ctx, {
-           type: 'line',
-           data: {
-             labels: ["January", "February", "March", "April", "May", "June", "July"],
-             datasets: [{
-               data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-               lineTension: 0,
-               backgroundColor: 'transparent',
-               borderColor: '#007bff',
-               borderWidth: 4,
-               pointBackgroundColor: '#007bff'
-             }]
-           },
-           options: {
-             scales: {
-               yAxes: [{
-                 ticks: {
-                   beginAtZero: false
-                 }
-               }]
-             },
-             legend: {
-               display: false,
-             }
-           }
-         });
-       </script>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Results </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+
+        </div>
+    </div>
+
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</div>
+</div>
+
+
+
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+</script>
 
 
 {% endblock %}
-
