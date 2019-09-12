@@ -1,74 +1,118 @@
 body {
-    margin: -2px;
-    background-color: #f5f8fc;
+  font-size: .875rem;
+  background-color: white;
 }
 
-.mynav {
-    background-color: #27348b !important;
-    height: 80px;
-    vertical-align: middle;
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
 }
 
-.navlist li a {
-    height: 80px;
-    text-align: center;
-    line-height: 45px;
-    color: white !important;
-    font-size: 130%;
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
-.navbar-default .navbar-nav>.active>a,
-.navbar-default .navbar-nav>.active>a:hover,
-.navbar-default .navbar-nav>.active>a:focus,
-.navbar-default .navbar-nav>li>a:hover,
-.navbar-default .navbar-nav>li>a:focus,
-.navbar-default .navbar-nav>.open>a,
-.navbar-default .navbar-nav>.open>a:hover,
-.navbar-default .navbar-nav>.open>a:focus,
-.dropdown-menu>li>a:hover,
-.dropdown-menu>li>a:focus,
-.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: #e2b600 !important;
-    background: inherit;
-    text-decoration: underline;
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-table,
-th,
-td {
-    border: 1px solid #ececec;
-    padding: 5px;
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
 }
 
-.jumbotron {
-    background-color: #27348b !important;
-    color: white;
-    text-align: center;
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
 }
 
-.profilebox {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #27348b !important;
-    color: white;
-    width: 25%;
-    height: 10%;
-    border-right: 1px solid white;
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
 }
 
-.profilebox ul {
-    text-align: left;
+.sidebar .nav-link.active {
+  color: #007bff;
 }
 
-.profilebox {
-    text-align: left;
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
 }
 
-.firstbox {
-    border-left: 1px solid white;
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
 }
 
-fieldset {
-    display: none;
+/*
+ * Content
+ */
+
+[role="main"] {
+  padding-top: 48px; /* Space for fixed navbar */
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: #27348b;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #27348b;
+  background-color: #27348b;
+  border-color: #27348b;
+}
+
+.navbar-dark{
+    background-color: #27348b;
+}
+
+.jumbotron{
+  margin-top: 25px;
+  background-color: #27348b;
+  color: white;
+}
+
+#hrjumbo {
+  background-color: white;
+}
+.nav-link{
+  color: white;
+}
+
+.comparisontool{
+  padding-left: 100px;
 }

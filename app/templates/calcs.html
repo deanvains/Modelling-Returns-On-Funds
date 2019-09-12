@@ -1,179 +1,275 @@
 {% extends "base.html" %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
-            <h1> Please fill in the boxes below: </h1>
 
-            <form>
-                <br>
-                <b>Interest Class:</b>
-                <select id="interestclass">
-                    <option value="classNull" selected>Please Select an Option</option>
-                    <option value="classE">Class E</option>
-                    <option value="classF">Class F</option>
-                    <option value="classG">Class G</option>
-                    <option value="classH">Class H</option>
-                    <option value="classA">Class A</option>
-                    <option value="classN">Class N</option>
-                    <option value="classQ">Class Q</option>
-                    <option value="classS">Class S</option>
-                </select>
-                <div></div>
-                <br>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Calculator </h1>
+          </div>
 
-                <br>
-                <fieldset id="FSOpeningBalance"> <b>Opening Balance: </b>
-                    <input type="text" name="inputAmount">
-                </fieldset>
-                <br>
+                    <button type="button" class="btn btn-primary" id="formButton">Capitol Account</button>
 
-                <br>
-                <fieldset id="FSMonthOrYear"> <b> Monthly or Yearly?: </b>
-                    <select id="inputDateMonth">
-                            <option value="null" selected> Please select a time period: </option>
-                            <option value="monthly"> Monthly </option>
-                            <option value="yearly"> Yearly </option>
-                    </select>
-                </fieldset>
-                <br>
+                    <button type="button" class="btn btn-primary" id="formButton2">Operating Accounts</button>
 
+                    <form id="calcForm">
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <fieldset id="month">
+                          <label for="month">Month</label>
+                          <input type="text" class="form-control" id="month" placeholder="e.g December">
+                            </fieldset>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <fieldset id="year">
+                          <label for="year">Year</label>
+                          <input type="text" class="form-control" id="year" placeholder="e.g 2019">
+                          </fieldset>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <fieldset id="fundValue">
+                          <label for="fundValue">Fund Value</label>
+                          <input type="text" class="form-control" id="fundValue" placeholder="e.g 1000000">
+                          </fieldset>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <fieldset id="fProfile">
+                          <label for="fProfile">Fund Profile</label>
+                          <input type="text" class="form-control" id="fProfile" placeholder="e.g None">
+                            </fieldset>
+                        </div>
+                            <div class="form-group col-md-4">
+                                <fieldset id="intrestClass">
+                          <label for="intrestClass">Intrest Class</label>
+                          <input type="text" class="form-control" id="intrestClass" placeholder="e.g 'E'">
+                          </fieldset>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <fieldset id="intrestClass">
+                      <label for="intrest">Intrest</label>
+                      <input type="text" class="form-control" id="intrest" placeholder="eg. 0.08">
+                      </fieldset>
+                    </div>
+                            <div class="form-group col-md-4">
+                                <fieldset id="donation">
+                          <label for="donation">Dontation</label>
+                          <input type="text" class="form-control" id="donation" placeholder="e.g 18">
+                          <input type="text" class="form-control" id="donation" placeholder="e.g 10000000">
+                                </fieldset>
+                        </div>
+                            <div class="form-group col-md-4">
+                                <fieldset id="spending">
+                          <label for="spending">Spending</label>
+                          <input type="text" class="form-control" id="spending" placeholder="e.g 18">
+                          <input type="text" class="form-control" id="spending" placeholder="e.g 10000000">
+                          </fieldset>
+                        </div>
+                            <div class="form-group col-md-4">
+                                <fieldset id="recap">
+                          <label for="recap">Recapitilization</label>
+                          <input type="text" class="form-control" id="recap" placeholder="e.g 30">
+                          <input type="text" class="form-control" id="recap" placeholder="e.g 10000">
+                          </fieldset>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <fieldset id="addContri">
+                      <label for="addContri">Additional Contribution</label>
+                      <input type="text" class="form-control" id="addContri" placeholder="e.g 0.05">
+                            </fieldset>
+                        </div>
+                            <div class="form-group col-md-4">
+                                <fieldset id="distribution">
+                          <label for="distribution">Distribution</label>
+                          <input type="text" class="form-control" id="distribution" placeholder="e.g 0.05">
+                                </fieldset>
+                        </div>
+                          <div class="form-group col-md-4">
+                              <fieldset id="timeframe">
+                          <label for="timeframe">Time Frame</label>
+                          <input type="text" class="form-control" id="timeframe" placeholder="e.g 49">
+                          </fieldset>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                      </div>
+                    </form>
 
-                <br>
-                <fieldset id="FSStartMonth"> <b> Starting Month: </b>
-                    <select name="inputDateMonth">
-                            <option value="jan"> January </option>
-                            <option value="feb"> February </option>
-                            <option value="mar"> March </option>
-                            <option value="apr"> April </option>
-                            <option value="may"> May </option>
-                            <option value="jun"> June </option>
-                            <option value="jul"> July </option>
-                            <option value="aug"> August </option>
-                            <option value="sep"> September </option>
-                            <option value="oct"> October</option>
-                            <option value="nov"> November </option>
-                            <option value="dec"> December</option>
-                          </select>
-                    </br>
+                   
 
-                    <br>
-                    <b> Ending Month: </b>
-                    <select name="endDateMonth">
-                                  <option value="jan"> January </option>
-                                  <option value="feb"> February </option>
-                                  <option value="mar"> March </option>
-                                  <option value="apr"> April </option>
-                                  <option value="may"> May </option>
-                                  <option value="jun"> June </option>
-                                  <option value="jul"> July </option>
-                                  <option value="aug"> August </option>
-                                  <option value="sep"> September </option>
-                                  <option value="oct"> October</option>
-                                  <option value="nov"> November </option>
-                                  <option value="dec"> December</option>
-                                </select>
-                </fieldset>
-                <br>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Results </h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
 
-                <br>
-                <fieldset id="FSStartYear">
-                    <b> Starting Year: </b>
-                    <input type="number" name="inputDateYear">
-                    <br>
-                    <b> Ending Year: </b>
-                    <input type="number" name="EndDateYear">
-                </fieldset>
-                <br>
+            </div>
+          </div>
 
-                <br>
-                <fieldset id="FSInterestRate">
-                    <b> Interest Ratio for this class: </b> <br>
-                    <input type="radio" name="rate1" value="2"> 2% <br>
-                    <input type="radio" name="rate2" value="5"> 5%<br>
-                </fieldset>
-                <br>
+          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
-                <br>
-                <fieldset id="FSSpendingProfile">
-                    <b> Spending Profile: </b>
-                    <input type="number" name="SpendingProfile">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSProfileOfFundReceipts">
-                    <b>Profile of Funds Receipt </b>
-                    <input type="text" name="inputAmount">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSChangeInSpendingInt">
-                    <b>Change in spending profile Integer:</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSChangeInSpendingMonth">
-                    <b>Change in spending profile Monthly:</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSChangeInSpendingYear">
-                    <b>Change in spending profile Yearly:</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSAdditionalDonations">
-                    <b>Additional Donations</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-            
-                <br>
-                <fieldset id="FSAdditionalDonationsMonth">
-                    <b>Month ofAdditional Donations</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSRecapitalisation">
-                    <b>Recapitalisation</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-            
-                <br>
-                <fieldset id="FSRecapitalisationMonth">
-                    <b>Month of Recapitalisation</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSCapitalDistribution">
-                    <b>Capital Distribution</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-                <br>
-                <fieldset id="FSCustomDistribution">
-                    <b>Custom Distribution</b>
-                    <input type="text" name="">
-                </fieldset>
-                <br>
-
-            </form>
-        </div>
-        <div class="col-sm-1"></div>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
     </div>
-</div>
+
+
+
+
+       <!-- Graphs -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+       <script>
+         var ctx = document.getElementById("myChart");
+         var myChart = new Chart(ctx, {
+           type: 'line',
+           data: {
+             labels: ["January", "February", "March", "April", "May", "June", "July"],
+             datasets: [{
+               data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+               lineTension: 0,
+               backgroundColor: 'transparent',
+               borderColor: '#007bff',
+               borderWidth: 4,
+               pointBackgroundColor: '#007bff'
+             }]
+           },
+           options: {
+             scales: {
+               yAxes: [{
+                 ticks: {
+                   beginAtZero: false
+                 }
+               }]
+             },
+             legend: {
+               display: false,
+             }
+           }
+         });
+       </script>
+
+
 {% endblock %}
+
