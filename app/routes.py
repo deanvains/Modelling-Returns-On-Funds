@@ -8,8 +8,8 @@ from calculations.ClassQ import classQ
 from calculations.ClassE import classE
 from calculations.ClassA import classA
 from calculations.ClassF import classF
-#from calculations.ClassG import classG
-#from calculations.ClassS import classS
+from calculations.ClassG import classG
+from calculations.ClassS import classS
 
 @app.route('/')
 @app.route('/homepage')
@@ -37,8 +37,8 @@ def calcs():
             calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
         elif(intclass == "F"):
             calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-       # elif(intclass == "G"):
-       #     calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+        elif(intclass == "G"):
+            calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
         elif(intclass == "H"):
             calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
         elif(intclass == "A"):
@@ -47,8 +47,8 @@ def calcs():
             calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
         elif(intclass == "Q"):
             calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        #elif(intclass == "S"):
-        #    calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        elif(intclass == "S"):
+            calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 
         return render_template("calcs.html", title='Calculation Page', calc=calc)
     return render_template("calcs.html", title='Calculation Page')
