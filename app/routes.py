@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
+from app.forms import calculationForm
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -14,24 +15,24 @@ from calculations.ClassS import classS
 @app.route('/')
 @app.route('/homepage')
 def homepage():
-
     return render_template("homepage.html", title='Home Page')
 
 @app.route('/calc',methods=["GET", "POST"])
 def calcs():
-    if request.method == "POST":
-        month = request.calculations["month"]
-        year = request.calculations["year"]
-        value = request.calculations["fundvalue"]
+    form = calculationForm()
+    if form.validate_on_submit():
+        month = form.month.data
+        year = form.year.data
+        value =  form.fundvalue.data
         fprofile = None
-        intclass = request.calculations["interestClass"]
-        interest = request.calculations["interest"]
-        donation = request.calculations["donation"]
-        spending = request.calculations["spending"]
-        recap = request.calculations["recap"]
-        distribution = request.calculations["distribution"]
-        timeframe = request.calculations["timeframe"]
-        addContribution = request.calculations['additionalContribution']
+        intclass = form.interestClass.data
+        interest = form.interest.data
+        donation = 0 #request.calculations["donation"]
+        spending = 0 #request.calculations["spending"]
+        recap = 0 #request.calculations["recap"]
+        distribution = form.distribution.data
+        timeframe = form.timeframe.data
+        addContribution = 0 #request.calculations['additionalContribution']
 
         if(intclass == "E"):
             calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
@@ -50,8 +51,8 @@ def calcs():
         elif(intclass == "S"):
             calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
 
-        return render_template("calcs.html", title='Calculation Page', calc=calc)
-    return render_template("calcs.html", title='Calculation Page')
+        return render_template("calcs.html", title='Calculation Page', form=form,calc=calc)
+    return render_template("calcs.html", title='Calculation Page', form=form)
 
 @app.route('/profile')
 def profile():
