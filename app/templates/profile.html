@@ -1,100 +1,500 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
 
-    <div class ="jumbotron">
-        <div class="container-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 profilebox firstbox">
-                        <h2>User Info</h2>
-                        <ul>
-                            <li>Username:</li>
-                            <li>Full Name</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 profilebox">
-                        <h2>User Bio</h2>
-                        <p>Here is some info about the user</p>
-                    </div>
-                    <div class="col-lg-4 profilebox">
-                        <h2>Information</h2>
-                        <ul>
-                            <li>Last Login: Date</li>
-                            <li>Here is another information point</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 profilebox">
-                        <h2>Edit Info</h2>
-                        <button type="button" class="btn btn-primary">Click Here</button>
-                    </div>
-                </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Stored Results</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                Date
+              </button>
             </div>
-        </div>
-    </div>
+          </div>
+
+          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                   <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Comparison Tool</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                Date 1
+              </button>
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                Date 2
+              </button>
+              <button class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+          </div>
+
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h2> Past Returns </h2>
-                <h4> Return 1 </h4>
-                <table>
-                    <tr>
-                        <th>Year(s)</th>
-                        <th>0</th>
-                        <th>1</th>
-                        <th>2</th>
-                    </tr>
-                    <tr>
-                        <td>Value</td>
-                        <td>100,000</td>
-                        <td>150,000</td>
-                        <td>200,000</td>
-                    </tr>
-                    <tr>
-                        <td>Spending</td>
-                        <td>-10,000</td>
-                        <td>-20,000</td>
-                        <td>-10,000</td>
-                    </tr>
-                    <tr>
-                        <td>Recapitalisation</td>
-                        <td>30,000</td>
-                        <td>40,000</td>
-                        <td>50,000</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-sm-6">
-                <h2> Estimate Returns</h2>
-                <h4>Return 1</h4>
-                <table>
-                    <tr>
-                        <th>Year(s)</th>
-                        <th>0</th>
-                        <th>1</th>
-                        <th>2</th>
-                    </tr>
-                    <tr>
-                        <td>Value</td>
-                        <td>160,000</td>
-                        <td>190,000</td>
-                        <td>270,000</td>
-                    </tr>
-                    <tr>
-                        <td>Spending</td>
-                        <td>-15,000</td>
-                        <td>-29,000</td>
-                        <td>-18,000</td>
-                    </tr>
-                    <tr>
-                        <td>Recapitalisation</td>
-                        <td>37,000</td>
-                        <td>46,000</td>
-                        <td>57,000</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+
+        <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas>
+  <div class="row">
+    <div class="col-sm">
+                <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                   <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
     </div>
+    <div class="col-sm">
+                <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                   <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+                <tr>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                  <td>data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+</div>
+        </main>
+      </div>
+    </div> 
+    
+       <!-- Graphs -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+       <script>
+         var ctx = document.getElementById("myChart");
+         var myChart = new Chart(ctx, {
+           type: 'line',
+           data: {
+             labels: ["January", "February", "March", "April", "May", "June", "July"],
+             datasets: [{
+               data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+               lineTension: 0,
+               backgroundColor: 'transparent',
+               borderColor: '#007bff',
+               borderWidth: 4,
+               pointBackgroundColor: '#007bff'
+             }]
+           },
+           options: {
+             scales: {
+               yAxes: [{
+                 ticks: {
+                   beginAtZero: false
+                 }
+               }]
+             },
+             legend: {
+               display: false,
+             }
+           }
+         });
+   
+   
+       </script>
+   
+           <script>
+         var ctx = document.getElementById("myChart2");
+         var myChart2 = new Chart(ctx, {
+           type: 'line',
+           data: {
+             labels: ["January", "February", "March", "April", "May", "June", "July"],
+             datasets: [{
+               data: [15339, 21345, 18483, 24003, 23489, 24092, 12034] ,
+               lineTension: 0,
+               backgroundColor: 'transparent',
+               borderColor: '#007bff',
+               borderWidth: 4,
+               pointBackgroundColor: '#007bff'
+             }]
+   
+           },
+           options: {
+             scales: {
+               yAxes: [{
+                 ticks: {
+                   beginAtZero: false
+                 }
+               }]
+             },
+             legend: {
+               display: false,
+             }
+           }
+         });
+   
+       </script>
+
 {% endblock %}
+
