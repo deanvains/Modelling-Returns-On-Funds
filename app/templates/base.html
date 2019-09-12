@@ -1,33 +1,114 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/stylesheet.css">
-    <script src="../static/scripts.js"></script>
 
-</head>
+    <title>UWA - Modelling Returns on Analysis Online Tool - Home</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
+          <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" ><img src="https://static.weboffice.uwa.edu.au/visualid/sites/alpha/img/uwacrest-white.svg" alt=UWA height=30px; width=98px></a>
+               <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+              <a class="nav-link" href="#">Sign out</a>
+            </li>
+          </ul>
+        </nav>
+    
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+              <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">
+                     <span data-feather="home"  id ="homebutton"></span>
+                      Home <span class="sr-only">(current)</span>
+                    </a>
+                                  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                  <span">Tools</span>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('calcs') }}">
+                      <span data-feather="file"></span>
+                      Calulator<span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">
+                      <span data-feather="database"></span>
+                      Stored Results
+                    </a>
+                  </li>
+                </ul>
+    
+                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                  <span>Other</span>
+                  <a class="d-flex align-items-center text-muted" href="#">
+    
+                  </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="file-text"></span>
+                      Admin Settings
+                    </a>
+                  </li>
+               </div>
+            </nav>
+    </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+          $("#calcForm").hide();
 
-<body>
-    <nav class="navbar navbar-default ml-auto">
-        <div class="mynav container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"> <img src="../static/UWA-logo.png" alt=UWA height=50px; width=160px></a>
-            </div>
-            <ul class="navlist nav navbar-nav navbar-right">
-
-                <li><a href="/">Homepage</a></li>
-                <li><a href="{{ url_for('calcs') }}">Calculate</a></li>
-                <li><a href="{{ url_for('profile') }}">Stored Data</a></li>
-
-            </ul>
-        </div>
-    </nav>
-    {% block content %}{% endblock %}
-</body>
-
+          $("#formButton").click(function() {
+            $("#calcForm").show();
+          $("#month").show();
+          $("#year").show();
+          $("#fundValue").show();
+          $("#fProfile").show();
+          $("#intrestClass").show();
+          $("#intrest").show();
+          $("#donation").show();
+          $("#spending").hide();
+          $("#recap").hide();
+          $("#addContri").hide();
+          $("#distribution").show();
+          $("#timeframe").show();
+            });
+          
+          $("#formButton2").click(function() {
+            $("#calcForm").show();
+          $("#month").show();
+          $("#year").show();
+          $("#fundValue").show();
+          $("#fProfile").show();
+          $("#intrestClass").show();
+          $("#intrest").show();
+          $("#donation").hide();
+          $("#spending").show();
+          $("#recap").show();
+          $("#addContri").show();
+          $("#distribution").show();
+          $("#timeframe").show();
+            });
+          });
+        </script>
+  </body>
 </html>
+
