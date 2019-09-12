@@ -55,7 +55,6 @@ def classN(month,year,value,fprofile,intclass,interest,spending,addContribution,
             sumAWB = 0
             if month < 12:
                 for bal in range(month+1,0,-1):
-                    print(monthlyOpBalance[month - bal + 1])
                     sum += monthlyOpBalance[month - bal + 1]
                 annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / (month+1))
                 
@@ -80,13 +79,8 @@ def classN(month,year,value,fprofile,intclass,interest,spending,addContribution,
             if additionalCapital.get(month) != None:
                 monthlyClBalance[month] -= int(additionalCapital.get(month))
         
-    for x,y in monthlyReturn.items():
-        print(x,y)
-    
-    for x,y in monthlyOpBalance.items():
-        print(x,y)
-    for x,y in annualAMB.items():
-        print(x,y)
+    result = [monthlyOpBalance,monthlyClBalance]
+    return result
    
 
 def main():
@@ -116,5 +110,5 @@ def main():
         addContri[i] = None
         
     timeframe = 48
-    classN(month,year,fundValue,fProfile,interestClass,interest,spending,addContri,timeframe)    
-
+    result = classN(month,year,fundValue,fProfile,interestClass,interest,spending,addContri,timeframe)
+    return result
