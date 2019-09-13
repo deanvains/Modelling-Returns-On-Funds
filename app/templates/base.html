@@ -16,11 +16,15 @@
 <body>
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/"><img src="https://static.weboffice.uwa.edu.au/visualid/sites/alpha/img/uwacrest-white.svg" alt=UWA height=30px; width=98px></a>
+        <!-- if user is logged in, invite them to take the quiz -->
+        {% if current_user.is_authenticated %}
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/">Sign out</a>
+                <a class="nav-link" href="{{ url_for('logout') }}">Sign out</a>
             </li>
         </ul>
+        <!-- if user is not logged in, display message and link -->
+        {% elif current_user.is_anonymous %}
         <ul class="navbar-nav ml-auto px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="{{ url_for('signin') }}">Sign In</a>
@@ -32,6 +36,7 @@
                 <a class="nav-link" href="{{ url_for('signup') }}">Register</a>
             </li>
         </ul>
+        {% endif %}
     </nav>
 
     <div class="container-fluid">
