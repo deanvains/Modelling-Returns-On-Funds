@@ -28,12 +28,12 @@ def calcs():
         fprofile = None
         intclass = form.interestClass.data
         interest = form.interest.data
-        donation = 0 #form.donation.data
-        spending = 0 #form.spending.data
-        recap = 0 #form.recap.data
+        donation = form.donation.data
+        spending = form.spending.data
+        recap = form.recap.data
         distribution = form.distribution.data
         timeframe = form.timeframe.data
-        addContribution = 0 #form.additionalContribution.data
+        addContribution = form.additionalContribution.data
 
         if(intclass == "E"):
             calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)

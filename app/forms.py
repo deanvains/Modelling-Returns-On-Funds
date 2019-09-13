@@ -18,12 +18,12 @@ class calculationForm(FlaskForm):
     interestClass = StringField('interestClass')
     interest = DecimalField('interest')
     donation = StringField('donation') #multiple file field could be incorrect could also use FieldList
-    spending = StringField('spending')
-    recap = StringField('recap')
-    distribution = DecimalField('distribution')
-    additionalContribution = StringField('additionalContribution')
+    spending = StringField('spending') #multiple file field could be incorrect could also use FieldList
+    recap = StringField('recap') #multiple file field could be incorrect could also use FieldList
+    distribution = DecimalField('distribution') #multiple file field could be incorrect could also use FieldList
+    additionalContribution = StringField('additionalContribution') #multiple file field could be incorrect could also use FieldList
     timeframe = IntegerField('timeframe')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Calculate')
 
     
 class LoginForm(FlaskForm):

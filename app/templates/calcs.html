@@ -1,44 +1,5 @@
 {% extends "base.html" %} {% block content %}
 
-<!--
-Sample flask form that works
-
-
-  <form action="" method="post">
-      (( form.hidden_tag() ))
-      <p>
-        (( form.username.label ))<br>
-        (( form.username(size=32) ))<br>
-        (% for error in form.username.errors %)
-        <span style="color: red;">[(( error ))]</span>
-        (% endfor %)
-      </p>
-      <p>
-        (( form.email.label ))<br>
-        (( form.email(size=64) ))<br>
-        (% for error in form.email.errors %)
-        <span style="color: red;">[(( error ))]</span>
-        (% endfor %)
-      </p>
-      <p>
-        (( form.password.label ))<br>
-        (( form.password(size=32) ))<br>
-        (% for error in form.password.errors %)
-        <span style="color: red;">[(( error ))]</span>
-        (% endfor %)
-      </p>
-      <p>
-        (( form.password2.label ))<br>
-        (( form.password2(size=32) ))<br>
-        (% for error in form.password2.errors %)
-        <span style="color: red;">[(( error ))]</span>
-        (% endfor %)
-      </p>
-      <p>(( form.submit() ))</p>
-    </form>
--->
-
-
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -49,6 +10,7 @@ Sample flask form that works
 
     <button type="button" class="btn btn-primary" id="formButton2">Operating Accounts</button>
 
+    <!--
     <form id="calcForm">
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -129,8 +91,87 @@ Sample flask form that works
             <button type="submit" class="btn btn-primary">Calculate</button>
         </div>
     </form>
+    -->
+    <div class="form-row">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.month.label }}<br> {{ form.month(size=32) }}<br> {% for error in form.month.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
 
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.year.label }}<br> {{ form.year(size=32) }}<br> {% for error in form.year.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
 
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.fundvalue.label }}<br> {{ form.fundvalue(size=32) }}<br> {% for error in form.fundvalue.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.interestClass.label }}<br> {{ form.interestClass(size=32) }}<br> {% for error in form.interestClass.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.interest.label }}<br> {{ form.interest(size=32) }}<br> {% for error in form.interest.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.spending.label }}<br> {{ form.spending(size=32) }}<br> {% for error in form.spending.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.recap.label }}<br> {{ form.recap(size=32) }}<br> {% for error in form.recap.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.distribution.label }}<br> {{ form.distribution(size=32) }}<br> {% for error in form.distribution.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.additionalContribution.label }}<br> {{ form.additionalContribution(size=32) }}<br> {% for error in form.additionalContribution.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.timeframe.label }}<br> {{ form.timeframe(size=32) }}<br> {% for error in form.timeframe.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+
+    {% for result in calc %}
+    <p> {{ result }} </p>
+    {% endfor %}
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Results </h1>
