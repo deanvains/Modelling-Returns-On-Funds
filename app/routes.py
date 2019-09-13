@@ -12,6 +12,7 @@ from calculations.ClassA import classA
 from calculations.ClassF import classF
 from calculations.ClassG import classG
 from calculations.ClassS import classS
+from calculations.test import deanTest
 
 @app.route('/')
 @app.route('/homepage')
@@ -35,6 +36,9 @@ def calcs():
         timeframe = form.timeframe.data
         addContribution = form.additionalContribution.data
 
+
+        calc = deanTest(year)
+        """
         if(intclass == "E"):
             calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
         elif(intclass == "F"):
@@ -51,6 +55,7 @@ def calcs():
             calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
         elif(intclass == "S"):
             calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+        """
 
         return render_template("calcs.html", title='Calculation Page', form=form,calc=calc)
     return render_template("calcs.html", title='Calculation Page', form=form)
