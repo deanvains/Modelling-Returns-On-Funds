@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="container-fluid">
+        <div class="leftSide col-lg-1">
+
+        </div>
+
+        <div class="mainArea col-lg-10">
+
+            <div class="signin container-fluid">
+                <div class="col-lg-10"></div>
+                <div class="col-lg-10">
+                    <div class="special">
+                        <br>
+                        <h1>Interest Rates</h1>
+                    </div>
+                    
+                    <!--div>
+                        <h4>Current Interest Rates</h4>
+                        {% for i in value %}
+                        <p>Class E {{i[0]}}</p>
+                        <p>Class F {{i[1]}}</p>
+                        <p>Class G {{i[2]}}</p>
+                        <p>Class H {{i[3]}}</p>
+                        <p>Class A {{i[4]}}</p>
+                        <p>Class N {{i[5]}}</p>
+                        <p>Class Q {{i[6]}}</p>
+                        <p>Class S {{i[7]}}</p>
+                        
+                        {% endfor %}
+                        
+                    
+                    </div--!>
+                    
+                    <div class="form">
+                        <h4>Change Interest Rates Below</h4>
+                        <form action="" method="post" novalidate>
+                            {{ form.hidden_tag() }}
+                            <p>
+                                {{ form.ClassE.label }}<br> {{ form.ClassE(size=5) }}<br> {% for error in form.ClassE.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassF.label }}<br> {{ form.ClassF(size=5) }}<br> {% for error in form.ClassF.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassG.label }}<br> {{ form.ClassG(size=5) }}<br> {% for error in form.ClassG.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassH.label }}<br> {{ form.ClassH(size=5) }}<br> {% for error in form.ClassH.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassA.label }}<br> {{ form.ClassA(size=5) }}<br> {% for error in form.ClassA.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassN.label }}<br> {{ form.ClassN(size=5) }}<br> {% for error in form.ClassN.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassQ.label }}<br> {{ form.ClassQ(size=5) }}<br> {% for error in form.ClassQ.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+                            <p>
+                                {{ form.ClassS.label }}<br> {{ form.ClassS(size=5) }}<br> {% for error in form.ClassS.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+
+                            <p>{{ form.submit() }}</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+            <div class="rightSide col-lg-1">
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

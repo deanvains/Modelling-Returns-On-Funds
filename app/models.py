@@ -24,6 +24,18 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+class InterestRates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ClassE = db.Column(db.Float)
+    ClassF = db.Column(db.Float)
+    ClassG = db.Column(db.Float)
+    ClassH = db.Column(db.Float)
+    ClassA = db.Column(db.Float)
+    ClassN = db.Column(db.Float)
+    ClassQ = db.Column(db.Float)
+    ClassS = db.Column(db.Float)
     
 """"
 class expected():

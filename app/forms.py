@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DecimalField, IntegerField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
-from app.models import User
+from app.models import User, InterestRates
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -44,3 +44,15 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
+            
+            
+class InterestRates(FlaskForm):
+    ClassE = DecimalField('Long Term Pool - Class E')
+    ClassF = DecimalField('Long Term Pool - Class F')
+    ClassG = DecimalField('Long Term Pool - Class G')
+    ClassH = DecimalField('Medium Term Pool - Class H')
+    ClassA = DecimalField('Short Term Pool - Class A')
+    ClassN = DecimalField('Short Term Pool - Class N')
+    ClassQ = DecimalField('Short Term Pool - Class Q')
+    ClassS = DecimalField('Cash Pool - Class S')
+    submit = SubmitField('Submit')
