@@ -88,7 +88,7 @@ def signup():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data)
         user.set_password(form.password.data)
         #user.admin = False  # user not admin by default
         db.session.add(user)
