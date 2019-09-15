@@ -37,6 +37,7 @@ class InterestRates(db.Model):
     ClassQ = db.Column(db.Float)
     ClassS = db.Column(db.Float)
     
+
 """"
 class expected():
     id = db.Column(db.Integer, primary_key=True)
