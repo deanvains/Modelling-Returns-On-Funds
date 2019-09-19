@@ -125,13 +125,6 @@
 
             <div class="form-group col-md-4">
                 <p>
-                    {{ form.interest.label }}<br> {{ form.interest(size=32) }}<br> {% for error in form.interest.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-            </div>
-
-            <div class="form-group col-md-4">
-                <p>
                     {{ form.spending.label }}<br> {{ form.spending(size=32) }}<br> {% for error in form.spending.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
@@ -161,6 +154,13 @@
             <div class="form-group col-md-4">
                 <p>
                     {{ form.timeframe.label }}<br> {{ form.timeframe(size=32) }}<br> {% for error in form.timeframe.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.savedata.label }}<br> {{ form.savedata(size=32) }}<br> {% for error in form.savedata.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
             </div>

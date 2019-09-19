@@ -15,13 +15,13 @@ class calculationForm(FlaskForm):
     year = IntegerField('year')
     fundvalue = IntegerField('fundvalue')
     interestClass = StringField('interestClass')
-    interest = DecimalField('interest')
     donation = StringField('donation')
     spending = StringField('spending')
     recap = StringField('recap')
     distribution = StringField('distribution')
     additionalContribution = StringField('additionalContribution')
     timeframe = IntegerField('timeframe')
+    savedata = BooleanField('savedata')
     submit = SubmitField('Calculate')
     
     

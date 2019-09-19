@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, InterestRates#, expected, actual
+from app.models import User, InterestRates, expected
 from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRates
 from app import app, db
 from werkzeug.urls import url_parse
@@ -30,19 +30,25 @@ def calcs():
                 month = form.month.data
                 year = form.year.data
                 value =  form.fundvalue.data
-                fprofile = None
                 intclass = form.interestClass.data
-                interest = form.interest.data
                 donation = form.donation.data
                 spending = form.spending.data
                 recap = form.recap.data
                 distribution = form.distribution.data
                 timeframe = form.timeframe.data
                 addContribution = form.additionalContribution.data
+                savedata = form.savedata.data
+
+                if(savedata == True and current_user.is_authenticated):
+                    clientsave = expected(user_id=current_user.id,month=month,year=year,value=value,intclass=intclass,donation=donation,
+                    spending=spending,recap=recap,distribution=distribution,timeframe=timeframe,addContribution=addContribution)
+                    db.session.add(clientsave)
+                    db.session.commit()
 
                 calc = deanTest(year)
                 """
                 if(intclass == "E"):
+                    interest = get this value from the database
                     calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
                 elif(intclass == "F"):
                     calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
