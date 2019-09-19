@@ -7,6 +7,4 @@
 $ venv/bin/activate
 
 ### to install all packages run the command: 
-$ pip install -r requirement.txt
-
-
+$ pip install -r requirements.txt

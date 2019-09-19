@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates#, expected, actual
 from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRates
@@ -13,6 +13,7 @@ from calculations.ClassF import classF
 from calculations.ClassG import classG
 from calculations.ClassS import classS
 from calculations.test import deanTest
+from app.exports import pdfGen
 
 @app.route('/')
 @app.route('/homepage')
@@ -21,44 +22,58 @@ def homepage():
 
 @app.route('/calc',methods=["GET", "POST"])
 def calcs():
+    
+    if request.method == 'POST':
+        if 'submit' in request.values:
+            form = calculationForm()
+            if form.validate_on_submit():
+                month = form.month.data
+                year = form.year.data
+                value =  form.fundvalue.data
+                fprofile = None
+                intclass = form.interestClass.data
+                interest = form.interest.data
+                donation = form.donation.data
+                spending = form.spending.data
+                recap = form.recap.data
+                distribution = form.distribution.data
+                timeframe = form.timeframe.data
+                addContribution = form.additionalContribution.data
+
+                calc = deanTest(year)
+                """
+                if(intclass == "E"):
+                    calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                elif(intclass == "F"):
+                    calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                elif(intclass == "G"):
+                    calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                elif(intclass == "H"):
+                    calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                elif(intclass == "A"):
+                    calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
+                elif(intclass == "N"):
+                    calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                elif(intclass == "Q"):
+                    calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                elif(intclass == "S"):
+                    calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                """
+
+                return render_template("calcs.html", title='Calculation Page', form=form,calc=calc)
+            else:
+                return render_template("calcs.html", title='Calculation Page', form=form)
+        else:
+            return pdfGen()
+
+    
     form = calculationForm()
-    if form.validate_on_submit():
-        month = form.month.data
-        year = form.year.data
-        value =  form.fundvalue.data
-        fprofile = None
-        intclass = form.interestClass.data
-        interest = form.interest.data
-        donation = form.donation.data
-        spending = form.spending.data
-        recap = form.recap.data
-        distribution = form.distribution.data
-        timeframe = form.timeframe.data
-        addContribution = form.additionalContribution.data
-
-
-        calc = deanTest(year)
-        """
-        if(intclass == "E"):
-            calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(intclass == "F"):
-            calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(intclass == "G"):
-            calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-        elif(intclass == "H"):
-            calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(intclass == "A"):
-            calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
-        elif(intclass == "N"):
-            calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(intclass == "Q"):
-            calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        elif(intclass == "S"):
-            calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-        """
-
-        return render_template("calcs.html", title='Calculation Page', form=form,calc=calc)
     return render_template("calcs.html", title='Calculation Page', form=form)
+
+#@app.route('/pdfCreator')
+#def pdfCreator():
+#    return pdfGen()
+
 
 @app.route('/profile')
 def profile():

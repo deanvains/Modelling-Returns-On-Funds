@@ -24,7 +24,7 @@ class calculationForm(FlaskForm):
     additionalContribution = StringField('additionalContribution') #multiple file field could be incorrect could also use FieldList
     timeframe = IntegerField('timeframe')
     submit = SubmitField('Calculate')
-
+    
     
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
