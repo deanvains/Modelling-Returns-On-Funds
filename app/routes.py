@@ -81,9 +81,9 @@ def calcs():
 #    return pdfGen()
 
 
-@app.route('/profile')
+@app.route('/profile',methods=["GET", "POST"])
 def profile():
-    return render_template("profile.html", title='Profile')
+    return render_template("profile.html", title='Profile', expected=expected.query.all())
 
 
 @app.route('/signin', methods=['GET', 'POST'])
