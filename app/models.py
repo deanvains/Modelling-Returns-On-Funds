@@ -38,26 +38,32 @@ class InterestRates(db.Model):
     ClassS = db.Column(db.Float)
     
 
-""""
 class expected():
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    month = db.Column(db.String(64))
+    month = db.Column(db.String(1024))
     year = db.Column(db.Integer)
     value = db.Column(db.Integer)
-    fprofile = db.Column(db.Integer)
-    intclass = db.Column(db.String(64))
-    interest = db.Column(db.Integer) #not an integer
-    #donation = db.Column(db.Integer)
-    #spending = db.Column(db.Integer)
-    recap = db.Column(db.Integer)
-    distribution = db.Column(db.Integer) #not an integer
+    intclass = db.Column(db.String(1024))
+    donation = db.Column(db.String(1024))
+    spending = db.Column(db.String(1024))
+    recap = db.Column(db.String(1024))
+    distribution = db.Column(db.String(1024))
     timeframe = db.Column(db.Integer)
-    #addContribution = db.Column(db.Integer)
+    addContribution = db.Column(db.String(1024))
 
 
-class actual():
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    body = db.Column(db.String(140))
-"""
+    month = StringField('month')
+    year = IntegerField('year')
+    fundvalue = IntegerField('fundvalue')
+    #fProfile = none
+    interestClass = StringField('interestClass')
+ 
+    donation = StringField('donation') #multiple file field could be incorrect could also use FieldList
+    spending = StringField('spending') #multiple file field could be incorrect could also use FieldList
+    recap = StringField('recap') #multiple file field could be incorrect could also use FieldList
+    distribution = DecimalField('distribution') #multiple file field could be incorrect could also use FieldList
+    additionalContribution = StringField('additionalContribution') #multiple file field could be incorrect could also use FieldList
+    timeframe = IntegerField('timeframe')
+    submit = SubmitField('Calculate')
+
