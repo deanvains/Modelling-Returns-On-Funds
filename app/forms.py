@@ -14,7 +14,6 @@ class calculationForm(FlaskForm):
     month = StringField('month')
     year = IntegerField('year')
     fundvalue = IntegerField('fundvalue')
-    #fProfile = none
     interestClass = StringField('interestClass')
     interest = DecimalField('interest')
     donation = StringField('donation')

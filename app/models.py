@@ -38,7 +38,7 @@ class InterestRates(db.Model):
     ClassS = db.Column(db.Float)
     
 
-class expected():
+class expected(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     month = db.Column(db.String(1024))
@@ -52,18 +52,5 @@ class expected():
     timeframe = db.Column(db.Integer)
     addContribution = db.Column(db.String(1024))
 
-
-    month = StringField('month')
-    year = IntegerField('year')
-    fundvalue = IntegerField('fundvalue')
-    #fProfile = none
-    interestClass = StringField('interestClass')
- 
-    donation = StringField('donation') #multiple file field could be incorrect could also use FieldList
-    spending = StringField('spending') #multiple file field could be incorrect could also use FieldList
-    recap = StringField('recap') #multiple file field could be incorrect could also use FieldList
-    distribution = DecimalField('distribution') #multiple file field could be incorrect could also use FieldList
-    additionalContribution = StringField('additionalContribution') #multiple file field could be incorrect could also use FieldList
-    timeframe = IntegerField('timeframe')
-    submit = SubmitField('Calculate')
-
+    def __repr__(self):
+        return '<id {}, User_id {}, month {}, year {} >'.format(self.id, self.user_id, self.month, self.year)
