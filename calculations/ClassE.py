@@ -33,7 +33,7 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
     annualAMB = {}
             
         
-    for month in range(0,timeFrame):
+    for month in range(0,timeFrame * 12 + 1):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
             monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
@@ -96,6 +96,7 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
                 monthlyClBalance[month] += int(recapital.get(month))
                 
     result = [monthlyOpBalance,monthlyClBalance]
+    
     return result
     """for x,y in monthlyReturn.items():
         print(x,y)
@@ -118,6 +119,6 @@ def main():
     donation = {18:1000000}
     recap = {30:10000}
     distribution = 0.05
-    timeframe = 49
+    timeframe = 4
     result = classE(month,year,fundValue,fProfile,interestClass,interest,donation,recap,distribution,timeframe)
     return result    

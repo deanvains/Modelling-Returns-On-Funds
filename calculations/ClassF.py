@@ -33,7 +33,7 @@ def classF(month,year,value,fprofile,intclass,interest,donation,recap,distributi
     annualAMB = {}
             
         
-    for month in range(0,timeFrame):
+    for month in range(0,timeFrame * 12 + 1):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
             monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
