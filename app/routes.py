@@ -85,16 +85,14 @@ def calcs():
                 elif(intclass == "S"):
                     calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
             
-
                 return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
-            else:
-                return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
+       
         else:
             return pdfGen()
 
     
     form = calculationForm()
-    return render_template("calcs.html", title='Calculation Page', form=form)
+    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
 
 #@app.route('/pdfCreator')
 #def pdfCreator():
