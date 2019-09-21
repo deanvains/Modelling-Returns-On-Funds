@@ -21,6 +21,8 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
     interestClass = intclass
     interest = interest
     spendingProfile = spending
+    if type(addContribution) == str:
+        addContribution = {}
     additionalCapital = addContribution
     
         
@@ -31,14 +33,14 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
     annualAMB = {}
             
        
-    for month in range(0,timeFrame):
+    for month in range(0,timeFrame * 12 + 1):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = monthlyOpBalance[month]
             if spendingProfile.get(month) != None:
                  monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
             if additionalCapital.get(month) != None:
-                monthlyClBalance[month] -= int(additionalCapital.get(month))
+                monthlyClBalance[month] += int(additionalCapital.get(month))
             annualAMB[1] = int(monthlyOpBalance[month])   
 
         elif month == 0 and dateMonth != "December" :
@@ -47,7 +49,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
             if spendingProfile.get(month) != None:
                  monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
             if additionalCapital.get(month) != None:
-                monthlyClBalance[month] -= int(additionalCapital.get(month))
+                monthlyClBalance[month] += int(additionalCapital.get(month))
         
         elif month > 0 and ((monthDict[dateMonth] + month ) % 12) == 0:
             monthlyOpBalance[month] = monthlyClBalance[month-1]
@@ -55,7 +57,6 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
             sumAWB = 0
             if month < 12:
                 for bal in range(month+1,0,-1):
-                    print(monthlyOpBalance[month - bal + 1])
                     sum += monthlyOpBalance[month - bal + 1]
                 annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / (month+1))
                 
@@ -69,7 +70,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
             if spendingProfile.get(month) != None:
                  monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
             if additionalCapital.get(month) != None:
-                monthlyClBalance[month] -= int(additionalCapital.get(month))
+                monthlyClBalance[month] += int(additionalCapital.get(month))
 
           
         else :
@@ -78,7 +79,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
             if spendingProfile.get(month) != None:
                  monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
             if additionalCapital.get(month) != None:
-                monthlyClBalance[month] -= int(additionalCapital.get(month))
+                monthlyClBalance[month] += int(additionalCapital.get(month))
         
     result = [monthlyOpBalance,monthlyClBalance]
     return result

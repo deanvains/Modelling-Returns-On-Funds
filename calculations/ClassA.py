@@ -1,6 +1,3 @@
-def calMonths(year1,year2,month1,month2):
-    return int((year1-year2) * 12 +(month2-month1))
-
 def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe):
     
     monthDict = {"January" : 1,
@@ -25,9 +22,16 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
     interestClass = intclass
     interest = interest
     spendingProfile = spending
-    recapital = recap
-    yearlyCapDist = distribution
-    
+    if type(recap) == str:
+        recapital = {}
+    else:
+        recapital = recap
+
+    if type(recap) == str:
+        yearlyCapDist ={}
+    else:
+        yearlyCapDist = distribution
+    print (yearlyCapDist)
  
         
         
@@ -37,7 +41,7 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
     annualAMB = {}
             
         
-    for month in range(0,timeFrame):
+    for month in range(0,timeFrame * 12 + 1):
         if month == 0 and dateMonth == "December":
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = monthlyOpBalance[month]
@@ -75,8 +79,8 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
                  monthlyClBalance[month] = int(monthlyClBalance[month] - spendingProfile.get(month))
             if recapital.get(month) != None:
                 monthlyClBalance[month] -= int(recapital.get(month))
-            if yearlyCapDist[(monthDict[dateMonth] + month)/12] != None:
-                monthlyClBalance[month] += int(yearlyCapDist.get((monthDict[dateMonth] + month)/12))
+            if yearlyCapDist.get(month)!= None:
+                monthlyClBalance[month] += int(yearlyCapDist.get(month))
 
           
         else :
