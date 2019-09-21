@@ -13,6 +13,9 @@ from calculations.ClassF import classF
 from calculations.ClassG import classG
 from calculations.ClassS import classS
 from calculations.test import deanTest
+from calculations.findDec import findDec
+from calculations.calcSpend import calcSpending
+from calculations.calcMonth import calcMonths
 from app.exports import pdfGen
 
 @app.route('/')
@@ -30,13 +33,33 @@ def calcs():
                 month = form.month.data
                 year = form.year.data
                 value =  form.fundvalue.data
+                fprofile = None
                 intclass = form.interestClass.data
-                donation = form.donation.data
-                spending = form.spending.data
-                recap = form.recap.data
+                interest = form.interest.data
+                if form.donation.data == '' :
+                    donation = {}
+                else:
+                    donation = calcSpending(form.donation.data,form.donationMonths.data,form.donationYears.data,month,year)
+                #spending = form.additionalContribution.data
+                if form.spending.data == '' :
+                    spending = {}
+                else:
+                    spending = calcSpending(form.spending.data,form.spendingMonths.data,form.spendingYears.data,month,year)
+                if form.recap.data == '' :
+                    recap = {}
+                else:
+                    recap = calcSpending(form.recap.data,form.recapMonths.data,form.recapYears.data,month,year)
+                if form.operatingDistribution.data == '' :
+                    operatingDistribution = {}
+                else:
+                    operatingDistribution = calcSpending(form.operatingDistribution.data,form.operatingDistributionMonths.data,form.operatingDistributionYears.data,month,year)
                 distribution = form.distribution.data
                 timeframe = form.timeframe.data
-                addContribution = form.additionalContribution.data
+                if form.additionalContribution.data == '' :
+                    addContribution = {}
+                else:
+                    addContribution = calcSpending(form.additionalContribution.data,form.additionalContributionMonths.data,form.additionalContributionYears.data,month,year)
+                decMonth = findDec(month)
                 savedata = form.savedata.data
 
                 if(savedata == True and current_user.is_authenticated):
@@ -45,30 +68,27 @@ def calcs():
                     db.session.add(clientsave)
                     db.session.commit()
 
-                calc = deanTest(year)
-                """
-                if(intclass == "E"):
-                    interest = get this value from the database
+                if intclass == "E":
                     calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-                elif(intclass == "F"):
-                    calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-                elif(intclass == "G"):
-                    calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                elif intclass == "F":
+                    calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
+                elif intclass == "G" :
+                    calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
                 elif(intclass == "H"):
                     calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-                elif(intclass == "A"):
-                    calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,distribution,timeframe)
+                elif intclass == "A":
+                    calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,operatingDistribution,timeframe)
                 elif(intclass == "N"):
                     calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
                 elif(intclass == "Q"):
                     calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
                 elif(intclass == "S"):
                     calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-                """
+            
 
-                return render_template("calcs.html", title='Calculation Page', form=form,calc=calc)
+                return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
             else:
-                return render_template("calcs.html", title='Calculation Page', form=form)
+                return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
         else:
             return pdfGen()
 
