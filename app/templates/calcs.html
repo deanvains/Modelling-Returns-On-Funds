@@ -125,6 +125,35 @@
 
             <div class="form-group col-md-4">
                 <p>
+                    {{ form.interest.label }}<br> {{ form.interest(size=32) }}<br> {% for error in form.interest.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+            
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.donation.label }}<br> {{ form.donation(size=32) }}<br> {% for error in form.donation.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.donationMonths.label }}<br> {{ form.donationMonths(size=32) }}<br> {% for error in form.donationMonths.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.donationYears.label }}<br> {{ form.donationYears(size=32) }}<br> {% for error in form.donationYears.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+
+            <div class="form-group col-md-4">
+                <p>
                     {{ form.spending.label }}<br> {{ form.spending(size=32) }}<br> {% for error in form.spending.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
@@ -132,8 +161,36 @@
 
             <div class="form-group col-md-4">
                 <p>
+                {{ form.spendingMonths.label }}<br> {{ form.spendingMonths(size=32) }}<br> {% for error in form.spendingMonths.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.spendingYears.label }}<br> {{ form.spendingYears(size=32) }}<br> {% for error in form.spendingYears.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
                     {{ form.recap.label }}<br> {{ form.recap(size=32) }}<br> {% for error in form.recap.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+            
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.recapMonths.label }}<br> {{ form.recapMonths(size=32) }}<br> {% for error in form.recapMonths.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                {{ form.recapYears.label }}<br> {{ form.recapYears(size=32) }}<br> {% for error in form.recapYears.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
             </div>
 
@@ -146,7 +203,42 @@
 
             <div class="form-group col-md-4">
                 <p>
+                    {{ form.operatingDistribution.label }}<br> {{ form.operatingDistribution(size=32) }}<br> {% for error in form.operatingDistribution.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.operatingDistributionMonths.label }}<br> {{ form.operatingDistributionMonths(size=32) }}<br> {% for error in form.operatingDistributionMonths.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.operatingDistributionYears.label }}<br> {{ form.operatingDistributionYears(size=32) }}<br> {% for error in form.operatingDistributionYears.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
                     {{ form.additionalContribution.label }}<br> {{ form.additionalContribution(size=32) }}<br> {% for error in form.additionalContribution.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.additionalContributionMonths.label }}<br> {{ form.additionalContributionMonths(size=32) }}<br> {% for error in form.additionalContributionMonths.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <p>
+                    {{ form.additionalContributionYears.label }}<br> {{ form.additionalContributionYears(size=32) }}<br> {% for error in form.additionalContributionYears.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
             </div>
@@ -192,126 +284,27 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                    <th>year</th>
+                    {% for year in range(timeframe|int +1) %}
+                    <th>{{ years + year }} </th>
+                    {% endfor %}
+           
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
+                    <td>Opening Balance</td>
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    <th>{{ calc[0][year] }} </th>
+                    {% endfor %}
                 </tr>
                 <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
+                    <td>Closing Balance</td>
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    <th>{{ calc[1][year] }} </th>
+                    {% endfor %}
                 </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
+             
             </tbody>
         </table>
     </div>
