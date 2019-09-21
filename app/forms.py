@@ -11,16 +11,29 @@ class LoginForm(FlaskForm):
 
 
 class calculationForm(FlaskForm):
-    month = StringField('month')
-    year = IntegerField('year')
-    fundvalue = IntegerField('fundvalue')
-    interestClass = StringField('interestClass')
-    donation = StringField('donation')
-    spending = StringField('spending')
-    recap = StringField('recap')
-    distribution = StringField('distribution')
-    additionalContribution = StringField('additionalContribution')
-    timeframe = IntegerField('timeframe')
+    month = StringField('Month')
+    year = IntegerField('Year')
+    fundvalue = IntegerField('Fund Value')
+    #fProfile = none
+    interestClass = StringField('Interest Class')
+    interest = DecimalField('Interest Rate')
+    donation = StringField('Donation Amounts') #multiple file field could be incorrect could also use FieldList
+    donationMonths = StringField('Donation Monts')
+    donationYears = StringField ('Donation Years')
+    spending = StringField('Spending Amounts') #multiple file field could be incorrect could also use FieldList
+    spendingMonths = StringField("Spending Months")
+    spendingYears = StringField("Spending Years")
+    recap = StringField('Recapitalization Amounts') #multiple file field could be incorrect could also use FieldList
+    recapMonths = StringField("Recapitalization Months")
+    recapYears = StringField("Recapitalization Years")
+    distribution = DecimalField('Distribution Rate') #multiple file field could be incorrect could also use FieldList
+    operatingDistribution = StringField('Operating Capital Distribution') #multiple file field could be incorrect could also use FieldList
+    operatingDistributionMonths = StringField("Op Cap Months")
+    operatingDistributionYears = StringField("Op Cap Years")
+    additionalContribution = StringField('Additional Contribution') #multiple file field could be incorrect could also use FieldList
+    additionalContributionMonths = StringField("Add Contribution Months")
+    additionalContributionYears = StringField("Add Contribution Years")
+    timeframe = IntegerField('Time Frame')
     savedata = BooleanField('savedata')
     submit = SubmitField('Calculate')
     
