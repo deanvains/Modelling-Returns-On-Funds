@@ -35,7 +35,7 @@ def classG(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             
         
     for month in range(0,timeFrame *12 +1):
-        if month == 0 and dateMonth == "December":
+        if month == 0 and dateMonth == "dec":
             monthlyOpBalance[month] = fundValue
             monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
             monthlyReturn[month] = int(monthlyOpBalance[month] * float(interest))
@@ -47,7 +47,7 @@ def classG(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             annualAMB[1] = int(monthlyOpBalance[month])
             AWB3yr[1] = int(monthlyOpBalance[month])
             
-        elif month == 0 and dateMonth != "December" :
+        elif month == 0 and dateMonth != "dec" :
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = int(monthlyOpBalance[month])
             if donation.get(month) != None:

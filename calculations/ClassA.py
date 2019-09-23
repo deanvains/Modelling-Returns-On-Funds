@@ -43,7 +43,7 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
             
         
     for month in range(0,timeFrame * 12 + 1):
-        if month == 0 and dateMonth == "December":
+        if month == 0 and dateMonth == "dec":
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = monthlyOpBalance[month]
             if spendingProfile.get(month) != None:
@@ -52,7 +52,7 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
                 monthlyClBalance[month] -= int(recapital.get(month))
             annualAMB[1] = int(monthlyOpBalance[month])   
 
-        elif month == 0 and dateMonth != "December" :
+        elif month == 0 and dateMonth != "dec" :
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = int(monthlyOpBalance[month])
             if spendingProfile.get(month) != None:

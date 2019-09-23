@@ -35,7 +35,7 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             
         
     for month in range(0,timeFrame * 12 + 1):
-        if month == 0 and dateMonth == "December":
+        if month == 0 and dateMonth == 'dec':
             monthlyOpBalance[month] = fundValue
             monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
             monthlyReturn[month] = int(monthlyOpBalance[month] * float(interest))
@@ -47,7 +47,7 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             annualAMB[1] = int(monthlyOpBalance[month])
             AWB3yr[1] = int(monthlyOpBalance[month])
             
-        elif month == 0 and dateMonth != "December" :
+        elif month == 0 and dateMonth != "dec" :
             monthlyOpBalance[month] = fundValue
             monthlyClBalance[month] = int(monthlyOpBalance[month])
             if donation.get(month) != None:
@@ -55,34 +55,34 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
          
-        elif month > 0 and ((monthDict[dateMonth] + month ) % 12) == 0:
+        elif month > 0 and ((monthDict[dateMonth.lower()] + month ) % 12) == 0:
             monthlyOpBalance[month] = monthlyClBalance[month-1]
             sum = 0
             sumAWB = 0
             if month < 12:
                 for bal in range(month+1,0,-1):
                     sum += monthlyOpBalance[month - bal + 1]
-                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / month)
-                AWB3yr[(monthDict[dateMonth] + month)/12] = int(annualAMB[(monthDict[dateMonth] + month)/12])
+                annualAMB[(monthDict[dateMonth.lower()] + month)/12] = int(sum / month)
+                AWB3yr[(monthDict[dateMonth.lower()] + month)/12] = int(annualAMB[(monthDict[dateMonth.lower()] + month)/12])
             else :
                 for bal in range(12,12-12,-1):
                     sum += monthlyOpBalance[month - bal+1]
-                annualAMB[(monthDict[dateMonth] + month)/12] = int(sum / 12)
-                if (monthDict[dateMonth] + month)/12 == 2:
+                annualAMB[(monthDict[dateMonth.lower()] + month)/12] = int(sum / 12)
+                if (monthDict[dateMonth.lower()] + month)/12 == 2:
                     for bal in range(2,0,-1):
                         sumAWB += annualAMB[bal]
-                    AWB3yr[(monthDict[dateMonth] + month)/12] = int(sumAWB/2)
+                    AWB3yr[(monthDict[dateMonth.lower()] + month)/12] = int(sumAWB/2)
                     
-                elif (monthDict[dateMonth] + month)/12 == 1:
-                    AWB3yr[(monthDict[dateMonth] + month)/12] = int(annualAMB[(monthDict[dateMonth] + month)/12])
+                elif (monthDict[dateMonth.lower()] + month)/12 == 1:
+                    AWB3yr[(monthDict[dateMonth.lower()] + month)/12] = int(annualAMB[(monthDict[dateMonth.lower()] + month)/12])
                 else:
-                    for bal in range(int((monthDict[dateMonth] + month)/12),int(((monthDict[dateMonth] + month)/12) - 3),-1):
+                    for bal in range(int((monthDict[dateMonth.lower()] + month)/12),int(((monthDict[dateMonth.lower()] + month)/12) - 3),-1):
                         sumAWB += annualAMB[bal]
-                    AWB3yr[(monthDict[dateMonth] + month)/12] = int(sumAWB/3)
+                    AWB3yr[(monthDict[dateMonth.lower()] + month)/12] = int(sumAWB/3)
             
             
-            monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth] + month)/12] * float(interest))
-            monthlyCapDist[month] = int(AWB3yr[(monthDict[dateMonth] + month)/12] * float(distribution))
+            monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth.lower()] + month)/12] * float(interest))
+            monthlyCapDist[month] = int(AWB3yr[(monthDict[dateMonth.lower()] + month)/12] * float(distribution))
             monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month] - monthlyCapDist[month])
             if donation.get(month) != None:
                 monthlyClBalance[month] += int(donation.get(month))
