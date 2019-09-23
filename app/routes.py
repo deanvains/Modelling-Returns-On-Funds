@@ -14,9 +14,10 @@ from calculations.ClassG import classG
 from calculations.ClassS import classS
 from calculations.test import deanTest
 from calculations.findDec import findDec
-from calculations.calcSpend import calcSpending
+from calculations.calDynamic import calcDyn
 from calculations.calcMonth import calcMonths
 from app.exports import pdfGen
+import traceback
 
 @app.route('/')
 @app.route('/homepage')
@@ -37,29 +38,29 @@ def calcs():
                     fprofile = None
                     intclass = form.interestClass.data
                     interest = form.interest.data
+                    distribution = form.distribution.data
+                    timeframe = form.timeframe.data
                     if form.donation.data == '' or form.donation.data == '0':
                         donation = {}
                     else:
-                        donation = calcSpending(form.donation.data,form.donationMonths.data,form.donationYears.data,month,year)
+                        donation = calcDyn(form.donation.data,month,year,timeframe)
                     #spending = form.additionalContribution.data
                     if form.spending.data == '' or form.spending.data == '0' :
                         spending = {}
                     else:
-                        spending = calcSpending(form.spending.data,form.spendingMonths.data,form.spendingYears.data,month,year)
+                        spending = calcDyn(form.spending.data,month,year,timeframe)
                     if form.recap.data == '' or form.recap.data == '0':
                         recap = {}
                     else:
-                        recap = calcSpending(form.recap.data,form.recapMonths.data,form.recapYears.data,month,year)
+                        recap = calcDyn(form.recap.data,month,year,timeframe)
                     if form.operatingDistribution.data == '' or form.operatingDistribution.data == '0' :
                         operatingDistribution = {}
                     else:
-                        operatingDistribution = calcSpending(form.operatingDistribution.data,form.operatingDistributionMonths.data,form.operatingDistributionYears.data,month,year)
-                    distribution = form.distribution.data
-                    timeframe = form.timeframe.data
+                        operatingDistribution = calcDyn(form.operatingDistribution.data,month,year,timeframe)
                     if form.additionalContribution.data == '' or form.additionalContribution.data == '0':
                         addContribution = {}
                     else:
-                        addContribution = calcSpending(form.additionalContribution.data,form.additionalContributionMonths.data,form.additionalContributionYears.data,month,year)
+                        addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
                     decMonth = findDec(month)
                     savedata = form.savedata.data
 
@@ -88,6 +89,7 @@ def calcs():
                 
                     return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
                 except:
+                    traceback.print_exc() #To print error Trace
                     return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
         else:
             return pdfGen()
