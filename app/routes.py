@@ -30,63 +30,65 @@ def calcs():
         if 'submit' in request.values:
             form = calculationForm()
             if form.validate_on_submit():
-                month = form.month.data
-                year = form.year.data
-                value =  form.fundvalue.data
-                fprofile = None
-                intclass = form.interestClass.data
-                interest = form.interest.data
-                if form.donation.data == '' :
-                    donation = {}
-                else:
-                    donation = calcSpending(form.donation.data,form.donationMonths.data,form.donationYears.data,month,year)
-                #spending = form.additionalContribution.data
-                if form.spending.data == '' :
-                    spending = {}
-                else:
-                    spending = calcSpending(form.spending.data,form.spendingMonths.data,form.spendingYears.data,month,year)
-                if form.recap.data == '' :
-                    recap = {}
-                else:
-                    recap = calcSpending(form.recap.data,form.recapMonths.data,form.recapYears.data,month,year)
-                if form.operatingDistribution.data == '' :
-                    operatingDistribution = {}
-                else:
-                    operatingDistribution = calcSpending(form.operatingDistribution.data,form.operatingDistributionMonths.data,form.operatingDistributionYears.data,month,year)
-                distribution = form.distribution.data
-                timeframe = form.timeframe.data
-                if form.additionalContribution.data == '' :
-                    addContribution = {}
-                else:
-                    addContribution = calcSpending(form.additionalContribution.data,form.additionalContributionMonths.data,form.additionalContributionYears.data,month,year)
-                decMonth = findDec(month)
-                savedata = form.savedata.data
+                try:
+                    month = form.month.data
+                    year = form.year.data
+                    value =  form.fundvalue.data
+                    fprofile = None
+                    intclass = form.interestClass.data
+                    interest = form.interest.data
+                    if form.donation.data == '' or form.donation.data == '0':
+                        donation = {}
+                    else:
+                        donation = calcSpending(form.donation.data,form.donationMonths.data,form.donationYears.data,month,year)
+                    #spending = form.additionalContribution.data
+                    if form.spending.data == '' or form.spending.data == '0' :
+                        spending = {}
+                    else:
+                        spending = calcSpending(form.spending.data,form.spendingMonths.data,form.spendingYears.data,month,year)
+                    if form.recap.data == '' or form.recap.data == '0':
+                        recap = {}
+                    else:
+                        recap = calcSpending(form.recap.data,form.recapMonths.data,form.recapYears.data,month,year)
+                    if form.operatingDistribution.data == '' or form.operatingDistribution.data == '0' :
+                        operatingDistribution = {}
+                    else:
+                        operatingDistribution = calcSpending(form.operatingDistribution.data,form.operatingDistributionMonths.data,form.operatingDistributionYears.data,month,year)
+                    distribution = form.distribution.data
+                    timeframe = form.timeframe.data
+                    if form.additionalContribution.data == '' or form.additionalContribution.data == '0':
+                        addContribution = {}
+                    else:
+                        addContribution = calcSpending(form.additionalContribution.data,form.additionalContributionMonths.data,form.additionalContributionYears.data,month,year)
+                    decMonth = findDec(month)
+                    savedata = form.savedata.data
 
-                if(savedata == True and current_user.is_authenticated):
-                    clientsave = expected(user_id=current_user.id,month=month,year=year,value=value,intclass=intclass,donation=donation,
-                    spending=spending,recap=recap,distribution=distribution,timeframe=timeframe,addContribution=addContribution)
-                    db.session.add(clientsave)
-                    db.session.commit()
+                    if(savedata == True and current_user.is_authenticated):
+                        clientsave = expected(user_id=current_user.id,month=month,year=year,value=value,intclass=intclass,donation=donation,
+                        spending=spending,recap=recap,distribution=distribution,timeframe=timeframe,addContribution=addContribution)
+                        db.session.add(clientsave)
+                        db.session.commit()
 
-                if intclass == "E":
-                    calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
-                elif intclass == "F":
-                    calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
-                elif intclass == "G" :
-                    calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
-                elif(intclass == "H"):
-                    calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-                elif intclass == "A":
-                    calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,operatingDistribution,timeframe)
-                elif(intclass == "N"):
-                    calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-                elif(intclass == "Q"):
-                    calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-                elif(intclass == "S"):
-                    calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
-            
-                return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
-       
+                    if intclass == "E":
+                        calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                    elif intclass == "F":
+                        calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
+                    elif intclass == "G" :
+                        calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
+                    elif(intclass == "H"):
+                        calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                    elif intclass == "A":
+                        calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,operatingDistribution,timeframe)
+                    elif(intclass == "N"):
+                        calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                    elif(intclass == "Q"):
+                        calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                    elif(intclass == "S"):
+                        calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                
+                    return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
+                except:
+                    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
         else:
             return pdfGen()
 
