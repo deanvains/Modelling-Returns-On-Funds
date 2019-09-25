@@ -86,7 +86,7 @@ def classS(month,year,value,fprofile,intclass,interest,spending,addContribution,
 
 
 def main():
-    month = 'January'
+    month = 'jan'
     year = 2019
     fundValue = 800000
     fProfile = None
@@ -113,4 +113,4 @@ def main():
         
     timeframe = 48
     result = classS(month,year,fundValue,fProfile,interestClass,interest,spending,addContri,timeframe)
-    print(result[0])
+    print(result)
