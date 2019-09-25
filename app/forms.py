@@ -57,3 +57,7 @@ class InterestRatesForm(FlaskForm):
     ClassQ = DecimalField('Short Term Pool - Class Q')
     ClassS = DecimalField('Cash Pool - Class S')
     submit = SubmitField('Submit')
+
+class RemovalForm(FlaskForm):
+    id = IntegerField('Which item would you like to remove?')
+    submit = SubmitField('Remove')

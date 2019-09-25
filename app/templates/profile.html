@@ -25,6 +25,15 @@
 
     {% endif %} {% endfor %}
 
+    <form>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.id.label }}<br> {{ form.id(size=32) }}<br> {% for error in form.id.errors %}
+            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
 
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 

@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -113,7 +113,14 @@ def calcs():
 
 @app.route('/profile',methods=["GET", "POST"])
 def profile():
-    return render_template("profile.html", title='Profile', expected=expected.query.all())
+    form= RemovalForm()
+    if form.validate_on_submit:
+        removalid = form.id.data
+        temp = expected.query.get(removalid)
+        db.session.delete(temp)
+        db.session.commit()
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form)
+    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form)
 
 
 @app.route('/signin', methods=['GET', 'POST'])
