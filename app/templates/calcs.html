@@ -19,7 +19,7 @@
                     {{ form.month.label }}<br> {{ form.month(size=32) }}<br> {% for error in form.month.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Month : <br> dec</p>
+                <p style="color:grey">Example - Month : <br> dec</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -27,7 +27,7 @@
                     {{ form.year.label }}<br> {{ form.year(size=32) }}<br> {% for error in form.year.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Year : <br> 2018</p>
+                <p style="color:grey">Example - Year : <br> 2018</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -35,7 +35,7 @@
                     {{ form.fundvalue.label }}<br> {{ form.fundvalue(size=32) }}<br> {% for error in form.fundvalue.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Fund Value : <br> 10000000</p>
+                <p style="color:grey">Example - Fund Value : <br> 10000000</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -43,7 +43,7 @@
                     {{ form.interestClass.label }}<br> {{ form.interestClass(size=32) }}<br> {% for error in form.interestClass.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Interest Class : <br> E</p>
+                <p style="color:grey">Example - Interest Class : <br> E</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -51,7 +51,7 @@
                     {{ form.donation.label }}<br> {{ form.donation(size=32) }}<br> {% for error in form.donation.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Donation Amounts : <br> jun-2020-1000000,jul-2020-0</p>
+                <p style="color:grey">Example - Donation Amounts : <br> jun-2020-1000000,jul-2020-0</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -59,7 +59,7 @@
                     {{ form.spending.label }}<br> {{ form.spending(size=32) }}<br> {% for error in form.spending.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Spending Amounts : <br> 0</p>
+                <p style="color:grey">Example - Spending Amounts : <br> 0</p>
             </div>
 
 
@@ -68,7 +68,7 @@
                     {{ form.recap.label }}<br> {{ form.recap(size=32) }}<br> {% for error in form.recap.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Recap Amounts : <br> jun-2021-10000,jul-2021-0</p>
+                <p style="color:grey">Example - Recap Amounts : <br> jun-2021-10000,jul-2021-0</p>
             </div>
 
 
@@ -77,7 +77,7 @@
                     {{ form.distribution.label }}<br> {{ form.distribution(size=32) }}<br> {% for error in form.distribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Distribution Rate : <br> 0.05</p>
+                <p style="color:grey">Example - Distribution Rate : <br> 0.05</p>
             </div>
 
             <div class="form-group col-md-12">
@@ -85,7 +85,7 @@
                     {{ form.operatingDistribution.label }}<br> {{ form.operatingDistribution(size=32) }}<br> {% for error in form.operatingDistribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Operating Capital Distribution : <br> 0</p>
+                <p style="color:grey">Example - Operating Capital Distribution : <br> 0</p>
             </div>
 
 
@@ -94,7 +94,7 @@
                     {{ form.additionalContribution.label }}<br> {{ form.additionalContribution(size=32) }}<br> {% for error in form.additionalContribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Additional Contribution : <br> 0</p>
+                <p style="color:grey">Example - Additional Contribution : <br> 0</p>
             </div>
 
 
@@ -104,14 +104,14 @@
                     {{ form.timeframe.label }}<br> {{ form.timeframe(size=32) }}<br> {% for error in form.timeframe.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                <p style="color:grey">Example-Time Frame : <br> 12</p><br>
+                <p style="color:grey">Example - Time Frame : <br> 12</p><br>
 
             </div>
 			
 			{% if current_user.is_authenticated %}
             <div class="form-group col-md-12">
                 <p>
-                    {{ form.savedata.label }}<br> {{ form.savedata(size=32) }}<br> {% for error in form.savedata.errors %}
+                    {{ form.savedata(size=32) }} {{ form.savedata.label }}<br> {% for error in form.savedata.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
             </div>
