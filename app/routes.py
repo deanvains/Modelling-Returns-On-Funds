@@ -174,5 +174,4 @@ def admin():
 
         db.session.commit()
         return redirect(url_for('admin'))
-    #return render_template('admin.html', title='Admin', form=form, value=intRates)
     return render_template('admin.html', title='Admin', form=form, Interest=Interest)
