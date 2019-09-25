@@ -32,11 +32,11 @@ def calcs():
             form = calculationForm()
             if form.validate_on_submit():
                 try:
-                    month = form.month.data
+                    month = form.month.data.strip()
                     year = form.year.data
                     value =  form.fundvalue.data
                     fprofile = None
-                    intclass = form.interestClass.data
+                    intclass = form.interestClass.data.strip()
                     interest = InterestRates.query.first()
                     distribution = form.distribution.data
                     timeframe = form.timeframe.data
