@@ -113,13 +113,12 @@ def calcs():
 
 @app.route('/profile',methods=["GET", "POST"])
 def profile():
-    form= RemovalForm()
-    if form.validate_on_submit:
-        removalid = form.id.data
-        temp = expected.query.get(removalid)
+    form = RemovalForm()
+    if form.validate_on_submit():
+        temp = expected.query.get(form.rid.data)
         db.session.delete(temp)
         db.session.commit()
-        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form)
+        return redirect(url_for('profile'))
     return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form)
 
 

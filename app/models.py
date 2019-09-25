@@ -43,7 +43,7 @@ class InterestRates(db.Model):
     
 
 class expected(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     month = db.Column(db.String(1024))
     year = db.Column(db.Integer)

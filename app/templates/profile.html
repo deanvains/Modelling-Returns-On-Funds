@@ -25,10 +25,10 @@
 
     {% endif %} {% endfor %}
 
-    <form>
+    <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.id.label }}<br> {{ form.id(size=32) }}<br> {% for error in form.id.errors %}
+            {{ form.rid.label }}<br> {{ form.rid(size=8) }}<br> {% for error in form.rid.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
