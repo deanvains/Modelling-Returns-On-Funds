@@ -14,7 +14,7 @@
                         <br>
                         <h1>Interest Rates</h1>
                     </div>
-                    
+
                     <!--div>
                         <h4>Current Interest Rates</h4>
                         {% for i in value %}
@@ -31,41 +31,41 @@
                         
                     
                     </div-->
-                    
+
                     <div class="form">
                         <h4>Change Interest Rates Below</h4>
                         <form action="" method="post" novalidate>
                             {{ form.hidden_tag() }}
                             <p>
-                                {{ form.ClassE.label }}<br> {{ form.ClassE(size=5) }}<br> {% for error in form.ClassE.errors %}
+                                Current: {{ Interest.ClassE }} <br> {{ form.ClassE.label }}<br> {{ form.ClassE(size=5) }}<br> {% for error in form.ClassE.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassF.label }}<br> {{ form.ClassF(size=5) }}<br> {% for error in form.ClassF.errors %}
+                                Current: {{ Interest.ClassF }} <br>{{ form.ClassF.label }}<br> {{ form.ClassF(size=5) }}<br> {% for error in form.ClassF.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassG.label }}<br> {{ form.ClassG(size=5) }}<br> {% for error in form.ClassG.errors %}
+                                Current:{{ Interest.ClassG }} <br>{{ form.ClassG.label }}<br> {{ form.ClassG(size=5) }}<br> {% for error in form.ClassG.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassH.label }}<br> {{ form.ClassH(size=5) }}<br> {% for error in form.ClassH.errors %}
+                                Current:{{ Interest.ClassH }} <br>{{ form.ClassH.label }}<br> {{ form.ClassH(size=5) }}<br> {% for error in form.ClassH.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassA.label }}<br> {{ form.ClassA(size=5) }}<br> {% for error in form.ClassA.errors %}
+                                Current:{{ Interest.ClassA }} <br>{{ form.ClassA.label }}<br> {{ form.ClassA(size=5) }}<br> {% for error in form.ClassA.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassN.label }}<br> {{ form.ClassN(size=5) }}<br> {% for error in form.ClassN.errors %}
+                                Current: {{ Interest.ClassN }}<br> {{ form.ClassN.label }}<br> {{ form.ClassN(size=5) }}<br> {% for error in form.ClassN.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassQ.label }}<br> {{ form.ClassQ(size=5) }}<br> {% for error in form.ClassQ.errors %}
+                                Current:{{ Interest.ClassQ }}<br> {{ form.ClassQ.label }}<br> {{ form.ClassQ(size=5) }}<br> {% for error in form.ClassQ.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
                             <p>
-                                {{ form.ClassS.label }}<br> {{ form.ClassS(size=5) }}<br> {% for error in form.ClassS.errors %}
+                                Current:{{ Interest.ClassS }} <br>{{ form.ClassS.label }}<br> {{ form.ClassS(size=5) }}<br> {% for error in form.ClassS.errors %}
                                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
                             </p>
 

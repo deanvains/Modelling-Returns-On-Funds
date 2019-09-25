@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRates
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -143,7 +143,6 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
         return redirect(url_for('signin'))
     return render_template('signup.html', title='Sign Up', form=form)
 
@@ -154,14 +153,19 @@ def logout():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    form = InterestRates()
-    #intRates = InterestRates.query(InterestRates).order_by(InterestRates.id.desc()).first()
-    #if intRates is None:
-    #    return redirect(url_for('admin'))
+    form = InterestRatesForm()
+    Interest = InterestRates.query.first()
     if form.validate_on_submit():
-        interest_rates = InterestRates(ClassE=form.ClassE.data, ClassF=form.ClassF.data, ClassG=form.ClassG.data, ClassH=form.ClassH.data, ClassA=form.ClassA.data, ClassN=form.ClassN.data, ClassQ=form.ClassQ.data, ClassS=form.ClassS.data)
-        db.session.add(interest_rates)
+        Interest.ClassE = form.ClassE.data
+        Interest.ClassF = form.ClassF.data
+        Interest.ClassG = form.ClassG.data
+        Interest.ClassH = form.ClassH.data
+        Interest.ClassA = form.ClassA.data
+        Interest.ClassN = form.ClassN.data
+        Interest.classQ = form.ClassQ.data
+        Interest.ClassS = form.ClassS.data
+
         db.session.commit()
         return redirect(url_for('admin'))
     #return render_template('admin.html', title='Admin', form=form, value=intRates)
-    return render_template('admin.html', title='Admin', form=form)
+    return render_template('admin.html', title='Admin', form=form, Interest=Interest)

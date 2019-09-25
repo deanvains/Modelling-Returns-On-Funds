@@ -47,7 +47,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different username.')
             
             
-class InterestRates(FlaskForm):
+class InterestRatesForm(FlaskForm):
     ClassE = DecimalField('Long Term Pool - Class E')
     ClassF = DecimalField('Long Term Pool - Class F')
     ClassG = DecimalField('Long Term Pool - Class G')
