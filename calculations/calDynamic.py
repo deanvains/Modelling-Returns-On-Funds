@@ -19,18 +19,14 @@ def calcDyn(dynamicVal,startMonth,startYear,dur):
     for i in range(dur*12+1):
         calc[i] = 0
     
-    dynVal = dynamicVal.split()
+    dynVal = dynamicVal.split(',')
     for group in dynVal:
         grpLst = group.split("-")
-        print(grpLst)
-        monthVal = grpLst[0].lower()
-        yearVal = grpLst[1]
-        moneyVal = int(grpLst[2])
+        monthVal = grpLst[0].strip().lower()
+        yearVal = grpLst[1].strip()
+        moneyVal = int(grpLst[2].strip())
         startVal = calcMonths(startYear,int(yearVal),monthDict[startMonth.lower()],monthDict[monthVal])
-        print(startVal)
         for i in range(startVal,dur*12+1):
             calc[i] = moneyVal
-    print(dynamicVal)        
-    print(calc)        
     return calc  
     
