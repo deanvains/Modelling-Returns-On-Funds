@@ -16,7 +16,6 @@ class calculationForm(FlaskForm):
     fundvalue = IntegerField('Fund Value')
     #fProfile = none
     interestClass = StringField('Interest Class')
-    interest = DecimalField('Interest Rate')
     donation = StringField('Donation Amounts')
     spending = StringField('Spending Amounts') 
     recap = StringField('Recapitalization Amounts') 
