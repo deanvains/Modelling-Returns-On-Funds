@@ -36,6 +36,9 @@ class InterestRates(db.Model):
     ClassN = db.Column(db.Float)
     ClassQ = db.Column(db.Float)
     ClassS = db.Column(db.Float)
+
+    def __repr__(self):
+        return '<id {}, classE {}, classF {},classG {},classH {},class A{}, classN {}, classQ {}, classS {}>'.format(self.id, self.ClassE, self.ClassF, self.ClassG, self.ClassH, self.ClassA, self.ClassN, self.ClassQ, self.ClassS)
     
 
 class expected(db.Model):

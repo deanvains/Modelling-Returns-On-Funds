@@ -37,7 +37,7 @@ def calcs():
                     value =  form.fundvalue.data
                     fprofile = None
                     intclass = form.interestClass.data
-                    interest = form.interest.data
+                    interest = InterestRates.query.first()
                     distribution = form.distribution.data
                     timeframe = form.timeframe.data
                     if form.donation.data == '' or form.donation.data == '0':
@@ -71,21 +71,29 @@ def calcs():
                         db.session.commit()
 
                     if intclass == "E":
-                        calc = classE(month,year,value,fprofile,intclass,interest,donation,recap,distribution,timeframe)
+                        thisinterest = interest.classE
+                        calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
                     elif intclass == "F":
-                        calc = classF(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
+                        thisinterest = interest.classF
+                        calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
                     elif intclass == "G" :
-                        calc = classG(month,year,value,fprofile,intclass,interest,donation,recap,operatingDistribution,timeframe)
+                        thisinterest = interest.classG
+                        calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
                     elif(intclass == "H"):
-                        calc = classH(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                        thisinterest = interest.classH
+                        calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif intclass == "A":
-                        calc = classA(month,year,value,fprofile,intclass,interest,spending,recap,operatingDistribution,timeframe)
+                        thisinterest = interest.classA
+                        calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
                     elif(intclass == "N"):
-                        calc = classN(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                        thisinterest = interest.classN
+                        calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif(intclass == "Q"):
-                        calc = classQ(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                        thisinterest = interest.classQ
+                        calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif(intclass == "S"):
-                        calc = classS(month,year,value,fprofile,intclass,interest,spending,addContribution,timeframe)
+                        thisinterest = interest.classS
+                        calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 
                     calc = testdata() #testing
                     return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
