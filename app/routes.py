@@ -99,7 +99,8 @@ def calcs():
                     return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
                 except:
                     traceback.print_exc() #To print error Trace
-                    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
+                    error = True
+                    return render_template("calcs.html", title='Calculation Page', error = error,form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
         else:
             return pdfGen()
 
