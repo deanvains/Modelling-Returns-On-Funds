@@ -71,28 +71,28 @@ def calcs():
                         db.session.commit()
 
                     if intclass == "E":
-                        thisinterest = interest.classE
+                        thisinterest = interest.ClassE
                         calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
                     elif intclass == "F":
-                        thisinterest = interest.classF
+                        thisinterest = interest.ClassF
                         calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
                     elif intclass == "G" :
-                        thisinterest = interest.classG
+                        thisinterest = interest.ClassG
                         calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
                     elif(intclass == "H"):
-                        thisinterest = interest.classH
+                        thisinterest = interest.ClassH
                         calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif intclass == "A":
-                        thisinterest = interest.classA
+                        thisinterest = interest.ClassA
                         calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
                     elif(intclass == "N"):
-                        thisinterest = interest.classN
+                        thisinterest = interest.ClassN
                         calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif(intclass == "Q"):
-                        thisinterest = interest.classQ
+                        thisinterest = interest.ClassQ
                         calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     elif(intclass == "S"):
-                        thisinterest = interest.classS
+                        thisinterest = interest.ClassS
                         calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 
                     calc = testdata() #testing
