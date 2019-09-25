@@ -95,7 +95,7 @@ def calcs():
                         thisinterest = interest.ClassS
                         calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 
-                    calc = testdata() #testing
+                    #calc = testdata() #testing
                     return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
                 except:
                     traceback.print_exc() #To print error Trace
