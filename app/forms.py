@@ -14,7 +14,6 @@ class calculationForm(FlaskForm):
     month = StringField('Month')
     year = IntegerField('Year')
     fundvalue = IntegerField('Fund Value')
-    #fProfile = none
     interestClass = StringField('Interest Class')
     donation = StringField('Donation Amounts')
     spending = StringField('Spending Amounts') 
@@ -23,7 +22,7 @@ class calculationForm(FlaskForm):
     operatingDistribution = StringField('Operating Capital Distribution') 
     additionalContribution = StringField('Additional Contribution') 
     timeframe = IntegerField('Time Frame')
-    savedata = BooleanField('savedata')
+    savedata = BooleanField('Click the box to save your result.')
     submit = SubmitField('Calculate')
     
     

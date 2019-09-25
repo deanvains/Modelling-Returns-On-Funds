@@ -1,25 +1,22 @@
 {% extends "base.html" %} {% block content %}
 
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-              <div class="container-fluid">
-                <div class="jumbotron">
-  <h1 class="display-4">Welcome!</h1>
-  <p class="lead">Modelling Returns on Analysis Online Tool</p>
-  <hr class="my-4" id = "hrjumbo">
-  <p>This is the homepage!</p>
-  {% if current_user.is_authenticated %}
-        <p>Welcome, {{ current_user.username }}!</p>
-  {% endif %}
-  <p class="lead">
-  </p>
-</div>
-</div>
-
-<h2>User Info:</h2>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">Modelling Returns on Analysis Online Tool</p>
+            <hr class="my-4" id="hrjumbo">
+            <p>This is the homepage!</p>
+            {% if current_user.is_authenticated %}
+            <p>Welcome, {{ current_user.username }}!</p>
+            {% endif %}
+            <p class="lead">
+            </p>
+        </div>
+    </div>
 </main>
 
 
 
-  {% endblock %}
-
+{% endblock %}
