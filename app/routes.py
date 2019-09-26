@@ -187,6 +187,7 @@ def makeadmin():
     if form.validate_on_submit():
 
         temp = User.query.get(form.adminid.data)
+        temp.admin = True
         db.session.add(temp)
         db.session.commit()
         return redirect(url_for('makeadmin'))
