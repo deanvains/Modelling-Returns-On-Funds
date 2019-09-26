@@ -44,6 +44,14 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
+			
+
+class ResetPassword(FlaskForm):
+	username = StringField('Username', validators=[DataRequired()])
+	currentPassword = PasswordField('Old Password', validators=[DataRequired()])
+	newPassword = PasswordField('New Password', validators=[DataRequired()])
+	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired(), EqualTo('newPassword')])
+	submit = SubmitField('Register')
             
             
 class InterestRatesForm(FlaskForm):

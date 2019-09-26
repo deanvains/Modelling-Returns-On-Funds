@@ -20,7 +20,7 @@
         {% if current_user.is_authenticated %}
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="{{ url_for('logout') }}">Sign out</a>
+                <a class="nav-link" href="{{ url_for('logout') }}">Sign Out</a>
             </li>
         </ul>
         <!-- if user is not logged in, display message and link -->
@@ -34,6 +34,12 @@
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="{{ url_for('signup') }}">Register</a>
+            </li>
+        </ul>
+		
+		<ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="{{ url_for('reset') }}">Reset Password</a>
             </li>
         </ul>
         {% endif %}

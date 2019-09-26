@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin, ResetPassword
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -157,6 +157,18 @@ def signup():
         db.session.commit()
         return redirect(url_for('signin'))
     return render_template('signup.html', title='Sign Up', form=form)
+
+
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+	form = ResetPassword()
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=form.username.data).first()
+		user.set_password(form.newPassword.data)
+		db.session.commit()
+		return redirect(url_for('signin'))
+	return render_template('reset.html', title='Reset Password', form=form)
+
 
 @app.route('/logout')
 def logout():
