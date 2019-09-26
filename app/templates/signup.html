@@ -1,35 +1,22 @@
-{% extends "base.html" %} {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="signin container-fluid">
-        <div class="col-lg-10"></div>
-        <div class="col-lg-10">
-            <div class="special">
-                <br>
-                <h1>Register an Account </h1>
-            </div>
-            <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.username.label }}<br> {{ form.username(size=32) }}<br> {% for error in form.username.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>
-                    {{ form.password.label }}<br> {{ form.password(size=32) }}<br> {% for error in form.password.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>
-                    {{ form.password2.label }}<br> {{ form.password2(size=32) }}<br> {% for error in form.password2.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>{{ form.submit() }}</p>
-            </form>
+{% extends "base.html" %} 
+{% import 'bootstrap/wtf.html' as wtf %}
 
-            <div class="link">
-                <p> <a href="{{ url_for('signin') }}">Already have an account? Follow this link
-          to sign in! </a> </p>
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Sign in </h1>
             </div>
-        </div>
-        <div class="col-lg-4"></div>
-    </div>
+
+                    <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+                        </form>
+                      
+                 
+
+                    <div class="link mb-3 mt-2">
+                        <p> <a href="{{ url_for('signup') }}">Don't have an account yet? Follow this link
+              to create one! </a> </p>
+                    </div>
+
 </main>
 {% endblock %}
