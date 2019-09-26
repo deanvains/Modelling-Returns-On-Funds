@@ -1,67 +1,29 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="container-fluid">
-        <div class="leftSide col-lg-1">
 
-        </div>
 
-        <div class="mainArea col-lg-10">
-
-            <div class="signin container-fluid">
-                <div class="col-lg-10"></div>
-                <div class="col-lg-10">
-                    <div class="special">
-                        <br>
-                        <h1>Interest Rates</h1>
-                    </div>
-
-                    <div class="form">
-                        <h4>Change Interest Rates Below</h4>
-                        <form action="" method="post" novalidate>
-                            {{ form.hidden_tag() }}
-                            <p>
-                                {{ form.ClassE.label }} <br> Current: {{ Interest.ClassE }} <br> {{ form.ClassE(size=5) }} <br> {% for error in form.ClassE.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassF.label }} <br> Current: {{ Interest.ClassF }} <br> {{ form.ClassF(size=5) }} <br> {% for error in form.ClassF.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassG.label }} <br> Current: {{ Interest.ClassG }} <br> {{ form.ClassG(size=5) }} <br> {% for error in form.ClassG.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassH.label }} <br> Current: {{ Interest.ClassH }} <br> {{ form.ClassH(size=5) }} <br> {% for error in form.ClassH.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassA.label }} <br> Current: {{ Interest.ClassA }} <br> {{ form.ClassA(size=5) }} <br> {% for error in form.ClassA.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassN.label }} <br> Current: {{ Interest.ClassN }} <br> {{ form.ClassN(size=5) }} <br> {% for error in form.ClassN.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassQ.label }} <br> Current: {{ Interest.ClassQ }} <br> {{ form.ClassQ(size=5) }} <br> {% for error in form.ClassQ.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-                            <p>
-                                {{ form.ClassS.label }} <br> Current: {{ Interest.ClassS }} <br> {{ form.ClassS(size=5) }} <br> {% for error in form.ClassS.errors %}
-                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                            </p>
-
-                            <p>{{ form.submit() }}</p>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4"></div>
-
-            </div>
-            <div class="rightSide col-lg-1">
-            </div>
-        </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Interest Rates</h1>
     </div>
+
+    
+
+        <div class="row mb-3">
+          <div class="col">Current E: {{ Interest.ClassE }} <br> Current F: {{ Interest.ClassF }}  </div>
+          <div class="col">Current G: {{ Interest.ClassG }}<br>  Current H: {{ Interest.ClassH }} </div>
+          <div class="col">Current A: {{ Interest.ClassA }} <br> Current N: {{ Interest.ClassN }} </div>
+          <div class="col">Current Q: {{ Interest.ClassQ }} <br> Current S: {{ Interest.ClassS }} </div>
+        </div>
+
+  
+
+            <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+                </form>
+
+
 </main>
 {% endblock %}
