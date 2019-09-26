@@ -48,10 +48,17 @@ class RegistrationForm(FlaskForm):
 
 class ResetPassword(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
-	currentPassword = PasswordField('Old Password', validators=[DataRequired()])
+	currentPassword = PasswordField('Current Password', validators=[DataRequired()])
 	newPassword = PasswordField('New Password', validators=[DataRequired()])
 	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired(), EqualTo('newPassword')])
-	submit = SubmitField('Register')
+	submit = SubmitField('Reset Password')
+	
+	
+class ForgottenPassword(FlaskForm):
+	username = StringField('Username', validators=[DataRequired()])
+	newPassword = PasswordField('New Password', validators=[DataRequired()])
+	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired(), EqualTo('newPassword')])
+	submit = SubmitField('Reset Password')
             
             
 class InterestRatesForm(FlaskForm):
