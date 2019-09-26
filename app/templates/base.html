@@ -117,7 +117,8 @@
     <script>
         $(document).ready(function() {
             $("#calcForm ").hide();
-
+            $('#formButton').css('background-color', '#e2edfa');
+            $('#formButton').css('color', '#007bff');
             $("#formButton ").click(function() {
                 $("#calcForm ").show();
                 $("#month ").show();
@@ -133,6 +134,10 @@
                 $("#operatingDistribution ").hide();
                 $("#distribution ").show();
                 $("#timeframe ").show();
+                $('#formButton').css('background-color', '#e2edfa');
+                $('#formButton').css('color', '#007bff');
+                $("#formButton2 ").css('background-color','#007bff');
+                $('#formButton2').css('color', '#e2edfa');
             });
 
             $("#formButton2 ").click(function() {
@@ -150,6 +155,10 @@
                 $("#operatingDistribution ").show();
                 $("#distribution ").show();
                 $("#timeframe ").show();
+                $('#formButton2').css('background-color', '#e2edfa');
+                $('#formButton2').css('color', '#007bff');
+                $('#formButton').css('background-color','#007bff');
+                $('#formButton').css('color', '#e2edfa');
             });
         });
     </script>
