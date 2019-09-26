@@ -60,3 +60,7 @@ class InterestRatesForm(FlaskForm):
 class RemovalForm(FlaskForm):
     rid = IntegerField('Which item would you like to remove?')
     submit = SubmitField('Submit')
+
+class makeAdmin(FlaskForm):
+    adminid = IntegerField('ID number of member to make admin')
+    submit = SubmitField('Submit')

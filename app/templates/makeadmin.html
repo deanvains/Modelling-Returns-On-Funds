@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="container-fluid">
+        <div class="leftSide col-lg-1">
+
+        </div>
+
+        <div class="mainArea col-lg-10">
+
+            <div class="signin container-fluid">
+                <div class="col-lg-10"></div>
+                <div class="col-lg-10">
+                    <div class="special">
+                        <br>
+                        <h1>Maker User Admin</h1>
+                    </div>
+
+                    <div class="form">
+                        <h4>Change Interest Rates Below</h4>
+                        <form action="" method="post" novalidate>
+                            {{ form.hidden_tag() }}
+                            <p>
+                                {{ form.adminid.label }} <br> {{ form.adminid(size=5) }} <br> {% for error in form.adminid.errors %}
+                                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                            </p>
+
+
+                            <p>{{ form.submit() }}</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+            <div class="rightSide col-lg-1">
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

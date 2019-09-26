@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -180,3 +180,14 @@ def admin():
         db.session.commit()
         return redirect(url_for('admin'))
     return render_template('admin.html', title='Admin', form=form, Interest=Interest)
+
+@app.route('/makeadmin', methods=['GET', 'POST'])
+def makeadmin():
+    form = makeAdmin()
+    if form.validate_on_submit():
+
+        temp = User.query.get(form.adminid.data)
+        db.session.add(temp)
+        db.session.commit()
+        return redirect(url_for('makeadmin'))
+    return render_template('makeadmin.html', title='Make Admin', form=form)
