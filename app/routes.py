@@ -204,7 +204,7 @@ def admin():
             Interest.ClassN = float(form.ClassN.data)
 
         if(form.ClassQ.data != ''):
-            Interest.classQ = float(form.ClassQ.data)
+            Interest.ClassQ = float(form.ClassQ.data)
 
         if(form.ClassS.data != ''):
             Interest.ClassS = float(form.ClassS.data)
