@@ -49,6 +49,7 @@ class expected(db.Model):
     year = db.Column(db.Integer)
     value = db.Column(db.Integer)
     intclass = db.Column(db.String(1024))
+    interest = db.Column(db.Float)
     donation = db.Column(db.String(1024))
     spending = db.Column(db.String(1024))
     recap = db.Column(db.String(1024))
@@ -58,4 +59,4 @@ class expected(db.Model):
     addContribution = db.Column(db.String(1024))
 
     def __repr__(self):
-        return '<id {}, User_id {}, month {}, year {} >'.format(self.id, self.user_id, self.month, self.year)
+        return '<id {}, User id {}, month {}, year {} , interest Rate {}>'.format(self.id, self.user_id, self.month, self.year, self.interest)

@@ -55,14 +55,14 @@ class ResetPassword(FlaskForm):
             
             
 class InterestRatesForm(FlaskForm):
-    ClassE = DecimalField('Long Term Pool - Class E')
-    ClassF = DecimalField('Long Term Pool - Class F')
-    ClassG = DecimalField('Long Term Pool - Class G')
-    ClassH = DecimalField('Medium Term Pool - Class H')
-    ClassA = DecimalField('Short Term Pool - Class A')
-    ClassN = DecimalField('Short Term Pool - Class N')
-    ClassQ = DecimalField('Short Term Pool - Class Q')
-    ClassS = DecimalField('Cash Pool - Class S')
+    ClassE = StringField('Long Term Pool - Class E')
+    ClassF = StringField('Long Term Pool - Class F')
+    ClassG = StringField('Long Term Pool - Class G')
+    ClassH = StringField('Medium Term Pool - Class H')
+    ClassA = StringField('Short Term Pool - Class A')
+    ClassN = StringField('Short Term Pool - Class N')
+    ClassQ = StringField('Short Term Pool - Class Q')
+    ClassS = StringField('Cash Pool - Class S')
     submit = SubmitField('Submit')
     
 class RemovalForm(FlaskForm):

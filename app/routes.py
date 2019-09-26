@@ -64,17 +64,9 @@ def calcs():
                         addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
                     decMonth = findDec(month)
 
-                    savedata = form.savedata.data
+                    
 
-                    if(savedata == True and current_user.is_authenticated):
-                        clientsave = expected(user_id=int(current_user.id),month=str(form.month.data),year=int(form.year.data),
-                        value=int(form.fundvalue.data),intclass=str(form.interestClass.data),donation=str(form.donation.data),
-                        spending=str(form.spending.data),recap=str(form.recap.data),distribution=str(form.distribution.data),
-                        operatingDistribution=str(form.operatingDistribution.data),
-                        timeframe=int(form.timeframe.data),addContribution=str(form.additionalContribution.data))
-                        db.session.add(clientsave)
-                        db.session.commit()
-
+        
                     if intclass == "E":
                         thisinterest = interest.ClassE
                         calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
@@ -100,7 +92,17 @@ def calcs():
                         thisinterest = interest.ClassS
                         calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 
-                    #calc = testdata() #testing
+                    savedata = form.savedata.data
+                    if(savedata == True and current_user.is_authenticated):
+                        clientsave = expected(user_id=int(current_user.id),month=str(form.month.data),year=int(form.year.data),
+                        interest=thisinterest, value=int(form.fundvalue.data),intclass=str(form.interestClass.data),
+                        donation=str(form.donation.data),spending=str(form.spending.data),
+                        recap=str(form.recap.data),distribution=str(form.distribution.data),
+                        operatingDistribution=str(form.operatingDistribution.data),
+                        timeframe=int(form.timeframe.data),addContribution=str(form.additionalContribution.data))
+                        db.session.add(clientsave)
+                        db.session.commit()
+                    
                     return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
                 except:
                     traceback.print_exc() #To print error Trace
@@ -180,14 +182,29 @@ def admin():
     form = InterestRatesForm()
     Interest = InterestRates.query.first()
     if form.validate_on_submit():
-        Interest.ClassE = form.ClassE.data
-        Interest.ClassF = form.ClassF.data
-        Interest.ClassG = form.ClassG.data
-        Interest.ClassH = form.ClassH.data
-        Interest.ClassA = form.ClassA.data
-        Interest.ClassN = form.ClassN.data
-        Interest.classQ = form.ClassQ.data
-        Interest.ClassS = form.ClassS.data
+        if(form.ClassE.data != ''):
+            Interest.ClassE = float(form.ClassE.data)
+
+        if(form.ClassF.data != ''):
+            Interest.ClassF = float(form.ClassF.data)
+
+        if(form.ClassG.data != ''):
+            Interest.ClassG = float(form.ClassG.data)
+
+        if(form.ClassH.data != ''):
+            Interest.ClassH = float(form.ClassH.data)
+
+        if(form.ClassA.data != ''):
+            Interest.ClassA = float(form.ClassA.data)
+
+        if(form.ClassN.data != ''):
+            Interest.ClassN = float(form.ClassN.data)
+
+        if(form.ClassQ.data != ''):
+            Interest.classQ = float(form.ClassQ.data)
+
+        if(form.ClassS.data != ''):
+            Interest.ClassS = float(form.ClassS.data)
 
         db.session.commit()
         return redirect(url_for('admin'))
