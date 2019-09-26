@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin, ResetPassword
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin, ResetPassword, ForgottenPassword
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -164,6 +164,9 @@ def reset():
 	form = ResetPassword()
 	if form.validate_on_submit():
 		user = User.query.filter_by(username=form.username.data).first()
+		if user is None or not user.check_password(form.currentPassword.data):
+			flash('Invalid username or current password')
+			return redirect(url_for('reset'))
 		user.set_password(form.newPassword.data)
 		db.session.commit()
 		return redirect(url_for('signin'))
@@ -197,10 +200,19 @@ def admin():
 def makeadmin():
     form = makeAdmin()
     if form.validate_on_submit():
-
         temp = User.query.get(form.adminid.data)
         temp.admin = True
         db.session.add(temp)
         db.session.commit()
         return redirect(url_for('makeadmin'))
     return render_template('makeadmin.html', title='Make Admin', form=form)
+
+@app.route('/adminreset', methods=['GET', 'POST'])
+def adminreset():
+	form = ForgottenPassword()
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=form.username.data).first()
+		user.set_password(form.newPassword.data)
+		db.session.commit()
+		return redirect(url_for('homepage'))
+	return render_template('adminreset.html', title='Forgotten Password', form=form)
