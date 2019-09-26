@@ -40,6 +40,7 @@ def calcs():
                     interest = InterestRates.query.first()
                     distribution = form.distribution.data
                     timeframe = form.timeframe.data
+                    
                     if form.donation.data == '' or form.donation.data == '0':
                         donation = {}
                     else:
@@ -62,11 +63,15 @@ def calcs():
                     else:
                         addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
                     decMonth = findDec(month)
+
                     savedata = form.savedata.data
 
                     if(savedata == True and current_user.is_authenticated):
-                        clientsave = expected(user_id=current_user.id,month=month,year=year,value=value,intclass=intclass,donation=donation,
-                        spending=spending,recap=recap,distribution=distribution,timeframe=timeframe,addContribution=addContribution)
+                        clientsave = expected(user_id=int(current_user.id),month=str(form.month.data),year=int(form.year.data),
+                        value=int(form.fundvalue.data),intclass=str(form.interestClass.data),donation=str(form.donation.data),
+                        spending=str(form.spending.data),recap=str(form.recap.data),distribution=str(form.distribution.data),
+                        operatingDistribution=str(form.operatingDistribution.data),
+                        timeframe=int(form.timeframe.data),addContribution=str(form.additionalContribution.data))
                         db.session.add(clientsave)
                         db.session.commit()
 
