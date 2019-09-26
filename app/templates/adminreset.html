@@ -1,35 +1,19 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block content %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="signin container-fluid">
-        <div class="col-lg-10"></div>
-        <div class="col-lg-10">
-            <div class="special">
-                <br>
-                <h1>Forgotten Password</h1>
-            </div>
-			
-			<div>
-                <p> Reset passwords for users who have forgotten their passwords. </p>
-            </div>
-			
-			<form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.username.label }}<br> {{ form.username(size=32) }}<br> {% for error in form.username.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>
-                    {{ form.newPassword.label }}<br> {{ form.newPassword(size=32) }}<br> {% for error in form.newPassword.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>
-                    {{ form.newPassword2.label }}<br> {{ form.newPassword2(size=32) }}<br> {% for error in form.newPassword2.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p>{{ form.submit() }}</p>
-            </form>
-        </div>
-        <div class="col-lg-4"></div>
+    
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Forgotton Password </h1>
     </div>
+
+    <p> Reset passwords for users who have forgotten their passwords. </p>
+
+            <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+                </form>
+              
 </main>
 {% endblock %}
