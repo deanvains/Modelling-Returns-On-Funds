@@ -77,5 +77,5 @@ class RemovalForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class makeAdmin(FlaskForm):
-    adminid = IntegerField('ID number of member to make admin')
+    adminid = IntegerField('Please enter user ID to make admin.')
     submit = SubmitField('Submit')

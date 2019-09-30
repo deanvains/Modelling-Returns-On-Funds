@@ -147,8 +147,8 @@ def signin():
         return redirect(next_page)
     return render_template('signin.html', title='Sign In', form=form)
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -158,7 +158,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('signin'))
-    return render_template('signup.html', title='Sign Up', form=form)
+    return render_template('register.html', title='Register New User', form=form)
 
 
 @app.route('/reset', methods=['GET', 'POST'])
