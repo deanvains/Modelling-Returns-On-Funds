@@ -80,7 +80,7 @@
                     {{ form.recap.label }}<br> {{ form.recap(size=32) }}<br> {% for error in form.recap.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-		{% if error["spending"] == True %}
+		{% if error["recap"] == True %}
                     <p><span style="color: red;">There are errors with the Recap Field, Please check again</span></p>
                 {% endif %}
                 <p style="color:grey">Example - Recap Amounts : <br> jun-2021-10000,jul-2021-0</p>
