@@ -44,7 +44,7 @@ def calcs():
                     if form.donation.data == '' or form.donation.data == '0':
                         donation = {}
                     else:
-			dynVal = form.donation.data.split(',')
+                        dynVal = form.donation.data.split(',')
                         yearValue = 0
                         for group in dynVal:
                             grpLst = group.split("-")
@@ -60,7 +60,7 @@ def calcs():
                     if form.spending.data == '' or form.spending.data == '0' :
                         spending = {}
                     else:
-			dynVal = form.spending.data.split(',')
+                        dynVal = form.spending.data.split(',')
                         yearValue = 0
                         for group in dynVal:
                             grpLst = group.split("-")
@@ -75,7 +75,7 @@ def calcs():
                     if form.recap.data == '' or form.recap.data == '0':
                         recap = {}
                     else:
-			dynVal = form.recap.data.split(',')
+                        dynVal = form.recap.data.split(',')
                         yearValue = 0
                         for group in dynVal:
                             grpLst = group.split("-")
@@ -90,7 +90,7 @@ def calcs():
                     if form.operatingDistribution.data == '' or form.operatingDistribution.data == '0' :
                         operatingDistribution = {}
                     else:
-			dynVal = form.operatingDistribution.data.split(',')
+                        dynVal = form.operatingDistribution.data.split(',')
                         yearValue = 0
                         for group in dynVal:
                             grpLst = group.split("-")
@@ -106,7 +106,7 @@ def calcs():
                     if form.additionalContribution.data == '' or form.additionalContribution.data == '0':
                         addContribution = {}
                     else:
-			dynVal = form.additionalContribution.data.split(',')
+                        dynVal = form.additionalContribution.data.split(',')
                         yearValue = 0
                         for group in dynVal:
                             grpLst = group.split("-")
@@ -147,7 +147,6 @@ def calcs():
                     elif(intclass == "S"):
                         thisinterest = interest.ClassS
                         calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-
                     savedata = form.savedata.data
                     if(savedata == True and current_user.is_authenticated):
                         clientsave = expected(user_id=int(current_user.id),month=str(form.month.data),year=int(form.year.data),
