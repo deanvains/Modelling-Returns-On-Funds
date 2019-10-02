@@ -34,6 +34,8 @@ def calcs():
                 try:
                     month = form.month.data.strip()
                     year = form.year.data
+		    if len(str(year)) != 4:
+                        raise Exception("Invalid Years")
                     value =  form.fundvalue.data
                     fprofile = None
                     intclass = form.interestClass.data.strip()
