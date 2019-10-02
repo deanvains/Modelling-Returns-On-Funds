@@ -44,23 +44,79 @@ def calcs():
                     if form.donation.data == '' or form.donation.data == '0':
                         donation = {}
                     else:
+			dynVal = form.donation.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            yearVal = grpLst[1].strip()
+                            if yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    raise Exception("Year 2 is lower than year 1")
+                                else:
+                                    yearValue = yearVal
                         donation = calcDyn(form.donation.data,month,year,timeframe)
                     #spending = form.additionalContribution.data
                     if form.spending.data == '' or form.spending.data == '0' :
                         spending = {}
                     else:
+			dynVal = form.spending.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            yearVal = grpLst[1].strip()
+                            if yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    raise Exception("Year 2 is lower than year 1")
+                                else:
+                                    yearValue = yearVal
                         spending = calcDyn(form.spending.data,month,year,timeframe)
                     if form.recap.data == '' or form.recap.data == '0':
                         recap = {}
                     else:
+			dynVal = form.recap.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            yearVal = grpLst[1].strip()
+                            if yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    raise Exception("Year 2 is lower than year 1")
+                                else:
+                                    yearValue = yearVal
                         recap = calcDyn(form.recap.data,month,year,timeframe)
                     if form.operatingDistribution.data == '' or form.operatingDistribution.data == '0' :
                         operatingDistribution = {}
                     else:
+			dynVal = form.operatingDistribution.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            yearVal = grpLst[1].strip()
+                          
+                            if yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    raise Exception("Year 2 is lower than year 1")
+                                else:
+                                    yearValue = yearVal
                         operatingDistribution = calcDyn(form.operatingDistribution.data,month,year,timeframe)
                     if form.additionalContribution.data == '' or form.additionalContribution.data == '0':
                         addContribution = {}
                     else:
+			dynVal = form.additionalContribution.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            yearVal = grpLst[1].strip()
+                            if yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    raise Exception("Year 2 is lower than year 1")
+                                else:
+                                    yearValue = yearVal
                         addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
                     decMonth = findDec(month)
 
@@ -103,12 +159,138 @@ def calcs():
                         db.session.add(clientsave)
                         db.session.commit()
                     
-                    return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending)
+                    return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,decMonth = decMonth,spending =spending,error = {})
                 except:
+                    error = {}
                     traceback.print_exc() #To print error Trace
-                    error = True
-                    return render_template("calcs.html", title='Calculation Page', error = error,form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)
-        else:
+                    month = form.month.data.strip().lower()
+                    if month != 'dec' and month != 'nov' and month != 'oct' and month != 'sep' and month != 'aug' and month != 'jul' and month != 'jun' and month != 'may' and month != 'apr' and month != 'mar' and month != 'feb' and month != 'jan':
+                        error["month"] = True
+                    year = form.year.data
+                    if len(str(year)) != 4:
+                        error["year"] = True
+
+                    if form.donation.data != '' and form.donation.data != '0' :
+                        dynVal = form.donation.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            if monthVal != 'dec' and monthVal != 'nov' and monthVal != 'oct' and monthVal != 'sep' and monthVal != 'aug' and monthVal != 'jul' and monthVal != 'jun' and monthVal != 'may' and monthVal != 'apr' and monthVal != 'mar' and monthVal != 'feb' and monthVal != 'jan':
+                                error["donation"] = True
+                            yearVal = grpLst[1].strip()
+                            if len(str(yearVal)) != 4 or yearVal.isdigit() is False:
+                                error["donation"] = True
+                            elif yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    error["donation"] = True
+                                    print(yearVal, yearValue)
+                                    yearVal = 0
+                                    
+                                else:
+                                    yearValue = yearVal
+                            moneyVal = grpLst[2].strip()
+                            if moneyVal.isdigit() is False:
+                                error["donation"] = True
+                    
+                    if form.spending.data != '' and form.spending.data != '0' :
+                        dynVal = form.spending.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            if monthVal != 'dec' and monthVal != 'nov' and monthVal != 'oct' and monthVal != 'sep' and monthVal != 'aug' and monthVal != 'jul' and monthVal != 'jun' and monthVal != 'may' and monthVal != 'apr' and monthVal != 'mar' and monthVal != 'feb' and monthVal != 'jan':
+                                error["spending"] = True
+                            yearVal = grpLst[1].strip()
+                            if len(str(yearVal)) != 4 or yearVal.isdigit() is False:
+                                error["spending"] = True
+                            elif yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    error["spending"] = True
+                                    print(yearVal, yearValue)
+                                    yearVal = 0
+                                    
+                                else:
+                                    yearValue = yearVal
+                            moneyVal = grpLst[2].strip()
+                            if moneyVal.isdigit() is False:
+                                error["spending"] = True
+
+                    if form.recap.data != '' and form.recap.data != '0' :
+                        dynVal = form.recap.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            if monthVal != 'dec' and monthVal != 'nov' and monthVal != 'oct' and monthVal != 'sep' and monthVal != 'aug' and monthVal != 'jul' and monthVal != 'jun' and monthVal != 'may' and monthVal != 'apr' and monthVal != 'mar' and monthVal != 'feb' and monthVal != 'jan':
+                                error["recap"] = True
+                            yearVal = grpLst[1].strip()
+                            print(yearVal.isdigit())
+                            if len(str(yearVal)) != 4 or yearVal.isdigit() is False:
+                                error["recap"] = True
+                            elif yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    error["recap"] = True
+                                    print(yearVal, yearValue)
+                                    yearVal = 0
+                                    
+                                else:
+                                    yearValue = yearVal
+                            moneyVal = grpLst[2].strip()
+                            if moneyVal.isdigit() is False:
+                                error["recap"] = True
+
+                    if form.operatingDistribution.data != '' and form.operatingDistribution.data != '0' :
+                        dynVal = form.operatingDistribution.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            if monthVal != 'dec' and monthVal != 'nov' and monthVal != 'oct' and monthVal != 'sep' and monthVal != 'aug' and monthVal != 'jul' and monthVal != 'jun' and monthVal != 'may' and monthVal != 'apr' and monthVal != 'mar' and monthVal != 'feb' and monthVal != 'jan':
+                                error["operatingDistribution"] = True
+                            yearVal = grpLst[1].strip()
+                            print(yearVal.isdigit())
+                            if len(str(yearVal)) != 4 or yearVal.isdigit() is False:
+                                error["operatingDistribution"] = True
+                            elif yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    error["operatingDistribution"] = True
+                                    print(yearVal, yearValue)
+                                    yearVal = 0
+                                    
+                                else:
+                                    yearValue = yearVal
+                            moneyVal = grpLst[2].strip()
+                            if moneyVal.isdigit() is False:
+                                error["operatingDistribution"] = True
+                        
+                    if form.additionalContribution.data != '' and form.additionalContribution.data != '0' :
+                        dynVal = form.additionalContribution.data.split(',')
+                        yearValue = 0
+                        for group in dynVal:
+                            grpLst = group.split("-")
+                            monthVal = grpLst[0].strip().lower()
+                            if monthVal != 'dec' and monthVal != 'nov' and monthVal != 'oct' and monthVal != 'sep' and monthVal != 'aug' and monthVal != 'jul' and monthVal != 'jun' and monthVal != 'may' and monthVal != 'apr' and monthVal != 'mar' and monthVal != 'feb' and monthVal != 'jan':
+                                error["additionalContribution"] = True
+                            yearVal = grpLst[1].strip()
+                            print(yearVal.isdigit())
+                            if len(str(yearVal)) != 4 or yearVal.isdigit() is False:
+                                error["additionalContribution"] = True
+                            elif yearVal.isdigit() == True :
+                                if int(yearVal) < int(yearValue) :
+                                    error["additionalContribution"] = True
+                                    print(yearVal, yearValue)
+                                    yearVal = 0
+                                    
+                                else:
+                                    yearValue = yearVal
+                            moneyVal = grpLst[2].strip()
+                            if moneyVal.isdigit() is False:
+                                error["additionalContribution"] = True
+                    else:
+                        error["funny"] = True
+                        
+                    return render_template("calcs.html", title='Calculation Page', error = error,form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)                
             return pdfGen()
 
     
@@ -116,7 +298,7 @@ def calcs():
     calc = testdata() #testing
 
     #calc in the render template has been modified for testing
-    return render_template("calcs.html", title='Calculation Page', form=form,calc = calc,timeframe = 0,years=0,decMonth = 0,spending = 0)
+    return render_template("calcs.html", title='Calculation Page', form=form,calc = calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
 
 @app.route('/profile',methods=["GET", "POST"])
