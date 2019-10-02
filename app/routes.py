@@ -32,9 +32,9 @@ def calcs():
             form = calculationForm()
             if form.validate_on_submit():
                 try:
-                    month = form.month.data.strip()
+                   month = form.month.data.strip()
                     year = form.year.data
-		    if len(str(year)) != 4:
+                    if len(str(year)) != 4:
                         raise Exception("Invalid Years")
                     value =  form.fundvalue.data
                     fprofile = None
