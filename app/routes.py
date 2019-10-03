@@ -308,14 +308,13 @@ def profile():
     if form1.validate_on_submit() and request.form['btn']=='form1':
         thisdata = form1.rid.data
         temp = expected.query.get(thisdata)
-        print(temp)
-        if(temp.user_id == current_user.id):
+        if(temp.user_id == current_user.id and temp != None):
             db.session.delete(temp)
             db.session.commit()
         else:
-            flash("You tried to remove a post that either does not belong to you or does not exist!")
+            error["Post either does not belong to you or does not exist"] = True
         
-        return redirect(url_for('profile'))
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
     
 

@@ -27,7 +27,7 @@
         {{ form.hidden_tag() }}
         <p>
             {{ form.rid.label }}<br> {{ form.rid(size=8) }}<br> {% for error in form.rid.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            <span style="color: red;">Selected post either does not belong to you or does not exist. </span> {% endfor %}
         </p>
         <input type="submit" name='btn' value="form1">
     </form>
