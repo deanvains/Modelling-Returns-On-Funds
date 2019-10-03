@@ -12,7 +12,7 @@
 
     <p> Reset passwords for users who have forgotten their passwords. </p>
 
-            <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+            <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                 </form>
               
 </main>

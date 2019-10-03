@@ -11,17 +11,18 @@
     </div>
 
     
-
+		<h4>Current Interest Rates</h4>
         <div class="row mb-3">
-          <div class="col">Current E: {{ Interest.ClassE }} <br> Current F: {{ Interest.ClassF }}  </div>
-          <div class="col">Current G: {{ Interest.ClassG }}<br>  Current H: {{ Interest.ClassH }} </div>
-          <div class="col">Current A: {{ Interest.ClassA }} <br> Current N: {{ Interest.ClassN }} </div>
-          <div class="col">Current Q: {{ Interest.ClassQ }} <br> Current S: {{ Interest.ClassS }} </div>
+          <div class="col">Class E: {{ Interest.ClassE }} <br> Class F: {{ Interest.ClassF }}  </div>
+          <div class="col">Class G: {{ Interest.ClassG }}<br>  Class H: {{ Interest.ClassH }} </div>
+          <div class="col">Class A: {{ Interest.ClassA }} <br> Class N: {{ Interest.ClassN }} </div>
+          <div class="col">Class Q: {{ Interest.ClassQ }} <br> Class S: {{ Interest.ClassS }} </div>
         </div>
 
   
-
-            <form class="form form-horizontal mb-3" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+			<h4>Change Interest Rates</h4>
+            <form class="form form-horizontal mb-3" method="post" role="form">    
+               {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                 </form>
 
 

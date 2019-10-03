@@ -55,9 +55,9 @@
                                 <span data-feather="home" id="homebutton"></span> Home <span class="sr-only">(current)</span>
                             </a>
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                            <span>Tools</span>
+                            <span>Tools</span></h6>
                         </li>
-                    </h6>
+                    
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ url_for( 'calcs') }} ">
                                 <span data-feather="file "></span> Calculator
@@ -114,11 +114,13 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
-    <script>
+        <script>
         $(document).ready(function() {
             $("#calcForm ").hide();
-            $('#formButton').css('background-color', '#e2edfa');
+            $('#formButton').css('background-color',  '#e2edfa');
             $('#formButton').css('color', '#007bff');
+            $('#formButton2').css('background-color',  '#e2edfa');
+            $('#formButton2').css('color', '#007bff');
             $("#formButton ").click(function() {
                 $("#calcForm ").show();
                 $("#month ").show();
@@ -134,10 +136,10 @@
                 $("#operatingDistribution ").hide();
                 $("#distribution ").show();
                 $("#timeframe ").show();
-                $('#formButton').css('background-color', '#e2edfa');
-                $('#formButton').css('color', '#007bff');
-                $("#formButton2 ").css('background-color','#007bff');
-                $('#formButton2').css('color', '#e2edfa');
+                $('#formButton').css('background-color', '#007bff');
+                $('#formButton').css('color',  '#e2edfa');
+                $('#formButton2').css('background-color', '#e2edfa');
+                $('#formButton2').css('color',  '#007bff');
             });
 
             $("#formButton2 ").click(function() {
@@ -155,10 +157,10 @@
                 $("#operatingDistribution ").show();
                 $("#distribution ").show();
                 $("#timeframe ").show();
-                $('#formButton2').css('background-color', '#e2edfa');
-                $('#formButton2').css('color', '#007bff');
-                $('#formButton').css('background-color','#007bff');
-                $('#formButton').css('color', '#e2edfa');
+                $('#formButton2').css('background-color', '#007bff');
+                $('#formButton2').css('color',  '#e2edfa');
+                $('#formButton').css('background-color', '#e2edfa');
+                $('#formButton').css('color',  '#007bff');
             });
         });
     </script>
