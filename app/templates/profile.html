@@ -29,7 +29,7 @@
             {{ form.rid.label }}<br> {{ form.rid(size=8) }}<br> {% for error in form.rid.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <input type="submit" name='btn' value="form1">
     </form>
 
     <form action="" method="post" novalidate>
@@ -38,7 +38,7 @@
             {{ form2.storedid.label }}<br> {{ form2.storedid(size=8) }}<br> {% for error in form2.storedid.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
-        <p>{{ form2.submit() }}</p>
+        <input type="submit" name='btn' value="form2">
     </form>
 
 

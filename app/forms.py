@@ -83,3 +83,8 @@ class makeAdmin(FlaskForm):
 class storedSelect(FlaskForm):
     storedid = IntegerField('Which result would you like to view?')
     submit = SubmitField('Submit')
+
+class compForm(FlaskForm):
+    stored1 = IntegerField('Which is the first result you would to view?')
+    stored2 = IntegerField('Which is the first result you would to view?')
+    submit = SubmitField('Submit')

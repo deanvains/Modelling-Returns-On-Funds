@@ -296,24 +296,30 @@ def calcs():
 
     
     form = calculationForm()
-    calc = testdata() #testing
-
-    #calc in the render template has been modified for testing
-    return render_template("calcs.html", title='Calculation Page', form=form,calc = calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+ 
+    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
 
 @app.route('/profile',methods=["GET", "POST"])
 def profile():
-    form = RemovalForm()
+    form1 = RemovalForm()
     form2 = storedSelect()
-
-    if form.validate_on_submit():
-        temp = expected.query.get(form.rid.data)
-        db.session.delete(temp)
-        db.session.commit()
+    
+    if form1.validate_on_submit() and request.form['btn']=='form1':
+        thisdata = form1.rid.data
+        temp = expected.query.get(thisdata)
+        print(temp)
+        if(temp.user_id == current_user.id):
+            db.session.delete(temp)
+            db.session.commit()
+        else:
+            flash("You tried to remove a post that either does not belong to you or does not exist!")
+        
         return redirect(url_for('profile'))
 
-    if form2.validate_on_submit():
+    
+
+    if form2.validate_on_submit() and request.form['btn']=='form2':
         data = expected.query.get(form2.storedid.data)
         if(data.user_id == current_user.id and form2.storedid.data == data.id):
             month = str(data.month)
@@ -414,32 +420,33 @@ def profile():
                 addContribution = calcDyn(addContribution,month,year,timeframe)
             decMonth = findDec(month)
 
+
             if intclass == "E":
                 calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif intclass == "F":
                 calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif intclass == "G" :
                 calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif(intclass == "H"):
                 calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif intclass == "A":
                 calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif(intclass == "N"):
                 calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif(intclass == "Q"):
                 calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
             elif(intclass == "S"):
                 calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
-    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
 
 @app.route('/signin', methods=['GET', 'POST'])
