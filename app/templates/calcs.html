@@ -210,15 +210,28 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: [
+            {% for year in range(timeframe|int +1) %}
+                    "{{ years + year }}" ,
+                    {% endfor %}
+            ],
+
             datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                label: 'Closing Balances',
+                data: [
+                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                "{{ (calc[1][year]) }}" ,
+                    {% endfor %}
+
+                ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
             }]
+
+            
         },
         options: {
             scales: {
@@ -229,11 +242,10 @@
                 }]
             },
             legend: {
-                display: false,
+                display: true,
             }
         }
     });
 </script>
-
 
 {% endblock %}
