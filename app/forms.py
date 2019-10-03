@@ -86,5 +86,5 @@ class storedSelect(FlaskForm):
 
 class compForm(FlaskForm):
     stored1 = IntegerField('Which is the first result you would to view?')
-    stored2 = IntegerField('Which is the first result you would to view?')
+    stored2 = IntegerField('Which is the second result you would to view?')
     submit = SubmitField('Submit')
