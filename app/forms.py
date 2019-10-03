@@ -73,7 +73,7 @@ class InterestRatesForm(FlaskForm):
     submit = SubmitField('Submit')
     
 class RemovalForm(FlaskForm):
-    rid = IntegerField('Which item would you like to remove?')
+    rid = IntegerField('Which result would you like to remove?')
     submit = SubmitField('Submit')
 
 class makeAdmin(FlaskForm):

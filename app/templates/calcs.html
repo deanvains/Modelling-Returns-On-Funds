@@ -10,7 +10,7 @@
 
     <button type="button" class="btn btn-primary" id="formButton2">Operating Accounts</button>
 
-
+	<br><br>
     <div class="form-row">
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
@@ -146,7 +146,7 @@
 			{% if current_user.is_anonymous %}
 			<div class="form-group col-md-12">
                 <p>
-					<a href="{{ url_for('signin') }}">Sign in to save your calculation</a>
+					<a href="{{ url_for('signin') }}">Sign in to save your calculation.</a>
 				</p>
             </div>
 			{% endif %}
