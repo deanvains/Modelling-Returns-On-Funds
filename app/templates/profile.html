@@ -32,6 +32,15 @@
         <p>{{ form.submit() }}</p>
     </form>
 
+    <form action="" method="post" novalidate>
+        {{ form2.hidden_tag() }}
+        <p>
+            {{ form2.storedid.label }}<br> {{ form2.storedid(size=8) }}<br> {% for error in form2.storedid.errors %}
+            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+        </p>
+        <p>{{ form2.submit() }}</p>
+    </form>
+
 
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
@@ -39,126 +48,27 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                    <th>Year</th>
+                    {% for year in range(timeframe|int +1) %}
+                    <th>{{ years + year }} </th>
+                    {% endfor %}
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
+                    <td>Opening Balance</td>
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    <th>{{ "${:,.2f}".format(calc[0][year]) }} </th>
+                    {% endfor %}
                 </tr>
                 <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
+                    <td>Closing Balance</td>
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    <th>{{ "${:,.2f}".format(calc[1][year]) }} </th>
+                    {% endfor %}
                 </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
-                <tr>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                    <td>data</td>
-                </tr>
+
             </tbody>
         </table>
     </div>

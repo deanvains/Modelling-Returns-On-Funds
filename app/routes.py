@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, InterestRates, expected
-from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin, ResetPassword, ForgottenPassword
+from app.forms import calculationForm, LoginForm, RegistrationForm, InterestRatesForm, RemovalForm, makeAdmin, ResetPassword, ForgottenPassword, storedSelect
 from app import app, db
 from werkzeug.urls import url_parse
 from calculations.ClassH import classH
@@ -305,12 +305,141 @@ def calcs():
 @app.route('/profile',methods=["GET", "POST"])
 def profile():
     form = RemovalForm()
+    form2 = storedSelect()
+    """
     if form.validate_on_submit():
         temp = expected.query.get(form.rid.data)
         db.session.delete(temp)
         db.session.commit()
         return redirect(url_for('profile'))
-    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form)
+"""
+    if form2.validate_on_submit():
+        data = expected.query.get(form2.storedid.data)
+        if(data.user_id == current_user.id and form2.storedid.data == data.id):
+            month = str(data.month)
+            year = int(data.year)
+            value = int(data.value)
+            intclass = str(data.intclass)
+            thisinterest = float(data.interest)
+            spending = int(data.spending)
+            fprofile = None
+            timeframe = int(data.timeframe)
+            distribution = float(data.distribution)
+            donation = data.donation
+            spending = data.spending
+            recap = data.recap
+            operatingDistribution = data.operatingDistribution
+            addContribution = data.addContribution
+
+            
+            if donation == '' or donation == '0':
+                donation = {}
+            else:
+                dynVal = donation.split(',')
+                yearValue = 0
+                for group in dynVal:
+                    grpLst = group.split("-")
+                    monthVal = grpLst[0].strip().lower()
+                    yearVal = grpLst[1].strip()
+                    if yearVal.isdigit() == True :
+                        if int(yearVal) < int(yearValue) :
+                            raise Exception("Year 2 is lower than year 1")
+                        else:
+                            yearValue = yearVal
+                donation = calcDyn(donation,month,year,timeframe)
+
+            if spending == '' or spending == '0' :
+                spending = {}
+            else:
+                dynVal = spending.split(',')
+                yearValue = 0
+                for group in dynVal:
+                    grpLst = group.split("-")
+                    monthVal = grpLst[0].strip().lower()
+                    yearVal = grpLst[1].strip()
+                    if yearVal.isdigit() == True :
+                        if int(yearVal) < int(yearValue) :
+                            raise Exception("Year 2 is lower than year 1")
+                        else:
+                            yearValue = yearVal
+                        spending = calcDyn(spending,month,year,timeframe)
+
+            if recap == '' or recap == '0':
+                recap = {}
+            else:
+                dynVal = recap.split(',')
+                yearValue = 0
+                for group in dynVal:
+                    grpLst = group.split("-")
+                    monthVal = grpLst[0].strip().lower()
+                    yearVal = grpLst[1].strip()
+                    if yearVal.isdigit() == True :
+                        if int(yearVal) < int(yearValue) :
+                            raise Exception("Year 2 is lower than year 1")
+                        else:
+                            yearValue = yearVal
+                recap = calcDyn(recap,month,year,timeframe)
+                    
+            if operatingDistribution == '' or operatingDistribution == '0' :
+                operatingDistribution = {}
+            else:
+                dynVal = operatingDistribution.split(',')
+                yearValue = 0
+                for group in dynVal:
+                    grpLst = group.split("-")
+                    monthVal = grpLst[0].strip().lower()
+                    yearVal = grpLst[1].strip()
+                          
+                    if yearVal.isdigit() == True :
+                        if int(yearVal) < int(yearValue) :
+                            raise Exception("Year 2 is lower than year 1")
+                        else:
+                            yearValue = yearVal
+                operatingDistribution = calcDyn(operatingDistribution,month,year,timeframe)
+                    
+            if addContribution == '' or addContribution == '0':
+                addContribution = {}
+            else:
+                dynVal = addContribution.split(',')
+                yearValue = 0
+                for group in dynVal:
+                    grpLst = group.split("-")
+                    monthVal = grpLst[0].strip().lower()
+                    yearVal = grpLst[1].strip()
+                    if yearVal.isdigit() == True :
+                        if int(yearVal) < int(yearValue) :
+                            raise Exception("Year 2 is lower than year 1")
+                        else:
+                            yearValue = yearVal
+                addContribution = calcDyn(addContribution,month,year,timeframe)
+            decMonth = findDec(month)
+
+            if intclass == "E":
+                calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif intclass == "F":
+                calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif intclass == "G" :
+                calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif(intclass == "H"):
+                calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif intclass == "A":
+                calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif(intclass == "N"):
+                calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif(intclass == "Q"):
+                calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+            elif(intclass == "S"):
+                calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+
+    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
 
 @app.route('/signin', methods=['GET', 'POST'])

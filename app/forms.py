@@ -79,3 +79,7 @@ class RemovalForm(FlaskForm):
 class makeAdmin(FlaskForm):
     adminid = IntegerField('Please enter user ID to make admin.')
     submit = SubmitField('Submit')
+
+class storedSelect(FlaskForm):
+    storedid = IntegerField('Which result would you like to view?')
+    submit = SubmitField('Submit')
