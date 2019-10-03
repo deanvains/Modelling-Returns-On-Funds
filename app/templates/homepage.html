@@ -2,10 +2,24 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block content %}
 
+<style>
+    #mainback{
+      background-image: url("https://www.uwa.edu.au/study/-/media/UWAFS/Short-header-images/Background-Mobile/texture.jpg");
+        /* Full height */
+        height: 1000px;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
+ 
+    </style>
+
+<div id="mainback">
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
-        <div class="jumbotron">
+        <div class="jumbotron border border-white">
             <h1 class="display-4">Welcome!</h1>
             <p class="lead">Modelling Returns on Funds Online Tool</p>
             <hr class="my-4" id="hrjumbo"> {% if current_user.is_authenticated %}
@@ -24,7 +38,9 @@
         </div>
     </div>
 </main>
+</div>
 
 
 
 {% endblock %}
+
