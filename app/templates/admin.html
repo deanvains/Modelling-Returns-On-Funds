@@ -21,7 +21,8 @@
 
   
 
-            <form class="form form-horizontal mb-3" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={}, id="")}}
+            <form class="form form-horizontal mb-3" method="post" role="form">    
+               {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                 </form>
 
 
