@@ -306,13 +306,13 @@ def calcs():
 def profile():
     form = RemovalForm()
     form2 = storedSelect()
-    """
+
     if form.validate_on_submit():
         temp = expected.query.get(form.rid.data)
         db.session.delete(temp)
         db.session.commit()
         return redirect(url_for('profile'))
-"""
+
     if form2.validate_on_submit():
         data = expected.query.get(form2.storedid.data)
         if(data.user_id == current_user.id and form2.storedid.data == data.id):
