@@ -36,7 +36,7 @@
         {{ form2.hidden_tag() }}
         <p>
             {{ form2.storedid.label }}<br> {{ form2.storedid(size=8) }}<br> {% for error in form2.storedid.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
         </p>
         <input type="submit" name='btn' value="form2">
     </form>

@@ -320,7 +320,7 @@ def profile():
 
     if form2.validate_on_submit() and request.form['btn']=='form2':
         data = expected.query.get(form2.storedid.data)
-        if(data.user_id == current_user.id and form2.storedid.data == data.id):
+        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.id):
             month = str(data.month)
             year = int(data.year)
             value = int(data.value)
@@ -444,7 +444,9 @@ def profile():
             elif(intclass == "S"):
                 calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                 return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,calc=calc,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
-
+    else:
+        error = True
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
     return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
 
