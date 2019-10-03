@@ -304,15 +304,16 @@ def calcs():
 def profile():
     form1 = RemovalForm()
     form2 = storedSelect()
+    error = False
     
     if form1.validate_on_submit() and request.form['btn']=='form1':
         thisdata = form1.rid.data
         temp = expected.query.get(thisdata)
-        if(temp.user_id == current_user.id and temp != None):
+        if(temp != None and temp.user_id == current_user.id):
             db.session.delete(temp)
             db.session.commit()
         else:
-            error["Post either does not belong to you or does not exist"] = True
+            error = True
         
         return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
 
