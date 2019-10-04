@@ -23,8 +23,8 @@ class calculationForm(FlaskForm):
     additionalContribution = StringField('Additional Contribution') 
     timeframe = IntegerField('Time Frame')
     savedata = BooleanField('Click the box to save your result.')
-    submit = SubmitField('Calculate')
-    
+    submit = SubmitField(label='Calculate')
+    expo = SubmitField(label='Export')
     
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

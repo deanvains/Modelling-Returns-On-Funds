@@ -149,7 +149,10 @@
 					<a href="{{ url_for('signin') }}">Sign in to save your calculation.</a>
 				</p>
             </div>
-			{% endif %}
+            {% endif %}
+            
+            <p>{{ form.expo() }}</p>
+            
         </form>
     </div>
 
@@ -159,7 +162,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <form action="" method="POST">
-                    <button type="submit" class="btn-sm btn-outline-secondary">Export</button>
+                    <!--<button type="submit" class="btn-sm btn-outline-secondary">Export</button>-->
                 </form>
                 <!--<form>
                     <<a href=# id=test><button type="submit" class="btn btn-sm btn-outline-secondary">Export</button></a>
