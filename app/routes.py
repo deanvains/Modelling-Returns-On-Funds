@@ -325,21 +325,24 @@ def profile():
     form2 = storedSelect()
     form3 = compForm()
     error = False
+    error2 = False
     
     if form1.validate_on_submit() and request.form['btn']=='form1':
+        error2=False
         thisdata = form1.rid.data
         temp = expected.query.get(thisdata)
         if(temp != None and temp.user_id == current_user.id):
             db.session.delete(temp)
             db.session.commit()
         else:
-            error = True
+            error2 = True
         
-        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {},error2=error2)
 
     
 
     if form2.validate_on_submit() and request.form['btn']=='form2':
+        error2=False
         data = expected.query.get(form2.storedid.data)
         if(data != None and data.user_id == current_user.id and form2.storedid.data == data.id):
             month = str(data.month)
@@ -347,7 +350,7 @@ def profile():
             value = int(data.value)
             intclass = str(data.intclass)
             thisinterest = float(data.interest)
-            spending = int(data.spending)
+            spending = data.spending
             fprofile = None
             timeframe = int(data.timeframe)
             distribution = float(data.distribution)
@@ -443,33 +446,35 @@ def profile():
 
             if intclass == "E":
                 calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3, calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3, calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif intclass == "F":
                 calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif intclass == "G" :
                 calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif(intclass == "H"):
                 calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif intclass == "A":
                 calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif(intclass == "N"):
                 calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif(intclass == "Q"):
                 calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
             elif(intclass == "S"):
                 calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
-    else:
-        error = True
-        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+                return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
+            
+        else:
+            error2 = True
+            return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3,calc=[[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
     
     if form3.validate_on_submit() and request.form['btn']=='form3':
+        error2 = False
         data1 = expected.query.get(form3.stored1.data)
         data2 = expected.query.get(form3.stored2.data)
         if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.id and form3.stored2.data == data2.id):
@@ -478,7 +483,7 @@ def profile():
             value1 = int(data1.value)
             intclass1 = str(data1.intclass)
             thisinterest1 = float(data1.interest)
-            spending1 = int(data1.spending)
+            spending1 = data1.spending
             fprofile = None
             timeframe1 = int(data1.timeframe)
             distribution1 = float(data1.distribution)
@@ -570,28 +575,28 @@ def profile():
                 addContribution1 = calcDyn(addContribution1,month1,year1,timeframe1)
             decMonth = findDec(month1)
 
-            if intclass == "E":
+            if intclass1 == "E":
                 calc3 = classE(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,distribution1,timeframe1)
                 
-            elif intclass == "F":
+            elif intclass1 == "F":
                 calc3 = classF(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,operatingDistribution1,timeframe1)
                 
-            elif intclass == "G" :
-                calc3 = classG(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,distribution1,timeframe1)
+            elif intclass1 == "G" :
+                calc3 = classG(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,operatingDistribution1,timeframe1)
                 
-            elif(intclass == "H"):
+            elif(intclass1 == "H"):
                 calc3 = classH(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,addContribution1,timeframe1)
                 
-            elif intclass == "A":
+            elif intclass1 == "A":
                 calc3 = classA(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,recap1,operatingDistribution1,timeframe1)
                 
-            elif(intclass == "N"):
+            elif(intclass1 == "N"):
                 calc3 = classN(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,addContribution1,timeframe1)
                 
-            elif(intclass == "Q"):
+            elif(intclass1 == "Q"):
                 calc3 = classQ(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,addContribution1,timeframe1)
                 
-            elif(intclass == "S"):
+            elif(intclass1 == "S"):
                 calc3 = classS(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,addContribution1,timeframe1)
                 
 
@@ -600,7 +605,7 @@ def profile():
             value2 = int(data2.value)
             intclass2 = str(data2.intclass)
             thisinterest2 = float(data2.interest)
-            spending2 = int(data2.spending)
+            spending2 = data2.spending
             fprofile = None
             timeframe2 = int(data2.timeframe)
             distribution2 = float(data2.distribution)
@@ -692,34 +697,37 @@ def profile():
                 addContribution2 = calcDyn(addContribution2,month2,year2,timeframe2)
             decMonth = findDec(month2)
 
-            if intclass == "E":
+            if intclass2 == "E":
                 calc4 = classE(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,distribution2,timeframe2)
                 
-            elif intclass == "F":
+            elif intclass2 == "F":
                 calc4 = classF(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,operatingDistribution2,timeframe2)
                 
-            elif intclass == "G" :
-                calc4 = classG(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,distribution2,timeframe2)
+            elif intclass2 == "G" :
+                calc4 = classG(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,operatingDistribution2,timeframe2)
                 
-            elif(intclass == "H"):
+            elif(intclass2 == "H"):
                 calc4 = classH(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,addContribution2,timeframe2)
                 
-            elif intclass == "A":
+            elif intclass2 == "A":
                 calc4 = classA(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,recap2,operatingDistribution2,timeframe2)
                
-            elif(intclass == "N"):
+            elif(intclass2 == "N"):
                 calc4 = classN(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,addContribution2,timeframe2)
                 
-            elif(intclass == "Q"):
+            elif(intclass2 == "Q"):
                 calc4 = classQ(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,addContribution2,timeframe2)
                 
-            elif(intclass == "S"):
+            elif(intclass2 == "S"):
                 calc4 = classS(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,addContribution2,timeframe2)
-            return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3, calc=calc,calc3=calc3, calc4=calc4,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
-    
+            return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2,form3=form3, calc=[[0],[0]],calc3=calc3, calc4=calc4,timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
 
-    
-    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+        else:   
+            error2 = True
+            return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
+
+    error2=False
+    return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {}, error2=error2)
 
 
 @app.route('/signin', methods=['GET', 'POST'])

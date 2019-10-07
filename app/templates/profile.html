@@ -23,6 +23,13 @@
 
     {% endif %} {% endfor %}
 
+    {% if error2 == True %}
+    <span style="color: red;">
+        <p> There was an error with your input. This usually occurs if you try to access data that does not exist, 
+            or does not belong to you. If error persists, contacts administrators. </p>
+    </span>
+    {% endif %}
+
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -158,8 +165,8 @@
 <!-- Graphs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById("myChart2");
-    var myChart2 = new Chart(ctx, {
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [
@@ -200,7 +207,7 @@
     });
 </script>
 <script>
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChart2");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
