@@ -14,15 +14,38 @@
             </button>
         </div>
     </div>
-
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 0px 10px ;
+        }
+    </style>
+    <table style="border: 1px solid black; text-align:center;">
+            <tr>
+                <th>Result ID</th>
+                <th>User ID </th>
+                <th>Class</th>
+                <th>Timeframe</th>
+                <th>Interest Rate</th>
+            </tr>
+   
     {% for exp in expected %} {% if current_user.id == exp.user_id %}
-
+    
     <div class="table-responsive">
-        <p> {{ exp }}</p>
+    
+        <tr> 
+            <td>{{ exp.id }}</td>
+            <td>{{ exp.user_id }}</td>
+            <td>{{ exp.intclass }}</td>
+            <td>{{ exp.timeframe }}</td>
+            <td>{{ exp.interest }}</td>
+        </tr>
+    
     </div>
-
+    
     {% endif %} {% endfor %}
-
+    </table>
     {% if error2 == True %}
     <span style="color: red;">
         <p> There was an error with your input. This usually occurs if you try to access data that does not exist, 
@@ -213,7 +236,7 @@
         type: 'line',
         data: {
             labels: [
-            {% for year in range(timeframe1|int +1) %}
+            {% for year in range(timeframemax|int +1) %}
                     "{{ years1 + year }}" ,
                     {% endfor %}
             ],
