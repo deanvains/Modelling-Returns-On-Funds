@@ -59,4 +59,4 @@ class expected(db.Model):
     addContribution = db.Column(db.String(1024))
 
     def __repr__(self):
-        return '<id {}, User id {}, month {}, year {} , interest Rate {}>'.format(self.id, self.user_id, self.month, self.year, self.interest)
+        return '<id {}, User id {}, month {}, year {} , interest Rate {}>'.format(self.id, self.user_id, self.intclass, self.timeframe, self.month, self.year, self.interest)

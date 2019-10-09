@@ -83,7 +83,7 @@
         </table>
     </div>
     <br>
-
+    <h2 class="h2">What If Analysis</h2>
     <form action="" method="post" novalidate>
         {{ form3.hidden_tag() }}
         <p>
@@ -104,8 +104,8 @@
             <thead>
                 <tr>
                     <th>Year</th>
-                    {% for year in range(timeframe|int +1) %}
-                    <th>{{ years + year }} </th>
+                    {% for year in range(timeframe1|int +1) %}
+                    <th>{{ years1 + year }} </th>
                     {% endfor %}
 
                 </tr>
@@ -113,13 +113,13 @@
             <tbody>
                 <tr>
                     <td>Opening Balance</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
                     <th>{{ "${:,.2f}".format(calc3[0][year]) }} </th>
                     {% endfor %}
                 </tr>
                 <tr>
                     <td>Closing Balance</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
                     <th>{{ "${:,.2f}".format(calc3[1][year]) }} </th>
                     {% endfor %}
                 </tr>
@@ -133,8 +133,8 @@
             <thead>
                 <tr>
                     <th>Year</th>
-                    {% for year in range(timeframe|int +1) %}
-                    <th>{{ years + year }} </th>
+                    {% for year in range(timeframe2|int +1) %}
+                    <th>{{ years2 + year }} </th>
                     {% endfor %}
 
                 </tr>
@@ -142,13 +142,13 @@
             <tbody>
                 <tr>
                     <td>Opening Balance</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
                     <th>{{ "${:,.2f}".format(calc4[0][year]) }} </th>
                     {% endfor %}
                 </tr>
                 <tr>
                     <td>Closing Balance</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
                     <th>{{ "${:,.2f}".format(calc4[1][year]) }} </th>
                     {% endfor %}
                 </tr>
@@ -162,7 +162,7 @@
 
 </main>
 
-<!-- Graphs -->
+<!-- Single graph -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById("myChart");
@@ -175,8 +175,9 @@
                     {% endfor %}
             ],
 
-            datasets: [{
-                label: 'Closing Balances',
+            datasets: [
+            {
+                label: 'Scenario 1',
                 data: [
                 {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
                 "{{ (calc[1][year]) }}" ,
@@ -189,8 +190,6 @@
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
             }]
-
-            
         },
         options: {
             scales: {
@@ -206,33 +205,48 @@
         }
     });
 </script>
+
+<!-- What if Graph -->
 <script>
     var ctx = document.getElementById("myChart2");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [
-            {% for year in range(timeframe|int +1) %}
-                    "{{ years + year }}" ,
+            {% for year in range(timeframe1|int +1) %}
+                    "{{ years1 + year }}" ,
                     {% endfor %}
             ],
 
             datasets: [{
-                label: 'Closing Balances',
+                label: 'Scenario 1',
                 data: [
-                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                "{{ (calc[1][year]) }}" ,
+                {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
+                "{{ (calc3[1][year]) }}" ,
                     {% endfor %}
-
                 ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
-            }]
+            }
+            ,
+            {
+                label: 'Scenario 2',
+                data: [
+                {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
+                "{{ (calc4[1][year]) }}" ,
+                    {% endfor %}
+                ],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#e2b600',
+                borderWidth: 4,
+                pointBackgroundColor: '#e2b600'
+            }
+            ]
 
-            
         },
         options: {
             scales: {
