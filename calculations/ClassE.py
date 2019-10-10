@@ -34,12 +34,14 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
     annualAMB = {}
             
         
-    for month in range(0,timeFrame * 12 + 1):
+    for month in range(0,timeFrame * 12 + 1): 
         if month == 0 and dateMonth == 'dec':
             monthlyOpBalance[month] = fundValue
-            monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
             monthlyReturn[month] = int(monthlyOpBalance[month] * float(interest))
-            monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month] - monthlyCapDist[month])
+            monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
+            if monthlyCapDist.get(month) != None:
+                monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
+                monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
                 monthlyClBalance[month] += int(donation.get(month))
             if recapital.get(month) != None:
@@ -82,8 +84,10 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             
             
             monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth.lower()] + month)/12] * float(interest))
-            monthlyCapDist[month] = int(AWB3yr[(monthDict[dateMonth.lower()] + month)/12] * float(distribution))
-            monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month] - monthlyCapDist[month])
+            monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
+            if monthlyCapDist.get(month) != None:
+                monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
+                monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
                 monthlyClBalance[month] += int(donation.get(month))
             if recapital.get(month) != None:
