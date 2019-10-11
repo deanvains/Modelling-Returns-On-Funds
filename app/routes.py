@@ -338,7 +338,7 @@ def profile():
         else:
             error2 = True
         
-        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {},error2=error2)
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframemax=0,timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {},error2=error2)
 
     
 
