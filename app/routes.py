@@ -151,6 +151,7 @@ def calcs():
                         thisinterest = interest.ClassS
                         calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
                     savedata = form.savedata.data
+
                     if(savedata == True and current_user.is_authenticated):
                         clientsave = expected(user_id=int(current_user.id), month=str(form.month.data),year=int(form.year.data),
                         interest=thisinterest, value=int(form.fundvalue.data),intclass=str(form.interestClass.data),
@@ -158,7 +159,7 @@ def calcs():
                         recap=str(form.recap.data),distribution=str(form.distribution.data),
                         operatingDistribution=str(form.operatingDistribution.data),
                         timeframe= int(form.timeframe.data),
-                        addContribution=str(form.additionalContribution.data))
+                        addContribution=str(form.additionalContribution.data),nickname=str(form.nickname.data))
                         db.session.add(clientsave)
                         db.session.commit()
                     
@@ -330,8 +331,8 @@ def profile():
     
     if form1.validate_on_submit() and request.form['btn']=='form1':
         error2=False
-        thisdata = form1.rid.data
-        temp = expected.query.get(thisdata)
+        thisdata = str(form1.rid.data)
+        temp = expected.query.filter_by(nickname=thisdata).first()
         if(temp != None and temp.user_id == current_user.id):
             db.session.delete(temp)
             db.session.commit()
@@ -344,8 +345,8 @@ def profile():
 
     if form2.validate_on_submit() and request.form['btn']=='form2':
         error2=False
-        data = expected.query.get(form2.storedid.data)
-        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.id):
+        data = expected.query.filter_by(nickname=form2.storedid.data).first()
+        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.nickname):
             month = str(data.month)
             year = int(data.year)
             value = int(data.value)
@@ -469,9 +470,9 @@ def profile():
     
     if form3.validate_on_submit() and request.form['btn']=='form3':
         error2 = False
-        data1 = expected.query.get(form3.stored1.data)
-        data2 = expected.query.get(form3.stored2.data)
-        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.id and form3.stored2.data == data2.id):
+        data1 = expected.query.filter_by(nickname=form3.stored1.data).first()
+        data2 = expected.query.filter_by(nickname=form3.stored2.data).first()
+        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.nickname and form3.stored2.data == data2.nickname):
             month1 = str(data1.month)
             year1 = int(data1.year)
             value1 = int(data1.value)
@@ -835,3 +836,7 @@ def adminreset():
 		db.session.commit()
 		return redirect(url_for('homepage'))
 	return render_template('adminreset.html', title='Forgotten Password', form=form)
+
+@app.route('/userlist', methods=['GET', 'POST'])
+def userlist():
+    return render_template('userlist.html', User=User.query.all())

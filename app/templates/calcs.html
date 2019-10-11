@@ -135,6 +135,12 @@
                     {{ form.savedata(size=32) }} {{ form.savedata.label }}<br> {% for error in form.savedata.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
+
+                <p>
+                        {{ form.nickname.label }} <br>
+                    {{ form.nickname(size=32) }} <br> {% for error in form.nickname.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                </p>
             </div>
 			{% endif %}
 			

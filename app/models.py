@@ -44,6 +44,7 @@ class InterestRates(db.Model):
 
 class expected(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    nickname = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     month = db.Column(db.String(1024))
     year = db.Column(db.Integer)
@@ -59,4 +60,4 @@ class expected(db.Model):
     addContribution = db.Column(db.String(1024))
 
     def __repr__(self):
-        return '<id {}, User id {}, month {}, year {} , interest Rate {}>'.format(self.id, self.user_id, self.intclass, self.timeframe, self.month, self.year, self.interest)
+        return '<id {}, nickname{}, User id {}, month {}, year {} , interest Rate {}>'.format(self.id, self.nickname, self.user_id, self.intclass, self.timeframe, self.month, self.year, self.interest)
