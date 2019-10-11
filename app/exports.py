@@ -1,10 +1,11 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
-from reportlab.graphics.shapes import Rect
+from reportlab.lib.utils import ImageReader
+from reportlab.graphics.shapes import Rect, Drawing
 from reportlab.lib.colors import Color, blue, red, yellow, green, brown, white, black, HexColor
 from flask import make_response
-from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
+from PIL import Image
 
 from calculations.ClassH import classH
 from calculations.ClassN import classN
@@ -139,7 +140,18 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		thisinterest = interest.ClassS
 		calc = classS(month,year,fundvalue,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 
+	#This is getting disgustingly long, bad coding mate
+	monthlist = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+	horiz = []
+	horiz[0] = monthlist[11 - decMonth]
+	for k in range(len(calc[1])) :
+		if k == len(calc[1])/12 :
+			horiz.append(monthlist[k%12-1])
+		else :
+			horiz.append('')
 	
+
+
 	#Create the PDF file
 	import io
 	output = io.BytesIO()
@@ -156,14 +168,21 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 	textobject = c.beginText()
 	textobject.setTextOrigin(inch, 10*inch)
 	textobject.setFont("Helvetica", 10)
-	textobject.textLine(text = 'This is an automatically generated pdf.')
-	textobject.textLine(text = 'To do:')
+	textobject.textLine(text = month)
+	textobject.textLine(text = intclass)
 	textobject.textLine(text = '    Make everything dynamic')
 	textobject.textLine(text = '    Better Graph')
 	textobject.textLine(text = '    UWA logo')
 	textobject.textLine(text = '    Connect to website and check how to download')
 	textobject.setFillGray(0.4)
 	c.drawText(textobject)
+
+
+	#logo = Image.open("/static/UWA-Logo.png")
+
+	#c.drawImage("UWA-Logo.png",100,100)
+
+
 
 	maxY = 0
 	for i in range(len(calc[1])):
@@ -174,8 +193,8 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 	lc = HorizontalLineChart()
 	lc.x = 50
 	lc.y = 50
-	lc.height = 125
-	lc.width = 300
+	lc.height = 300
+	lc.width = 500
 	lc.data = calc
 	lc.joinedLines = 1
 	catNames = 'Jan Feb Mar Apr May Jun Jul Aug'.split(' ')
