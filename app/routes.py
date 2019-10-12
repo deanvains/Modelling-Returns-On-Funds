@@ -14,6 +14,7 @@ from calculations.ClassG import classG
 from calculations.ClassS import classS
 from calculations.findDec import findDec
 from calculations.calDynamic import calcDyn
+from calculations.findMonth import findMonth
 from calculations.calcMonth import calcMonths
 from calculations.test import testdata
 from app.exports import pdfGen
@@ -332,7 +333,7 @@ def calcs():
     
     form = calculationForm()
  
-    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = {})
+    return render_template("calcs.html", title='Calculation Page', form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,error = None)
 
 
 @app.route('/profile',methods=["GET", "POST"])
