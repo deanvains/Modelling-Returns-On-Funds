@@ -32,7 +32,6 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
         yearlyCapDist ={}
     else:
         yearlyCapDist = distribution
-    print (yearlyCapDist)
  
         
         
@@ -41,7 +40,7 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
     monthlyReturn = {}
     annualAMB = {}
             
-        
+
     for month in range(0,timeFrame * 12 + 1):
         if month == 0 and dateMonth == "dec":
             monthlyOpBalance[month] = fundValue
@@ -92,7 +91,8 @@ def classA (month,year,value,fprofile,intclass,interest,spending,recap,distribut
             if recapital.get(month) != None:
                 monthlyClBalance[month] -= int(recapital.get(month))
         
-    result = [monthlyOpBalance,monthlyClBalance]
+    result = [monthlyOpBalance,monthlyClBalance,monthlyReturn,yearlyCapDist,spendingProfile,recapital]
+    print(1 in result[2].keys())
     return result
 
         

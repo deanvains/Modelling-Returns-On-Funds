@@ -82,7 +82,7 @@ def classH(month,year,value,fprofile,intclass,interest,spending,addContribution,
             if additionalCapital.get(month) != None:
                 monthlyClBalance[month] += int(additionalCapital.get(month))
         
-    result = [monthlyOpBalance,monthlyClBalance]
+    result = [monthlyOpBalance,monthlyClBalance,monthlyReturn,additionalCapital,spendingProfile,]
     return result
 
         

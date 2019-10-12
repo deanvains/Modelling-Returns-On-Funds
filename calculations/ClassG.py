@@ -39,7 +39,7 @@ def classG(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             monthlyOpBalance[month] = fundValue
             monthlyReturn[month] = int(monthlyOpBalance[month] * float(interest))
             monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
-            if monthlyCapDist.get(month) != None:
+            if distribution != 0 or distribution != None :
                 monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
                 monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
@@ -85,7 +85,7 @@ def classG(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             
             monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth.lower()] + month)/12] * float(interest))
             monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
-            if monthlyCapDist.get(month) != None:
+            if distribution != 0 or distribution != None :
                 monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
                 monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
@@ -100,7 +100,7 @@ def classG(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
                 
-    result = [monthlyOpBalance,monthlyClBalance]
+    result = [monthlyOpBalance,monthlyClBalance,monthlyReturn,donation,recapital,monthlyCapDist]
     
     return result
     """for x,y in monthlyReturn.items():

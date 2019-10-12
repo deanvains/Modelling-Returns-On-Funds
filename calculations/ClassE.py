@@ -33,13 +33,14 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
     AWB3yr = {}
     annualAMB = {}
             
-        
+   
+         
     for month in range(0,timeFrame * 12 + 1): 
         if month == 0 and dateMonth == 'dec':
             monthlyOpBalance[month] = fundValue
             monthlyReturn[month] = int(monthlyOpBalance[month] * float(interest))
             monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
-            if monthlyCapDist.get(month) != None:
+            if distribution != 0 or distribution != None :
                 monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
                 monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
@@ -85,8 +86,8 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             
             monthlyReturn[month] =  int(annualAMB[(monthDict[dateMonth.lower()] + month)/12] * float(interest))
             monthlyClBalance[month] = int(monthlyOpBalance[month] + monthlyReturn[month])
-            if monthlyCapDist.get(month) != None:
-                monthlyCapDist[month] = int(monthlyOpBalance[month] * float(distribution))
+            if distribution != 0 or distribution != None :
+                monthlyCapDist[month] = int(AWB3yr[(monthDict[dateMonth.lower()] + month)/12] * float(distribution))
                 monthlyClBalance[month] -= int(monthlyCapDist[month])
             if donation.get(month) != None:
                 monthlyClBalance[month] += int(donation.get(month))
@@ -100,7 +101,8 @@ def classE(month,year,value,fprofile,intclass,interest,donation,recap,distributi
             if recapital.get(month) != None:
                 monthlyClBalance[month] += int(recapital.get(month))
                 
-    result = [monthlyOpBalance,monthlyClBalance]
+    result = [monthlyOpBalance,monthlyClBalance,monthlyReturn,donation,recapital,monthlyCapDist]
+    
     
     return result
     """for x,y in monthlyReturn.items():
