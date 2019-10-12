@@ -34,15 +34,23 @@ def calcs():
             if form.validate_on_submit():
                 try:
                     month = form.month.data.strip()
+                    intMonth = findMonth(month)
                     year = form.year.data
-                    if len(str(year)) != 4:
+                    if len(year) != 4 or year.isdigit() == False :
                         raise Exception("Invalid Years")
+                    year = int(year)
                     value =  form.fundvalue.data
+                    if value.isdigit() == False :
+                        raise Exception("Invalid Fund Value")
+                    value = int(value)
                     fprofile = None
                     intclass = form.interestClass.data.strip()
                     interest = InterestRates.query.first()
                     distribution = form.distribution.data
                     timeframe = form.timeframe.data
+                    if timeframe.isdigit() == False :
+                        raise Exception("Invalid Time Frame")
+                    timeframe = int(timeframe)
                     
                     if form.donation.data == '' or form.donation.data == '0':
                         donation = {}
@@ -163,7 +171,7 @@ def calcs():
                         db.session.add(clientsave)
                         db.session.commit()
                     
-                    return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,timeframe1=0, decMonth1=0, decMonth = decMonth,spending =spending,error = {})
+                    return render_template("calcs.html", title='Calculation Page', form=form, calc=calc, years=year,timeframe=timeframe,timeframe1=0, decMonth1=0, decMonth = decMonth,spending =spending,error = {},months = intMonth)
                 except:
                     error = {}
                     traceback.print_exc() #To print error Trace
@@ -171,8 +179,14 @@ def calcs():
                     if month != 'dec' and month != 'nov' and month != 'oct' and month != 'sep' and month != 'aug' and month != 'jul' and month != 'jun' and month != 'may' and month != 'apr' and month != 'mar' and month != 'feb' and month != 'jan':
                         error["month"] = True
                     year = form.year.data
-                    if len(str(year)) != 4:
+                    if len(year) != 4 or year.isdigit() == False :
                         error["year"] = True
+                    value = form.fundvalue.data
+                    if value.isdigit() == False :
+                        error["value"] = True
+                    timeframe = form.timeframe.data
+                    if timeframe.isdigit() == False :
+                        error["timeframe"] = True
 
                     if form.donation.data != '' and form.donation.data != '0' :
                         dynVal = form.donation.data.split(',')
