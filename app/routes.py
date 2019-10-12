@@ -83,7 +83,7 @@ def calcs():
                                     raise Exception("Year 2 is lower than year 1")
                                 else:
                                     yearValue = yearVal
-                        spending = calcDyn(form.spending.data,month,year,timeframe)
+                                spending = calcDyn(form.spending.data,month,year,timeframe)
                     if form.recap.data == '' or form.recap.data == '0':
                         recap = {}
                     else:
@@ -98,7 +98,7 @@ def calcs():
                                     raise Exception("Year 2 is lower than year 1")
                                 else:
                                     yearValue = yearVal
-                        recap = calcDyn(form.recap.data,month,year,timeframe)
+                                recap = calcDyn(form.recap.data,month,year,timeframe)
                     if form.operatingDistribution.data == '' or form.operatingDistribution.data == '0' :
                         operatingDistribution = {}
                     else:
@@ -114,7 +114,7 @@ def calcs():
                                     raise Exception("Year 2 is lower than year 1")
                                 else:
                                     yearValue = yearVal
-                        operatingDistribution = calcDyn(form.operatingDistribution.data,month,year,timeframe)
+                                operatingDistribution = calcDyn(form.operatingDistribution.data,month,year,timeframe)
                     if form.additionalContribution.data == '' or form.additionalContribution.data == '0':
                         addContribution = {}
                     else:
@@ -129,7 +129,7 @@ def calcs():
                                     raise Exception("Year 2 is lower than year 1")
                                 else:
                                     yearValue = yearVal
-                        addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
+                                addContribution = calcDyn(form.additionalContribution.data,month,year,timeframe)
                     decMonth = findDec(month)
 
                     
@@ -361,8 +361,10 @@ def profile():
     if form2.validate_on_submit() and request.form['btn']=='form2':
         error2=False
         data = expected.query.filter_by(nickname=form2.storedid.data).first()
-        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.nickname):
+        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.nickname):  
+        
             month = str(data.month)
+            intMonth = findMonth(month)
             year = int(data.year)
             value = int(data.value)
             intclass = str(data.intclass)
@@ -392,7 +394,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                donation = calcDyn(donation,month,year,timeframe)
+                donation = calcDyn(data.donation,month,year,timeframe)
 
             if spending == '' or spending == '0' :
                 spending = {}
@@ -408,7 +410,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                        spending = calcDyn(spending,month,year,timeframe)
+                        spending = calcDyn(data.spending,month,year,timeframe)
 
             if recap == '' or recap == '0':
                 recap = {}
@@ -478,7 +480,7 @@ def profile():
             elif(intclass == "S"):
                 calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)    
             
-            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe=timeframe,years=year,decMonth = decMonth,spending = spending,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe=timeframe,years=year,decMonth = decMonth,spending = spending,timeframe1 = 0,intclass = intclass,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = False, error2=error2,months = intMonth)
         else:
             error2 = True
             return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2,form3=form3,calc=[[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
@@ -487,8 +489,9 @@ def profile():
         error2 = False
         data1 = expected.query.filter_by(nickname=form3.stored1.data).first()
         data2 = expected.query.filter_by(nickname=form3.stored2.data).first()
-        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.nickname and form3.stored2.data == data2.nickname):
+        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.nickname and form3.stored2.data == data2.nickname):    
             month1 = str(data1.month)
+            intMonth1 = findMonth(month1)
             year1 = int(data1.year)
             value1 = int(data1.value)
             intclass1 = str(data1.intclass)
@@ -518,7 +521,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                donation1 = calcDyn(donation1,month1,year1,timeframe1)
+                donation1 = calcDyn(data1.donation,month1,year1,timeframe1)
 
             if spending1 == '' or spending1 == '0' :
                 spending1 = {}
@@ -534,7 +537,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                        spending1 = calcDyn(spending1,month1,year1,timeframe1)
+                        spending1 = calcDyn(data1.spending,month1,year1,timeframe1)
 
             if recap1 == '' or recap1 == '0':
                 recap1 = {}
@@ -612,6 +615,7 @@ def profile():
                 
 
             month2 = str(data2.month)
+            intMonth2 = findMonth(month2)
             year2 = int(data2.year)
             
             value2 = int(data2.value)
@@ -644,7 +648,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                donation2 = calcDyn(donation2,month2,year2,timeframe2)
+                donation2 = calcDyn(data2.donation,month2,year2,timeframe2)
 
             if spending2 == '' or spending2 == '0' :
                 spending2 = {}
@@ -660,7 +664,7 @@ def profile():
                             raise Exception("Year 2 is lower than year 1")
                         else:
                             yearValue = yearVal
-                        spending2 = calcDyn(spending2,month2,year2,timeframe2)
+                        spending2 = calcDyn(data2.spending,month2,year2,timeframe2)
 
             if recap2 == '' or recap2 == '0':
                 recap2 = {}
@@ -738,7 +742,7 @@ def profile():
             # find greatest years
             
             
-            return render_template("profile.html", title='Profile', expected=expected.query.all(), timeframemax=timeframemax, form=form1, form2=form2,form3=form3, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(), timeframemax=timeframemax, form=form1, form2=form2,form3=form3, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,intclass1 = intclass1,intclass2 = intclass2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = 'False3', error2=error2,months1 = intMonth1,months2 = intMonth2)
             
         else:   
             error2 = True
