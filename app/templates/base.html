@@ -67,7 +67,7 @@
                         {% if current_user.is_authenticated %}
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ url_for( 'profile') }} ">
-                                <span data-feather="database "></span> Stored Results
+                                <span data-feather="database "></span> Stored Results and What If Analysis
                             </a>
                         </li>
                         {% endif %}
@@ -129,6 +129,25 @@
             $('#formButton').css('color', '#007bff');
             $('#formButton2').css('background-color',  '#e2edfa');
             $('#formButton2').css('color', '#007bff');
+            $("#yeartable ").show();
+            $("#monthtable ").hide();
+            $('#YearButton').css('background-color', '#007bff');
+            $('#YearButton').css('color',  '#e2edfa');
+            $('#MonthButton').css('background-color', '#e2edfa');
+            $('#MonthButton').css('color',  '#007bff');
+            $("#yeartable2 ").show();
+            $("#monthtable2 ").hide();
+            $('#YearButton2').css('background-color', '#007bff');
+            $('#YearButton2').css('color',  '#e2edfa');
+            $('#MonthButton2').css('background-color', '#e2edfa');
+            $('#MonthButton2').css('color',  '#007bff');
+            $("#yeartable3 ").show();
+            $("#monthtable3 ").hide();
+            $('#YearButton3').css('background-color', '#007bff');
+            $('#YearButton3').css('color',  '#e2edfa');
+            $('#MonthButton3').css('background-color', '#e2edfa');
+            $('#MonthButton3').css('color',  '#007bff');
+
             $("#formButton ").click(function() {
                 $("#calcForm ").show();
                 $("#month ").show();
@@ -169,6 +188,60 @@
                 $('#formButton2').css('color',  '#e2edfa');
                 $('#formButton').css('background-color', '#e2edfa');
                 $('#formButton').css('color',  '#007bff');
+            });
+
+            $("#YearButton").click(function() {
+                $("#yeartable ").show();
+                $("#monthtable ").hide();
+                $('#YearButton').css('background-color', '#007bff');
+                $('#YearButton').css('color',  '#e2edfa');
+                $('#MonthButton').css('background-color', '#e2edfa');
+                $('#MonthButton').css('color',  '#007bff');
+            });
+
+            $("#MonthButton").click(function() {
+                $("#yeartable ").hide();
+                $("#monthtable ").show();
+                $('#MonthButton').css('background-color', '#007bff');
+                $('#MonthButton').css('color',  '#e2edfa');
+                $('#YearButton').css('background-color', '#e2edfa');
+                $('#YearButton').css('color',  '#007bff');
+            });
+
+            $("#YearButton2").click(function() {
+                $("#yeartable2 ").show();
+                $("#monthtable2 ").hide();
+                $('#YearButton2').css('background-color', '#007bff');
+                $('#YearButton2').css('color',  '#e2edfa');
+                $('#MonthButton2').css('background-color', '#e2edfa');
+                $('#MonthButton2').css('color',  '#007bff');
+            });
+
+            $("#MonthButton2").click(function() {
+                $("#yeartable2 ").hide();
+                $("#monthtable2 ").show();
+                $('#MonthButton2').css('background-color', '#007bff');
+                $('#MonthButton2').css('color',  '#e2edfa');
+                $('#YearButton2').css('background-color', '#e2edfa');
+                $('#YearButton2').css('color',  '#007bff');
+            });
+
+            $("#YearButton3").click(function() {
+                $("#yeartable3 ").show();
+                $("#monthtable3 ").hide();
+                $('#YearButton3').css('background-color', '#007bff');
+                $('#YearButton3').css('color',  '#e2edfa');
+                $('#MonthButton3').css('background-color', '#e2edfa');
+                $('#MonthButton3').css('color',  '#007bff');
+            });
+
+            $("#MonthButton3").click(function() {
+                $("#yeartable3 ").hide();
+                $("#monthtable3 ").show();
+                $('#MonthButton3').css('background-color', '#007bff');
+                $('#MonthButton3').css('color',  '#e2edfa');
+                $('#YearButton3').css('background-color', '#e2edfa');
+                $('#YearButton3').css('color',  '#007bff');
             });
         });
     </script>
