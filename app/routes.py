@@ -338,15 +338,15 @@ def calcs():
 
 @app.route('/profile',methods=["GET", "POST"])
 def profile():
-    form1 = RemovalForm()
-    form2 = storedSelect()
-    form3 = compForm()
+    Remove = RemovalForm()
+    View = storedSelect()
+    Analyse = compForm()
     error = False
     error2 = False
     
-    if form1.validate_on_submit() and request.form['btn']=='form1':
+    if Remove.validate_on_submit() and request.form['btn']=='Remove':
         error2=False
-        thisdata = str(form1.rid.data)
+        thisdata = str(Remove.rid.data)
         temp = expected.query.filter_by(nickname=thisdata).first()
         if(temp != None and temp.user_id == current_user.id):
             db.session.delete(temp)
@@ -354,14 +354,14 @@ def profile():
         else:
             error2 = True
         
-        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframemax=0,timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {},error2=error2)
+        return render_template("profile.html", title='Profile', expected=expected.query.all(), form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframemax=0,timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {},error2=error2)
 
     
 
-    if form2.validate_on_submit() and request.form['btn']=='form2':
+    if View.validate_on_submit() and request.form['btn']=='View':
         error2=False
-        data = expected.query.filter_by(nickname=form2.storedid.data).first()
-        if(data != None and data.user_id == current_user.id and form2.storedid.data == data.nickname):  
+        data = expected.query.filter_by(nickname=View.storedid.data).first()
+        if(data != None and data.user_id == current_user.id and View.storedid.data == data.nickname):  
         
             month = str(data.month)
             intMonth = findMonth(month)
@@ -480,16 +480,16 @@ def profile():
             elif(intclass == "S"):
                 calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)    
             
-            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2,form3=form3,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe=timeframe,years=year,decMonth = decMonth,spending = spending,timeframe1 = 0,intclass = intclass,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = False, error2=error2,months = intMonth)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View,Analyse=Analyse,calc=calc,calc3=[[0],[0]], calc4=[[0],[0]],timeframe=timeframe,years=year,decMonth = decMonth,spending = spending,timeframe1 = 0,intclass = intclass,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = False, error2=error2,months = intMonth)
         else:
             error2 = True
-            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2,form3=form3,calc=[[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View,Analyse=Analyse,calc=[[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
     
-    if form3.validate_on_submit() and request.form['btn']=='form3':
+    if Analyse.validate_on_submit() and request.form['btn']=='Analyse':
         error2 = False
-        data1 = expected.query.filter_by(nickname=form3.stored1.data).first()
-        data2 = expected.query.filter_by(nickname=form3.stored2.data).first()
-        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and form3.stored1.data == data1.nickname and form3.stored2.data == data2.nickname):    
+        data1 = expected.query.filter_by(nickname=Analyse.stored1.data).first()
+        data2 = expected.query.filter_by(nickname=Analyse.stored2.data).first()
+        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and Analyse.stored1.data == data1.nickname and Analyse.stored2.data == data2.nickname):    
             month1 = str(data1.month)
             intMonth1 = findMonth(month1)
             year1 = int(data1.year)
@@ -742,14 +742,14 @@ def profile():
             # find greatest years
             
             
-            return render_template("profile.html", title='Profile', expected=expected.query.all(), timeframemax=timeframemax, form=form1, form2=form2,form3=form3, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,intclass1 = intclass1,intclass2 = intclass2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = 'False3', error2=error2,months1 = intMonth1,months2 = intMonth2)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(), timeframemax=timeframemax, form=Remove, View=View,Analyse=Analyse, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,intclass1 = intclass1,intclass2 = intclass2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = 'False3', error2=error2,months1 = intMonth1,months2 = intMonth2)
             
         else:   
             error2 = True
-            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=year,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=year,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
 
     error2=False
-    return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=form1, form2=form2, form3=form3, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2= 0,error = {}, error2=error2)
+    return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2= 0,error = {}, error2=error2)
 
 
 @app.route('/signin', methods=['GET', 'POST'])
