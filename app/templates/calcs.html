@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -10,163 +12,184 @@
 
     <button type="button" class="btn btn-primary" id="formButton2">Operating Account</button>
 
-	<br><br>
+    <br><br>
+    
     <div class="form-row">
-        <form action="" method="post" novalidate id="calcForm">
+        <form action="" method="post" novalidate id="calcForm" class="form ">
             {{ form.hidden_tag() }}
-            <div class="form-group col-md-12" id="month">
-                <p>
-                    {{ form.month.label }}<br> {{ form.month(size=32) }}<br> {% for error in form.month.errors %}
+                        <div class="form-group" id="month" style="width: 100%">
+                    {{ wtf.form_field(form.month, class='form-control', placeholder='eg. dec') }}
+                    {% for error in form.month.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
 		{% if error["month"] == True %}
-                    <p><span style="color: red;">There are errors with the months, Please check again</span></p>
+                    <span style="color: red;">There are errors with the months, Please check again</span>
                 {% endif %}
-                <p style="color:grey">Example - Month : <br> dec</p>
+                
+                <p class="font-weight-light">This is the starting month of the calculation. </p>
             </div>
 
-            <div class="form-group col-md-12" id="year">
-                <p>
-                    {{ form.year.label }}<br> {{ form.year(size=32) }}<br> {% for error in form.year.errors %}
+            <div class="form-group" id="year" style="width: 100%">
+                    {{ wtf.form_field(form.year, class='form-control', placeholder='e.g 2018') }}
+                    {% for error in form.year.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
 		{% if error["year"] == True %}
-                    <p><span style="color: red;">There are errors with the years, Please check again</span></p>
+                    <span style="color: red;">There are errors with the years, Please check again</span>
                 {% endif %}
-                <p style="color:grey">Example - Year : <br> 2018</p>
+
+                <p class="font-weight-light">This is the starting year of the calculation. </p>
             </div>
 
-            <div class="form-group col-md-12" id="fundValue">
-                <p>
-                    {{ form.fundvalue.label }}<br> {{ form.fundvalue(size=32) }}<br> {% for error in form.fundvalue.errors %}
+            <div class="form-group" id="fundValue" style="width: 100%">
+                     {{ wtf.form_field(form.fundvalue, class='form-control', placeholder='e.g 10000000 (no commas or $)') }}
+                
+                     {% for error in form.fundvalue.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-		{% if error["value"] == True %}
-                    <p><span style="color: red;">There are errors with the Fund Value, Please check again</span></p>
-                {% endif %}
-                <p style="color:grey">Example - Fund Value : <br> 10000000</p>
+
+            <p class="font-weight-light">This is the initial opening balance of the fund.</p>
+            </div>
+            
+            <div class="form-group" id="interestClass" style="width: 100%">
+                
+                    {{ wtf.form_field(form.interestClass, class='form-control', placeholder='e.g E') }}
+                    {% for error in form.interestClass.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+
+                    <p class="font-weight-light"> 
+                        Intrest Classes:
+                        - Long Term Pool: E, F,G.
+                        - Medium Term Pool: H
+                        - Short Term Pool: A, N, Q
+                        - Cash Pool: S</p>
             </div>
 
-            <div class="form-group col-md-12" id="interestClass">
-                <p>
-                    {{ form.interestClass.label }}<br> {{ form.interestClass(size=32) }}<br> {% for error in form.interestClass.errors %}
+            <div class="form-group" id="donation" style="width: 100%">
+                
+                     {{ wtf.form_field(form.donation, class='form-control', placeholder='e.g jun-2020-1000000,jul-2020-0') }}
+                     {% for error in form.donation.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p style="color:grey">Example - Interest Class : <br> E</p>
-            </div>
-
-            <div class="form-group col-md-12" id="donation">
-                <p>
-                    {{ form.donation.label }}<br> {{ form.donation(size=32) }}<br> {% for error in form.donation.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
 		{% if error["donation"] == True %}
                     <p><span style="color: red;">There are errors with the Donation Field, Please check again</span></p>
                 {% endif %}
-                <p style="color:grey">Example - Donation Amounts : <br> jun-2020-1000000,jul-2020-0</p>
+
+                <p class="font-weight-light">Money that is received from donations after the initial contribution at fund
+                    commencement. </p>
             </div>
 
-            <div class="form-group col-md-12" id="spending">
-                <p>
-                    {{ form.spending.label }}<br> {{ form.spending(size=32) }}<br> {% for error in form.spending.errors %}
+            <div class="form-group" id="spending" style="width: 100%">
+                    {{ wtf.form_field(form.spending, class='form-control', placeholder='e.g 0') }}
+                    {% for error in form.spending.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
 		{% if error["spending"] == True %}
                     <p><span style="color: red;">There are errors with the Spending Field, Please check again</span></p>
                 {% endif %}
-                <p style="color:grey">Example - Spending Amounts : <br> 0</p>
+
+                <p>Spending profile of the funds over the duration of the timeframe.</p>
+
             </div>
 
 
-            <div class="form-group col-md-12" id="recap">
-                <p>
-                    {{ form.recap.label }}<br> {{ form.recap(size=32) }}<br> {% for error in form.recap.errors %}
+            <div class="form-group" id="recap" style="width: 100%">
+                
+                    {{ wtf.form_field(form.recap, class='form-control', placeholder='e.g jun-2021-10000,jul-2021-0') }}
+                     {% for error in form.recap.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+            
 		{% if error["recap"] == True %}
                     <p><span style="color: red;">There are errors with the Recap Field, Please check again</span></p>
                 {% endif %}
-                <p style="color:grey">Example - Recap Amounts : <br> jun-2021-10000,jul-2021-0</p>
+
+                <p class="font-weight-light">Amount to be recapitalised from the Operating Accounts to the Capital
+                    Accounts.</p>
             </div>
 
 
-            <div class="form-group col-md-12" id="distribution">
-                <p>
-                    {{ form.distribution.label }}<br> {{ form.distribution(size=32) }}<br> {% for error in form.distribution.errors %}
+            <div class="form-group" id="distribution" style="width: 100%">
+            
+                    {{ wtf.form_field(form.distribution, class='form-control', placeholder='e.g 0.05') }}
+                    {% for error in form.distribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-                <p style="color:grey">Example - Distribution Rate : <br> 0.05</p>
+
+                    <p class="font-weight-light">This is the distribution rate of the fund. </p>
+
             </div>
 
-            <div class="form-group col-md-12" id="operatingDistribution">
-                <p>
-                    {{ form.operatingDistribution.label }}<br> {{ form.operatingDistribution(size=32) }}<br> {% for error in form.operatingDistribution.errors %}
+            <div class="form-group" id="operatingDistribution" style="width: 100%">
+                
+                    {{ wtf.form_field(form.operatingDistribution, class='form-control', placeholder='e.g 0') }}
+                    {% for error in form.operatingDistribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
 		{% if error["operatingDistribution"] == True %}
                     <p><span style="color: red;">There are errors with the Operating Distribution Field, Please check again</span></p>
                 {% endif %}
-                <p style="color:grey">Example - Operating Capital Distribution : <br> 0</p>
+        
+                <p class="font-weight-light">Capital distribution that Operating Accounts receives from the Capital Account
+                    after the initial fund injection.</p>
             </div>
 
 
-            <div class="form-group col-md-12" id="additionalContribution">
-                <p>
-                    {{ form.additionalContribution.label }}<br> {{ form.additionalContribution(size=32) }}<br> {% for error in form.additionalContribution.errors %}
+            <div class="form-group" id="additionalContribution" style="width: 100%">
+                
+                    {{ wtf.form_field(form.additionalContribution, class='form-control', placeholder='e.g 0') }}
+                    {% for error in form.additionalContribution.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
 		{% if error["additionalContribution"] == True %}
                 <p><span style="color: red;">There are errors with the Additional Contribution Field, Please check again</span></p>
                 {% endif %}
-                <p style="color:grey">Example - Additional Contribution : <br> 0</p>
+                <p class="font-weight-light">For certain classes of Operating Accounts that receive capital injections.
+
+                    Additional contribution amounts can be added to the fund value.</p>
             </div>
 
 
 
-            <div class="form-group col-md-12" id="timeframe">
-                <p>
-                    {{ form.timeframe.label }}<br> {{ form.timeframe(size=32) }}<br> {% for error in form.timeframe.errors %}
+            <div class="form-group" id="timeframe" style="width: 100%">
+            
+                    {{ wtf.form_field(form.timeframe, class='form-control', placeholder='e.g 12') }}
+                     {% for error in form.timeframe.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
-		{% if error["timeframe"] == True %}
-                <p><span style="color: red;">There are errors with the Time Frame Field, Please check again</span></p>
-                {% endif %}
-                <p style="color:grey">Example - Time Frame : <br> 12</p><br>
 
+                    <p class="font-weight-light">The time frame is the number of years from the starting month and year over
+                        which you would like to complete the calculation.</p>
             </div>
 			
 			{% if current_user.is_authenticated %}
-            <div class="form-group col-md-12">
-                <p>
+            <div class="form-group" style="width: 100%">
+                
                     {{ form.savedata(size=32) }} {{ form.savedata.label }}<br> {% for error in form.savedata.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
 
-                <p>
-                        {{ form.nickname.label }} <br>
-                    {{ form.nickname(size=32) }} <br> {% for error in form.nickname.errors %}
+                    {{ wtf.form_field(form.nickname, class='form-control') }}
+                     {% for error in form.nickname.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                </p>
+                
             </div>
 			{% endif %}
-			
-            <p>{{ form.submit() }}</p>
+            
+            <div  style="width: 20%">
+            <p>{{ form.submit(class="btn btn-primary btn-md btn-block") }}</p>
             {% if error == True %}
                 <p><span style="color: red;">There are errors with the inputs, Please check again</span></p>
             {% endif %}
-			
+            </div>
 			{% if current_user.is_anonymous %}
-			<div class="form-group col-md-12">
+			<div class="form-group">
                 <p>
 					<a href="{{ url_for('signin') }}">Sign in to save your calculation.</a>
 				</p>
             </div>
             {% endif %}
-            
-            <p>{{ form.expo() }}</p>
-            
+            <div style="width: 20%">
+            <p>{{ form.expo(class="btn btn-primary btn-md btn-block") }}</p>
+            </div>
         </form>
     </div>
+
+
 
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -186,15 +209,25 @@
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
     {% if error == {} %}
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
+
+
+    <button type="button" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
+    <button type="button" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
+
+    
+
+    
+
+
+    <div class="table-responsive" id="yeartable">
+        <table class="table table table-striped ">
             <thead>
-                <tr>
-                    <th>Year</th>
+                <tr class="bg-primary text-white">
+                    <th scope="col">Year</th>
                     {% for year in range(timeframe|int +1) %}
                     
                     {% if (year * 12 ) in calc[0].keys() %}
-                    <th>{{ years + year }} </th>
+                    <th scope="col">{{ years + year }} </th>
                     {% endif %}
                     {% endfor %}
 
@@ -319,11 +352,11 @@
 
 
     {% if error == {} %}
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
+    <div class="table-responsive" id ="monthtable">
+        <table class="table table table-striped ">
             <thead>
-                <tr>
-                    <th>Month</th>
+                <tr class="bg-primary text-white">
+                    <th scope="col">Month</th>
                     {% for month in range((timeframe|int *12) + 1) %}
                     {% if (month) in calc[0].keys() %}
                     {%  set monthDict = {0 : "Jan",
@@ -338,7 +371,7 @@
                     9 : "Oct",
                     10 : "Nov",
                     11 : "Dec"} %}
-                    <th>{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}} </th>
+                    <th scope="col">{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}} </th>
                     {% endif %}
                     {% endfor %}
 
