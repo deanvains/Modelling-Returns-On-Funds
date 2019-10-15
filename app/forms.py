@@ -23,7 +23,7 @@ class calculationForm(FlaskForm):
     additionalContribution = StringField('Additional Contribution') 
     timeframe = StringField('Time Frame')
     savedata = BooleanField('Click the box to save your result.')
-    nickname = StringField('If saving this result, assign a nickname for it.')
+    nickname = StringField('If saving this result, assign a title for it.')
     submit = SubmitField(label='Calculate')
     expo = SubmitField(label='Export')
     

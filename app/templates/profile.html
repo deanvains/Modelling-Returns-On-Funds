@@ -1,7 +1,4 @@
-{% extends "base.html" %} 
-{% import 'bootstrap/wtf.html' as wtf %}
-
-{% block content %}
+{% extends "base.html" %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -11,88 +8,78 @@
         </div>
     </div>
     <style>
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
             border-collapse: collapse;
-            padding: 0px 10px ;
+            padding: 0px 10px;
         }
     </style>
     <table class="table table table-striped">
-            <tr class="bg-primary text-white">
-                <th scope="col">Result ID</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">User ID </th>
-                <th scope="col">Class</th>
-                <th scope="col">Timeframe</th>
-                <th scope="col">Interest Rate</th>
-            </tr>
-   
-   
-    {% for exp in expected %} {% if current_user.id == exp.user_id %}
-    
-    <div class="table-responsive">
-
-        <tr> 
-            <td>{{ exp.id }}</td>
-            <td>{{ exp.nickname}} </td>
-            <td>{{ exp.user_id }}</td>
-            <td>{{ exp.intclass }}</td>
-            <td>{{ exp.timeframe }}</td>
-            <td>{{ exp.interest }}</td>
-
+        <tr class="bg-primary text-white">
+            <th scope="col">Result ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">User ID </th>
+            <th scope="col">Class</th>
+            <th scope="col">Timeframe</th>
+            <th scope="col">Interest Rate</th>
         </tr>
-    
-    </div>
-    
-    {% endif %} {% endfor %}
+
+
+        {% for exp in expected %} {% if current_user.id == exp.user_id %}
+
+        <div class="table-responsive">
+
+            <tr>
+                <td>{{ exp.id }}</td>
+                <td>{{ exp.nickname}} </td>
+                <td>{{ exp.user_id }}</td>
+                <td>{{ exp.intclass }}</td>
+                <td>{{ exp.timeframe }}</td>
+                <td>{{ exp.interest }}</td>
+
+            </tr>
+
+        </div>
+
+        {% endif %} {% endfor %}
     </table>
     {% if error2 == True %}
     <span style="color: red;">
         <p> There was an error with your input. This usually occurs if you try to access data that does not exist, 
             or does not belong to you. If error persists, contacts administrators. </p>
-    </span>
-    {% endif %}
+    </span> {% endif %}
 
     <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            {{ wtf.form_field(form.rid, class='form-control') }}
-            <input type="submit" name='btn' value="Remove" class="btn btn-primary">
-            {% for error in form.rid.errors %}
-                <span style="color: red;">Selected post either does not belong to you or does not exist. </span> {% endfor %}
-            
-           
-        </form>
+        {{ form.hidden_tag() }} {{ wtf.form_field(form.rid, class='form-control') }}
+        <input type="submit" name='btn' value="Remove" class="btn btn-primary"> {% for error in form.rid.errors %}
+        <span style="color: red;">Selected post either does not belong to you or does not exist. </span> {% endfor %}
 
-        <form action="" method="post" novalidate class="mt-4">
-                {{ View.hidden_tag() }}
-                {{ wtf.form_field(View.storedid, class='form-control') }}
-                <input type="submit" name='btn' value="View" class="btn btn-primary">
-            {% for error in View.storedid.errors %}
-                    <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
-            </form>
+
+    </form>
+
+    <form action="" method="post" novalidate class="mt-4">
+        {{ View.hidden_tag() }} {{ wtf.form_field(View.storedid, class='form-control') }}
+        <input type="submit" name='btn' value="View" class="btn btn-primary"> {% for error in View.storedid.errors %}
+        <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
+    </form>
 
 
 
 
 
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-
-
-    {% if error == False %}
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> {% if error == False %}
     <button type="button" class="btn btn-primary mb-2" id="YearButton2">View Year Table</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton2">View Month Table</button>
     <div class="table-responsive" id="yeartable2">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Year</th>
-                    {% for year in range(timeframe|int +1) %}
-                    
-                    {% if (year * 12 ) in calc[0].keys() %}
+                    {% for year in range(timeframe|int +1) %} {% if (year * 12 ) in calc[0].keys() %}
                     <th>{{ years + year }} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -105,100 +92,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[2].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc[2][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass.lower() == 'e' or intclass.lower() == 'f' or intclass.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[3].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[4].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[5].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[3].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[4].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[5].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[3].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                    {% if year in calc[4].keys() %}
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %} {% if year in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
@@ -210,31 +179,15 @@
         </table>
     </div>
     {% endif %}
-    <br>
-
-    {% if error == False %}
+    <br> {% if error == False %}
     <div class="table-responsive" id="monthtable2">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Month</th>
-                    {% for month in range((timeframe|int *12) + 1) %}
-                    {% if (month) in calc[0].keys() %}
-                    {%  set monthDict = {0 : "Jan",
-                    1 : "Feb",
-                    2 : "Mar",
-                    3 : "Apr",
-                    4 : "May",
-                    5 : "Jun",
-                    6 : "Jul",
-                    7 : "Aug",
-                    8 : "Sep",
-                    9 : "Oct",
-                    10 : "Nov",
-                    11 : "Dec"} %}
+                    {% for month in range((timeframe|int *12) + 1) %} {% if (month) in calc[0].keys() %} {% set monthDict = {0 : "Jan", 1 : "Feb", 2 : "Mar", 3 : "Apr", 4 : "May", 5 : "Jun", 6 : "Jul", 7 : "Aug", 8 : "Sep", 9 : "Oct", 10 : "Nov", 11 : "Dec"} %}
                     <th>{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -247,100 +200,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[2].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc[2][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass.lower() == 'e' or intclass.lower() == 'f' or intclass.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[3].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[4].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[5].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[3].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[4].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[5].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if year in calc[3].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if year in calc[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    {% if month in calc[4].keys() %}
+                    {% for month in range((timeframe|int * 12) + 1) %} {% if month in calc[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for month in range((timeframe|int * 12) + 1) %}
@@ -357,48 +292,39 @@
 
     <br>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">What If Analysis</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-            </div>
+        <h1 class="h2">What If Analysis</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
         </div>
-        
-    <form action="" method="post" novalidate>
-            {{ Analyse.hidden_tag() }}
-            <p>
-                    {{ wtf.form_field(Analyse.stored1, class='form-control') }}
-                    {{ wtf.form_field(Analyse.stored2, class='form-control') }}
-                    <input type="submit" name='btn' value="Analyse" class="btn btn-primary" >
+    </div>
 
-                    <br> {% for error in Analyse.stored1.errors %}
-                <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
-            </p>
-            <p>
-                    <br> {% for error in Analyse.stored2.errors %}
-                <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
-            </p>
-        </form>
-    
+    <form action="" method="post" novalidate>
+        {{ Analyse.hidden_tag() }}
+        <p>
+            {{ wtf.form_field(Analyse.stored1, class='form-control') }} {{ wtf.form_field(Analyse.stored2, class='form-control') }}
+            <input type="submit" name='btn' value="Analyse" class="btn btn-primary">
+
+            <br> {% for error in Analyse.stored1.errors %}
+            <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
+        </p>
+        <p>
+            <br> {% for error in Analyse.stored2.errors %}
+            <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
+        </p>
     </form>
 
-    <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas>
+    </form>
 
-
-
-
-    {% if error == 'False3' %}
-        <button type="button" class="btn btn-primary mb-2" id="YearButton3">View Year Tables</button>
+    <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas> {% if error == 'False3' %}
+    <button type="button" class="btn btn-primary mb-2" id="YearButton3">View Year Tables</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton3">View Month Tables</button>
     <div class="table-responsive" id="yeartable3">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Year</th>
-                    {% for year in range(timeframe1|int +1) %}
-                    
-                    {% if (year * 12 ) in calc3[0].keys() %}
+                    {% for year in range(timeframe1|int +1) %} {% if (year * 12 ) in calc3[0].keys() %}
                     <th>{{ years1 + year }} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -411,100 +337,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[2].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[2][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass1.lower() == 'e' or intclass1.lower() == 'f' or intclass1.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[3].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[4].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[5].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass1.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[3].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[4].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[5].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[3].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                    {% if year in calc3[4].keys() %}
+                    {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %} {% if year in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
@@ -516,31 +424,15 @@
         </table>
     </div>
     {% endif %}
-    <br>
-
-    {% if error == 'False3' %}
+    <br> {% if error == 'False3' %}
     <div class="table-responsive" id="monthtable3">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Month</th>
-                    {% for month in range((timeframe1|int *12) + 1) %}
-                    {% if (month) in calc3[0].keys() %}
-                    {%  set monthDict = {0 : "Jan",
-                    1 : "Feb",
-                    2 : "Mar",
-                    3 : "Apr",
-                    4 : "May",
-                    5 : "Jun",
-                    6 : "Jul",
-                    7 : "Aug",
-                    8 : "Sep",
-                    9 : "Oct",
-                    10 : "Nov",
-                    11 : "Dec"} %}
+                    {% for month in range((timeframe1|int *12) + 1) %} {% if (month) in calc3[0].keys() %} {% set monthDict = {0 : "Jan", 1 : "Feb", 2 : "Mar", 3 : "Apr", 4 : "May", 5 : "Jun", 6 : "Jul", 7 : "Aug", 8 : "Sep", 9 : "Oct", 10 : "Nov", 11 : "Dec"} %}
                     <th>{{ monthDict[(months1 + month -1) % 12 ] }} {{ years1 + month//12}} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -553,100 +445,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[2].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[2][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass1.lower() == 'e' or intclass1.lower() == 'f' or intclass1.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[3].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[4].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[5].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass1.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[3].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[4].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[5].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if year in calc3[3].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if year in calc3[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[4].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for month in range((timeframe1|int * 12) + 1) %}
@@ -659,20 +533,15 @@
     </div>
     {% endif %}
 
-    <br>
-
-    {% if error == 'False3' %}
+    <br> {% if error == 'False3' %}
     <div class="table-responsive" id="yeartable3">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Year</th>
-                    {% for year in range(timeframe2|int +1) %}
-                    
-                    {% if (year * 12 ) in calc4[0].keys() %}
+                    {% for year in range(timeframe2|int +1) %} {% if (year * 12 ) in calc4[0].keys() %}
                     <th>{{ years2 + year }} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -685,100 +554,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[2].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[2][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass2.lower() == 'e' or intclass2.lower() == 'f' or intclass2.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[3].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[4].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[5].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass1.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[3].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[4].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[5].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[5][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[3].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                    {% if year in calc4[4].keys() %}
+                    {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %} {% if year in calc4[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[4][year]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
@@ -790,31 +641,15 @@
         </table>
     </div>
     {% endif %}
-    <br>
-
-    {% if error == 'False3' %}
+    <br> {% if error == 'False3' %}
     <div class="table-responsive" id="monthtable3">
-            <table class="table table table-striped ">
-                    <thead>
-                        <tr class="bg-primary text-white">
+        <table class="table table table-striped ">
+            <thead>
+                <tr class="bg-primary text-white">
                     <th>Month</th>
-                    {% for month in range((timeframe2|int *12) + 1) %}
-                    {% if (month) in calc4[0].keys() %}
-                    {%  set monthDict = {0 : "Jan",
-                    1 : "Feb",
-                    2 : "Mar",
-                    3 : "Apr",
-                    4 : "May",
-                    5 : "Jun",
-                    6 : "Jul",
-                    7 : "Aug",
-                    8 : "Sep",
-                    9 : "Oct",
-                    10 : "Nov",
-                    11 : "Dec"} %}
+                    {% for month in range((timeframe2|int *12) + 1) %} {% if (month) in calc4[0].keys() %} {% set monthDict = {0 : "Jan", 1 : "Feb", 2 : "Mar", 3 : "Apr", 4 : "May", 5 : "Jun", 6 : "Jul", 7 : "Aug", 8 : "Sep", 9 : "Oct", 10 : "Nov", 11 : "Dec"} %}
                     <th>{{ monthDict[(months2 + month -1) % 12 ] }} {{ years2 + month//12}} </th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
 
                 </tr>
             </thead>
@@ -827,100 +662,82 @@
                 </tr>
                 <tr>
                     <td>Interest Returns </td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[2].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[2].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[2][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <!---->
                 {% if intclass2.lower() == 'e' or intclass2.lower() == 'f' or intclass2.lower() == 'g' %}
                 <tr>
                     <td>Donations</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[3].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[4].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[5].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% elif intclass2.lower() == 'a' %}
                 <tr>
                     <td>Capital Distribution</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[3].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[4].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Recapitalization</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if month in calc4[5].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if month in calc4[5].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[5][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% else %}
                 <tr>
                     <td>Additonal Capital Contribution</td>
-                    {% for month in range((timeframe2|int * 12) + 1) %}
-                    {% if year in calc4[3].keys() %}
+                    {% for month in range((timeframe2|int * 12) + 1) %} {% if year in calc4[3].keys() %}
                     <th>{{ "${:,.2f}".format(calc4[3][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 <tr>
                     <td>Spending</td>
-                    {% for month in range((timeframe1|int * 12) + 1) %}
-                    {% if month in calc3[4].keys() %}
+                    {% for month in range((timeframe1|int * 12) + 1) %} {% if month in calc3[4].keys() %}
                     <th>{{ "${:,.2f}".format(calc3[4][month]) }} </th>
                     {% else %}
                     <th>$0.00</th>
-                    {% endif %}
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tr>
                 {% endif %}
-            
+
                 <tr>
                     <td>Closing Balance</td>
                     {% for month in range((timeframe2|int * 12) + 1) %}
@@ -932,9 +749,9 @@
         </table>
     </div>
     {% endif %}
-    
 
-    
+
+
 
 
 
@@ -948,19 +765,20 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [
-            {% for year in range(timeframe|int +1) %}
-                    "{{ years + year }}" ,
-                    {% endfor %}
+            labels: [{ %
+                    for year in range(timeframe | int + 1) %
+                }
+                "{{ years + year }}", { % endfor %
+                }
             ],
 
-            datasets: [
-            {
+            datasets: [{
                 label: 'Scenario 1',
-                data: [
-                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                "{{ (calc[1][year]) }}" ,
-                    {% endfor %}
+                data: [{ %
+                        for year in range(decMonth, timeframe | int * 12 + 1, 12) %
+                    }
+                    "{{ (calc[1][year]) }}", { % endfor %
+                    }
 
                 ],
                 lineTension: 0,
@@ -991,40 +809,40 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [
-            {% for year in range(timeframemax|int +1) %}
-                    "{{ years1 + year }}" ,
-                    {% endfor %}
+            labels: [{ %
+                    for year in range(timeframemax | int + 1) %
+                }
+                "{{ years1 + year }}", { % endfor %
+                }
             ],
 
             datasets: [{
                 label: 'Scenario 1',
-                data: [
-                {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
-                "{{ (calc3[1][year]) }}" ,
-                    {% endfor %}
+                data: [{ %
+                        for year in range(decMonth1, timeframe1 | int * 12 + 1, 12) %
+                    }
+                    "{{ (calc3[1][year]) }}", { % endfor %
+                    }
                 ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
-            }
-            ,
-            {
+            }, {
                 label: 'Scenario 2',
-                data: [
-                {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
-                "{{ (calc4[1][year]) }}" ,
-                    {% endfor %}
+                data: [{ %
+                        for year in range(decMonth2, timeframe2 | int * 12 + 1, 12) %
+                    }
+                    "{{ (calc4[1][year]) }}", { % endfor %
+                    }
                 ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#e2b600',
                 borderWidth: 4,
                 pointBackgroundColor: '#e2b600'
-            }
-            ]
+            }]
 
         },
         options: {
