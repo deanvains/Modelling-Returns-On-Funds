@@ -344,8 +344,8 @@ def profile():
     
     if Remove.validate_on_submit() and request.form['btn']=='Remove':
         error2=False
-        thisdata = str(Remove.rid.data)
-        temp = expected.query.filter_by(nickname=thisdata).first()
+        thisdata = Remove.rid.data
+        temp = expected.query.get(thisdata)
         if(temp != None and temp.user_id == current_user.id):
             db.session.delete(temp)
             db.session.commit()
@@ -358,8 +358,8 @@ def profile():
 
     if View.validate_on_submit() and request.form['btn']=='View':
         error2=False
-        data = expected.query.filter_by(nickname=View.storedid.data).first()
-        if(data != None and data.user_id == current_user.id and View.storedid.data == data.nickname):  
+        data = expected.query.get(View.storedid.data)
+        if(data != None and data.user_id == current_user.id and View.storedid.data == data.id):  
         
             month = str(data.month)
             intMonth = findMonth(month)
@@ -485,9 +485,9 @@ def profile():
     
     if Analyse.validate_on_submit() and request.form['btn']=='Analyse':
         error2 = False
-        data1 = expected.query.filter_by(nickname=Analyse.stored1.data).first()
-        data2 = expected.query.filter_by(nickname=Analyse.stored2.data).first()
-        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and Analyse.stored1.data == data1.nickname and Analyse.stored2.data == data2.nickname):    
+        data1 = expected.query.get(Analyse.stored1.data)
+        data2 = expected.query.get(Analyse.stored2.data)
+        if(data1 != None and data2 != None and data1.user_id == current_user.id and data2.user_id == current_user.id and Analyse.stored1.data == data1.id and Analyse.stored2.data == data2.id):    
             month1 = str(data1.month)
             intMonth1 = findMonth(month1)
             year1 = int(data1.year)

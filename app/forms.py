@@ -74,7 +74,7 @@ class InterestRatesForm(FlaskForm):
     submit = SubmitField('Submit')
     
 class RemovalForm(FlaskForm):
-    rid = StringField('Which result would you like to remove?')
+    rid = IntegerField('Which result would you like to remove?')
     submit = SubmitField('Submit')
 
 class makeAdmin(FlaskForm):
@@ -82,10 +82,10 @@ class makeAdmin(FlaskForm):
     submit = SubmitField('Submit')
 
 class storedSelect(FlaskForm):
-    storedid = StringField('Which result would you like to view?')
+    storedid = IntegerField('Which result would you like to view?')
     submit = SubmitField('Submit')
 
 class compForm(FlaskForm):
-    stored1 = StringField('Which is the first result you would to view?')
-    stored2 = StringField('Which is the second result you would to view?')
+    stored1 = IntegerField('Which is the first result you would to view?')
+    stored2 = IntegerField('Which is the second result you would to view?')
     submit = SubmitField('Submit')
