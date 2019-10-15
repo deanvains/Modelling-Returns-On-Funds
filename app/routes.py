@@ -29,7 +29,6 @@ def homepage():
 def calcs():
     
     if request.method == 'POST':
-        print(request.values)
         if 'submit' in request.values:
             form = calculationForm()
             if form.validate_on_submit():
@@ -326,7 +325,6 @@ def calcs():
                         
                     return render_template("calcs.html", title='Calculation Page', error = error,form=form,calc = [[0],[0]],timeframe = 0,years=0,decMonth = 0,spending = 0)                
         else:
-            print('here')
             form = calculationForm()
             return pdfGen(form.month.data,form.year.data,form.fundvalue.data,form.interestClass.data,form.donation.data,form.spending.data,form.recap.data,form.distribution.data,form.operatingDistribution.data,form.additionalContribution.data,form.timeframe.data)
 

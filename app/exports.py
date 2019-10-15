@@ -18,14 +18,21 @@ from calculations.ClassS import classS
 from calculations.findDec import findDec
 from calculations.calDynamic import calcDyn
 from calculations.calcMonth import calcMonths
+from calculations.findMonth import findMonth
 from app.models import User, InterestRates, expected
 
-def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distribution,operatingDistribution,additionalContribution,timeframe):
+def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,operatingDistribution,additionalContribution,timeframe):
 	#Check the inputs
 	month = month.strip()
+	intMonth = findMonth(month)
+	if len(year) != 4 or year.isdigit() == False :
+		raise Exception("Invalid Years")
+	year = int(year)
+	value = int(value)
 	fprofile = None
-	interest = InterestRates.query.first()
 	intclass = interestClass.strip()
+	interest = InterestRates.query.first()
+	timeframe = int(timeframe)
 	
 	if donation == '' or donation == '0':
 		donation = {}
@@ -34,16 +41,14 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
-			if len(grpLst) == 3 :
-				monthVal = grpLst[0].strip().lower()
-				yearVal = grpLst[1].strip()
-				if yearVal.isdigit() == True :
-					if int(yearVal) < int(yearValue) :
-						raise Exception("Year 2 is lower than year 1")
-					else:
-						yearValue = yearVal
+			monthVal = grpLst[0].strip().lower()
+			yearVal = grpLst[1].strip()
+			if yearVal.isdigit() == True :
+				if int(yearVal) < int(yearValue) :
+					raise Exception("Year 2 is lower than year 1")
+				else:
+					yearValue = yearVal
 		donation = calcDyn(donation,month,year,timeframe)
-
 	if spending == '' or spending == '0' :
 		spending = {}
 	else:
@@ -51,16 +56,14 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
-			if len(grpLst) == 3 :
-				monthVal = grpLst[0].strip().lower()
-				yearVal = grpLst[1].strip()
-				if yearVal.isdigit() == True :
-					if int(yearVal) < int(yearValue) :
-						raise Exception("Year 2 is lower than year 1")
-					else:
-						yearValue = yearVal
-		spending = calcDyn(spending,month,year,timeframe)
-
+			monthVal = grpLst[0].strip().lower()
+			yearVal = grpLst[1].strip()
+			if yearVal.isdigit() == True :
+				if int(yearVal) < int(yearValue) :
+					raise Exception("Year 2 is lower than year 1")
+				else:
+					yearValue = yearVal
+				spending = calcDyn(spending,month,year,timeframe)
 	if recap == '' or recap == '0':
 		recap = {}
 	else:
@@ -68,16 +71,14 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
-			if len(grpLst) == 3 :
-				monthVal = grpLst[0].strip().lower()
-				yearVal = grpLst[1].strip()
-				if yearVal.isdigit() == True :
-					if int(yearVal) < int(yearValue) :
-						raise Exception("Year 2 is lower than year 1")
-					else:
-						yearValue = yearVal
-		recap = calcDyn(recap,month,year,timeframe)
-
+			monthVal = grpLst[0].strip().lower()
+			yearVal = grpLst[1].strip()
+			if yearVal.isdigit() == True :
+				if int(yearVal) < int(yearValue) :
+					raise Exception("Year 2 is lower than year 1")
+				else:
+					yearValue = yearVal
+				recap = calcDyn(recap,month,year,timeframe)
 	if operatingDistribution == '' or operatingDistribution == '0' :
 		operatingDistribution = {}
 	else:
@@ -85,17 +86,15 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
-			if len(grpLst) == 3 :
-				monthVal = grpLst[0].strip().lower()
-				yearVal = grpLst[1].strip()
-				
-				if yearVal.isdigit() == True :
-					if int(yearVal) < int(yearValue) :
-						raise Exception("Year 2 is lower than year 1")
-					else:
-						yearValue = yearVal
-		operatingDistribution = calcDyn(operatingDistribution,month,year,timeframe)
-
+			monthVal = grpLst[0].strip().lower()
+			yearVal = grpLst[1].strip()
+		
+			if yearVal.isdigit() == True :
+				if int(yearVal) < int(yearValue) :
+					raise Exception("Year 2 is lower than year 1")
+				else:
+					yearValue = yearVal
+				operatingDistribution = calcDyn(operatingDistribution,month,year,timeframe)
 	if additionalContribution == '' or additionalContribution == '0':
 		addContribution = {}
 	else:
@@ -103,46 +102,45 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
-			if len(grpLst) == 3 :
-				monthVal = grpLst[0].strip().lower()
-				yearVal = grpLst[1].strip()
-				if yearVal.isdigit() == True :
-					if int(yearVal) < int(yearValue) :
-						raise Exception("Year 2 is lower than year 1")
-					else:
-						yearValue = yearVal
-		addContribution = calcDyn(additionalContribution,month,year,timeframe)
+			monthVal = grpLst[0].strip().lower()
+			yearVal = grpLst[1].strip()
+			if yearVal.isdigit() == True :
+				if int(yearVal) < int(yearValue) :
+					raise Exception("Year 2 is lower than year 1")
+				else:
+					yearValue = yearVal
+				addContribution = calcDyn(additionalContribution,month,year,timeframe)
 	decMonth = findDec(month)
 
 	#Perform the correct calculation
 	if intclass == "E":
 		thisinterest = interest.ClassE
-		calc = classE(month,year,fundvalue,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
+		calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
 	elif intclass == "F":
 		thisinterest = interest.ClassF
-		calc = classF(month,year,fundvalue,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+		calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
 	elif intclass == "G" :
 		thisinterest = interest.ClassG
-		calc = classG(month,year,fundvalue,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+		calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
 	elif(intclass == "H"):
 		thisinterest = interest.ClassH
-		calc = classH(month,year,fundvalue,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+		calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 	elif intclass == "A":
 		thisinterest = interest.ClassA
-		calc = classA(month,year,fundvalue,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
+		calc = classA(month,year,value,fprofile,intclass,thisinterest,spending,recap,operatingDistribution,timeframe)
 	elif(intclass == "N"):
 		thisinterest = interest.ClassN
-		calc = classN(month,year,fundvalue,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+		calc = classN(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 	elif(intclass == "Q"):
 		thisinterest = interest.ClassQ
-		calc = classQ(month,year,fundvalue,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+		calc = classQ(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
 	elif(intclass == "S"):
 		thisinterest = interest.ClassS
-		calc = classS(month,year,fundvalue,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
-
+		calc = classS(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
+	
 	#This is getting disgustingly long, bad coding mate
 	monthlist = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-	horiz = []
+	horiz = ['Jan']
 	horiz[0] = monthlist[11 - decMonth]
 	for k in range(len(calc[1])) :
 		if k == len(calc[1])/12 :
@@ -150,15 +148,25 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 		else :
 			horiz.append('')
 	
-
-
+	start = calc[2][0]
+	opCalc = []
+	clCalc = []
+	for t in range(0,timeframe*12,12) :
+		opCalc.append(calc[0][start+t])
+		clCalc.append(calc[1][start+t])
+	data = []
+	tuple(opCalc)
+	tuple(clCalc)
+	data.append(opCalc)
+	data.append(clCalc)
+	tuple(data)
 	#Create the PDF file
 	import io
 	output = io.BytesIO()
 
 	c = canvas.Canvas(output)
-
-	c.drawString(100,100,"Hello World")
+	
+	
 	c.setFillColor(HexColor("#332FA7"))
 	c.rect(0, 765, 600, 80, stroke =0, fill = 1)
 	c.setFillColor(HexColor("#FCD433"))
@@ -181,21 +189,22 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recap,distributi
 	#logo = Image.open("/static/UWA-Logo.png")
 
 	#c.drawImage("UWA-Logo.png",100,100)
-
-
-
+	print(len(calc))
+	print(calc)
+	print('jeff please')
+	print(data)
 	maxY = 0
-	for i in range(len(calc[1])):
+	for i in range(len(calc[0])):
 		if calc[1][i] > maxY :
-			maxY = calc[1][i]
+			maxY = calc[0][i]
 
 	drawing = Drawing(400,200)
 	lc = HorizontalLineChart()
 	lc.x = 50
 	lc.y = 50
-	lc.height = 300
-	lc.width = 500
-	lc.data = calc
+	lc.height = 125
+	lc.width = 300
+	lc.data = data
 	lc.joinedLines = 1
 	catNames = 'Jan Feb Mar Apr May Jun Jul Aug'.split(' ')
 	lc.categoryAxis.categoryNames = catNames
