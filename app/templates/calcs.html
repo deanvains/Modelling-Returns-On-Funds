@@ -8,6 +8,7 @@
         <h1 class="h2">Calculator </h1>
     </div>
 
+    <p> Please select an account type:</p>
     <button type="button" class="btn btn-primary" id="formButton">Capital Account</button>
 
     <button type="button" class="btn btn-primary" id="formButton2">Operating Account</button>
@@ -206,11 +207,26 @@
         </div>
     </div>
 
-    <canvas class="my-4 w-100" id="myChartyear" width="900" height="380"></canvas>
-    <canvas class="my-4 w-100" id="myChartmonth" width="900" height="380"></canvas>
+    <p>Results are shown here after calculation.</p>
+
+
+
+ 
 
     {% if error == {} %}
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <canvas class="my-4 w-100" id="myChart" width="450" height="380"></canvas>
+
+            </div>
+            <div class="col-lg-6">
+                <canvas class="my-4 w-100" id="myChart2" width="450" height="380"></canvas>
+
+            </div>
+        </div>
+    </div>
 
     <button type="button" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
@@ -499,9 +515,51 @@
 <!-- Graphs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
-    var ctxyear = document.getElementById("myChartyear");
-    var myChartyear = new Chart(ctxyear, {
+    var ctx = document.getElementById("myChart");
+    var ctx2 = document.getElementById("myChart2");
+
+    var myChart = new Chart(ctx, {
         type: 'line',
+        data: {
+            labels: [
+            {% for year in range(timeframe|int +1) %}
+                    "{{ years + year }}" ,
+                    {% endfor %}
+            ],
+
+            datasets: [{
+                label: 'Closing Balances',
+                data: [
+                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                "{{ (calc[1][year]) }}" ,
+                    {% endfor %}
+
+                ,],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+
+            
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+            }
+        }
+    });
+
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
         data: {
             labels: [
             {% for year in range(timeframe|int +1) %}
@@ -528,7 +586,11 @@
         },
         options: {
             scales: {
+                xAxes: [{
+                stacked: true
+            }],
                 yAxes: [{
+                    stacked: true,
                     ticks: {
                         beginAtZero: false
                     }
@@ -540,65 +602,6 @@
         }
     });
 
-
-    //month graph
-
-
-    var ctxmonth = document.getElementById("myChartmonth");
-    var myChartmonth = new Chart(ctxmonth, {
-        type: 'line',
-        data: {
-            labels: [
-            {% for month in range((timeframe|int *12) + 1) %}
-                    {% if (month) in calc[0].keys() %}
-                    {%  set monthDict = {0 : "Jan",
-                    1 : "Feb",
-                    2 : "Mar",
-                    3 : "Apr",
-                    4 : "May",
-                    5 : "Jun",
-                    6 : "Jul",
-                    7 : "Aug",
-                    8 : "Sep",
-                    9 : "Oct",
-                    10 : "Nov",
-                    11 : "Dec"} %}
-                    "{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}}",
-                    {% endif %}
-                    {% endfor %}
-
-            ],
-
-            datasets: [{
-                label: 'Closing Balances',
-                data: [
-                {% for month in range((timeframe|int * 12) + 1) %}
-                    "{{(calc[1][month]) }}",
-                    {% endfor %}
-
-                ],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-
-            
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: true,
-            }
-        }
-    });
 </script>
 
 {% endblock %}
