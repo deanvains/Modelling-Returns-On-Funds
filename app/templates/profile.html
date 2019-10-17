@@ -765,20 +765,19 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [{ %
-                    for year in range(timeframe | int + 1) %
-                }
-                "{{ years + year }}", { % endfor %
-                }
+            labels: [
+            {% for year in range(timeframe|int +1) %}
+                    "{{ years + year }}" ,
+                    {% endfor %}
             ],
 
-            datasets: [{
+            datasets: [
+            {
                 label: 'Scenario 1',
-                data: [{ %
-                        for year in range(decMonth, timeframe | int * 12 + 1, 12) %
-                    }
-                    "{{ (calc[1][year]) }}", { % endfor %
-                    }
+                data: [
+                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                "{{ (calc[1][year]) }}" ,
+                    {% endfor %}
 
                 ],
                 lineTension: 0,
@@ -809,40 +808,40 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [{ %
-                    for year in range(timeframemax | int + 1) %
-                }
-                "{{ years1 + year }}", { % endfor %
-                }
+            labels: [
+            {% for year in range(timeframemax|int +1) %}
+                    "{{ years1 + year }}" ,
+                    {% endfor %}
             ],
 
             datasets: [{
                 label: 'Scenario 1',
-                data: [{ %
-                        for year in range(decMonth1, timeframe1 | int * 12 + 1, 12) %
-                    }
-                    "{{ (calc3[1][year]) }}", { % endfor %
-                    }
+                data: [
+                {% for year in range(decMonth1,timeframe1|int * 12 + 1, 12) %}
+                "{{ (calc3[1][year]) }}" ,
+                    {% endfor %}
                 ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
-            }, {
+            }
+            ,
+            {
                 label: 'Scenario 2',
-                data: [{ %
-                        for year in range(decMonth2, timeframe2 | int * 12 + 1, 12) %
-                    }
-                    "{{ (calc4[1][year]) }}", { % endfor %
-                    }
+                data: [
+                {% for year in range(decMonth2,timeframe2|int * 12 + 1, 12) %}
+                "{{ (calc4[1][year]) }}" ,
+                    {% endfor %}
                 ],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#e2b600',
                 borderWidth: 4,
                 pointBackgroundColor: '#e2b600'
-            }]
+            }
+            ]
 
         },
         options: {
