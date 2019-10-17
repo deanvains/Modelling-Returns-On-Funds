@@ -20,7 +20,6 @@
         <tr class="bg-primary text-white">
             <th scope="col">Result ID</th>
             <th scope="col">Title</th>
-            <th scope="col">User ID </th>
             <th scope="col">Class</th>
             <th scope="col">Timeframe</th>
             <th scope="col">Interest Rate</th>
@@ -34,7 +33,6 @@
             <tr>
                 <td>{{ exp.id }}</td>
                 <td>{{ exp.nickname}} </td>
-                <td>{{ exp.user_id }}</td>
                 <td>{{ exp.intclass }}</td>
                 <td>{{ exp.timeframe }}</td>
                 <td>{{ exp.interest }}</td>
@@ -313,10 +311,12 @@
     </form>
 
     </form>
-
+    <!-- scenario 1 -->
+    
     <canvas class="my-4 w-100" id="myChart2" width="900" height="380"></canvas> {% if error == 'False3' %}
     <button type="button" class="btn btn-primary mb-2" id="YearButton3">View Year Tables</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton3">View Month Tables</button>
+    <h1>Scenario 1- {{title1}}</h1>
     <div class="table-responsive" id="yeartable3">
         <table class="table table table-striped ">
             <thead>
@@ -532,7 +532,8 @@
         </table>
     </div>
     {% endif %}
-
+    <!-- scenario 2 -->
+    <h1>Scenario 2 - {{title2}}</h1>
     <br> {% if error == 'False3' %}
     <div class="table-responsive" id="yeartable3">
         <table class="table table table-striped ">

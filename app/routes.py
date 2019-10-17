@@ -495,6 +495,7 @@ def profile():
             intclass1 = str(data1.intclass)
             thisinterest1 = float(data1.interest)
             spending1 = data1.spending
+            title1 = str(data1.nickname)
             fprofile = None
             timeframe1 = int(data1.timeframe)
             distribution1 = float(data1.distribution)
@@ -615,6 +616,7 @@ def profile():
             month2 = str(data2.month)
             intMonth2 = findMonth(month2)
             year2 = int(data2.year)
+            title2 = str(data2.nickname)
             
             value2 = int(data2.value)
             intclass2 = str(data2.intclass)
@@ -740,14 +742,14 @@ def profile():
             # find greatest years
             
             
-            return render_template("profile.html", title='Profile', expected=expected.query.all(), timeframemax=timeframemax, form=Remove, View=View,Analyse=Analyse, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,intclass1 = intclass1,intclass2 = intclass2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = 'False3', error2=error2,months1 = intMonth1,months2 = intMonth2)
+            return render_template("profile.html", title='Profile', title1=title1, title2=title2, expected=expected.query.all(), timeframemax=timeframemax, form=Remove, View=View,Analyse=Analyse, calc=[[0],[0]],calc3=calc3, calc4=calc4, timeframe=0,years=0,decMonth=0, timeframe1 = timeframe1, timeframe2=timeframe2,intclass1 = intclass1,intclass2 = intclass2,years1=year1,years2=year2,decMonth1 = decMonth1,decMonth2 = decMonth2,spending1 = spending1,spending2 = spending2,error = 'False3', error2=error2,months1 = intMonth1,months2 = intMonth2)
             
         else:   
             error2 = True
-            return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=year,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', title1=0, title2=0,expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=year,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
 
     error2=False
-    return render_template("profile.html", title='Profile', expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2= 0,error = {}, error2=error2)
+    return render_template("profile.html", title='Profile',title1=0, title2=0, expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2= 0,error = {}, error2=error2)
 
 
 @app.route('/signin', methods=['GET', 'POST'])
@@ -783,16 +785,31 @@ def register():
 
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
-	form = ResetPassword()
-	if form.validate_on_submit():
-		user = User.query.filter_by(username=form.username.data).first()
-		if user is None or not user.check_password(form.currentPassword.data):
-			flash('Invalid username or current password')
-			return redirect(url_for('reset'))
-		user.set_password(form.newPassword.data)
-		db.session.commit()
-		return redirect(url_for('signin'))
-	return render_template('reset.html', title='Reset Password', form=form)
+    form = ResetPassword()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if (user == None):
+            return render_template('reset.html', title='Reset Password', form=form, error = True, error2 =False)
+        elif (user!=None and not user.check_password(form.currentPassword.data)):
+            return render_template('reset.html', title='Reset Password', form=form, error = True, error2 =False)
+
+
+        if (form.newPassword.data == form.newPassword2.data):
+            user.set_password(form.newPassword.data)
+            db.session.commit()
+            return redirect(url_for('reset'))
+        else:
+            return render_template('reset.html', title='Reset Password', form=form, error = False, error2 =True)
+    return render_template('reset.html', title='Reset Password', form=form, error = False, error2 =False)
+
+
+
+	# 	if user is None or not user.check_password(form.currentPassword.data):
+	# 		return redirect(url_for('reset'))
+	# 	user.set_password(form.newPassword.data)
+	# 	db.session.commit()
+	# 	return redirect(url_for('signin'))
+	# return render_template('reset.html', title='Reset Password', form=form)
 
 
 @app.route('/logout')
@@ -846,13 +863,18 @@ def makeadmin():
 
 @app.route('/adminreset', methods=['GET', 'POST'])
 def adminreset():
-	form = ForgottenPassword()
-	if form.validate_on_submit():
-		user = User.query.filter_by(username=form.username.data).first()
-		user.set_password(form.newPassword.data)
-		db.session.commit()
-		return redirect(url_for('homepage'))
-	return render_template('adminreset.html', title='Forgotten Password', form=form)
+    form = ResetPassword()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if (user != None):
+            if (form.newPassword.data != form.newPassword2.data):
+                 return render_template('adminreset.html', title='Forgotten Password', form=form, error = False, error2 =True)
+            user.set_password(form.newPassword.data)
+            db.session.commit()
+            return redirect(url_for('homepage'))
+        else:
+            return render_template('adminreset.html', title='Forgotten Password', form=form, error = True, error2 =False)
+    return render_template('adminreset.html', title='Forgotten Password', form=form, error = False, error2 =False)
 
 @app.route('/userlist', methods=['GET', 'POST'])
 def userlist():
