@@ -6,7 +6,6 @@ from reportlab.lib.colors import Color, blue, red, yellow, green, brown, white, 
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import Table, TableStyle, Image, SimpleDocTemplate
 from flask import make_response
-from pathlib import Path
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
 from PIL import Image
 from math import ceil
@@ -186,11 +185,10 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	textobject.setFillGray(0.4)
 	c.drawText(textobject)
 
-	path = str(Path(__file__).parent)
-	
-	logo = Image.open(path+"/static/UWA-Logo.png")
 
-	c.drawImage(path+"/static/UWA-Logo.png",100,100)
+	#logo = Image.open("/static/UWA-Logo.png")
+
+	#c.drawImage("UWA-Logo.png",100,100)
 
 	maxY = 0
 	for i in range(len(calc[0])):
