@@ -7,7 +7,11 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Register New User </h1>
             </div>
-
+            {% if error %}
+                <p><span style="color:red">User already exists. Please choose another username.</span></p>
+            {% elif error2 %}
+                <p><span style="color:red">Passwords do not match.</span></p>
+            {% endif %}
                     <form class="form form-horizontal" method="post" role="form">        
                             {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                         </form>

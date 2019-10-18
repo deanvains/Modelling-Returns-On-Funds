@@ -209,32 +209,18 @@
 
     <p>Results are shown here after calculation.</p>
 
-
-
- 
-
     {% if error == {} %}
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <canvas class="my-4 w-100" id="myChart" width="450" height="380"></canvas>
-
-            </div>
-            <div class="col-lg-6">
-                <canvas class="my-4 w-100" id="myChart2" width="450" height="380"></canvas>
-
-            </div>
+                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
         </div>
     </div>
 
     <button type="button" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
-
-    
-
-    
-
+    <button type="button" onclick="lineChart()" class="btn btn-primary mb-2" id="LineButton">View as Line Graph</button>
+    <button type="button" onclick="barChart()" class="btn btn-primary mb-2" id="BarButton">View Bar Graph</button>
 
     <div class="table-responsive" id="yeartable">
         <table class="table table table-striped ">
@@ -515,36 +501,39 @@
 <!-- Graphs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById("myChart");
-    var ctx2 = document.getElementById("myChart2");
-
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [
-            {% for year in range(timeframe|int +1) %}
+    var canvas = document.getElementById("myChart");
+    var monthdatalabels = [];
+    var yeardatalabels = [
+                    {% for year in range(timeframe|int +1) %}
                     "{{ years + year }}" ,
-                    {% endfor %}
-            ],
-
+                    {% endfor %}];
+    var yeardata = [ 
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    "{{ (calc[1][year]) }}" ,
+                    {% endfor %}];
+    var monthdata = [
+                    {% for month in range((timeframe|int * 12) + 1) %}
+                    "{{ (calc[1][month]) }}" ,
+                    {% endfor %}];
+    
+    var ctx = canvas.getContext('2d');
+    // We are only changing the chart type, so let's make that a global variable along with the chart object:
+    var chartType = 'line';
+    var mylineChart;
+    var data = {
+            labels: yeardatalabels,
             datasets: [{
                 label: 'Closing Balances',
-                data: [
-                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                "{{ (calc[1][year]) }}" ,
-                    {% endfor %}
-
-                ,],
+                data: yeardata,
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
             }]
+        };
 
-            
-        },
-        options: {
+    var options = {
             scales: {
                 yAxes: [{
                     ticks: {
@@ -555,52 +544,30 @@
             legend: {
                 display: true,
             }
-        }
-    });
+        };
 
-    var myChart2 = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: [
-            {% for year in range(timeframe|int +1) %}
-                    "{{ years + year }}" ,
-                    {% endfor %}
-            ],
+    init();
 
-            datasets: [{
-                label: 'Closing Balances',
-                data: [
-                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                "{{ (calc[1][year]) }}" ,
-                    {% endfor %}
+    function init() {
+    // Chart declaration:
+        mylineChart = new Chart(ctx, {
+            type: chartType,
+            data: data,
+            options: options
+        });
+    }
 
-                ],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
+    function barChart() {
+        mylineChart.destroy();
+        this.chartType = 'bar';
+        init();
+    }
 
-            
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                stacked: true
-            }],
-                yAxes: [{
-                    stacked: true,
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: true,
-            }
-        }
-    });
+    function lineChart() {
+        mylineChart.destroy();
+        this.chartType = 'line';
+        init();
+    }
 
 </script>
 

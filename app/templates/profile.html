@@ -2,6 +2,17 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="mt-4">
+    {% if error2 == True %}
+    <span style="color: red;">
+        <p> There was an error with your input. This usually occurs if you try to access data that does not exist, 
+            or does not belong to you. If error persists, contacts administrators. </p>
+    </span> {% endif %}
+    <br> {% for error in Analyse.stored1.errors %}
+    <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
+    <br> {% for error in Analyse.stored2.errors %}
+    <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
+</div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Stored Results</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -43,11 +54,6 @@
 
         {% endif %} {% endfor %}
     </table>
-    {% if error2 == True %}
-    <span style="color: red;">
-        <p> There was an error with your input. This usually occurs if you try to access data that does not exist, 
-            or does not belong to you. If error persists, contacts administrators. </p>
-    </span> {% endif %}
 
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }} {{ wtf.form_field(form.rid, class='form-control') }}
@@ -67,7 +73,7 @@
 
 
 
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> {% if error == False %}
+    <canvas class="my-4 w-100" id="my   " width="900" height="380"></canvas> {% if error == False %}
     <button type="button" class="btn btn-primary mb-2" id="YearButton2">View Year Table</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton2">View Month Table</button>
     <div class="table-responsive" id="yeartable2">
@@ -300,13 +306,6 @@
         <p>
             {{ wtf.form_field(Analyse.stored1, class='form-control') }} {{ wtf.form_field(Analyse.stored2, class='form-control') }}
             <input type="submit" name='btn' value="Analyse" class="btn btn-primary">
-
-            <br> {% for error in Analyse.stored1.errors %}
-            <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
-        </p>
-        <p>
-            <br> {% for error in Analyse.stored2.errors %}
-            <span style="color: red;">Selected post either does not belong to you or does not exist.</span> {% endfor %}
         </p>
     </form>
 

@@ -746,7 +746,7 @@ def profile():
             
         else:   
             error2 = True
-            return render_template("profile.html", title='Profile', title1=0, title2=0,expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=year,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
+            return render_template("profile.html", title='Profile', title1=0, title2=0,expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[1],[0]], calc4=[[1],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2 = 0,error = {}, error2=error2)
 
     error2=False
     return render_template("profile.html", title='Profile',title1=0, title2=0, expected=expected.query.all(),timeframemax=0, form=Remove, View=View, Analyse=Analyse, calc = [[0],[0]],calc3=[[0],[0]], calc4=[[0],[0]],timeframe=0,years=0,decMonth=0,timeframe1 = 0,years1=0,decMonth1 = 0,spending1 = 0,timeframe2 = 0,years2=0,decMonth2 = 0,spending2= 0,error = {}, error2=error2)
@@ -775,12 +775,19 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('signin'))
-    return render_template('register.html', title='Register New User', form=form)
+        exists = User.query.filter_by(username=form.username.data).first()
+        if exists!=None:
+            return render_template('register.html', title='Register New User', form=form, error=True, error2=False)
+        elif form.password.data != form.password2.data:
+            return render_template('register.html', title='Register New User', form=form, error=False, error2=True)
+
+        else:
+            user = User(username=form.username.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('signin'))
+    return render_template('register.html', title='Register New User', form=form, error=False, error2=False)
 
 
 @app.route('/reset', methods=['GET', 'POST'])
@@ -792,8 +799,6 @@ def reset():
             return render_template('reset.html', title='Reset Password', form=form, error = True, error2 =False)
         elif (user!=None and not user.check_password(form.currentPassword.data)):
             return render_template('reset.html', title='Reset Password', form=form, error = True, error2 =False)
-
-
         if (form.newPassword.data == form.newPassword2.data):
             user.set_password(form.newPassword.data)
             db.session.commit()
