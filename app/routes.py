@@ -808,15 +808,6 @@ def reset():
     return render_template('reset.html', title='Reset Password', form=form, error = False, error2 =False)
 
 
-
-	# 	if user is None or not user.check_password(form.currentPassword.data):
-	# 		return redirect(url_for('reset'))
-	# 	user.set_password(form.newPassword.data)
-	# 	db.session.commit()
-	# 	return redirect(url_for('signin'))
-	# return render_template('reset.html', title='Reset Password', form=form)
-
-
 @app.route('/logout')
 def logout():
     logout_user()

@@ -217,8 +217,8 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
-    <button type="button" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
+    <button type="button" onclick="yearChart()" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
+    <button type="button" onclick="monthChart()" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
     <button type="button" onclick="lineChart()" class="btn btn-primary mb-2" id="LineButton">View as Line Graph</button>
     <button type="button" onclick="barChart()" class="btn btn-primary mb-2" id="BarButton">View Bar Graph</button>
 
@@ -502,7 +502,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
     var canvas = document.getElementById("myChart");
-    var monthdatalabels = [];
+    var monthdatalabels = [
+            {% if error == {} %}
+                    {% for month in range((timeframe|int *12) + 1) %}
+                    {% if (month) in calc[0].keys() %}
+                        {%  set monthDict = {0 : "Jan",
+                        1 : "Feb",
+                        2 : "Mar",
+                        3 : "Apr",
+                        4 : "May",
+                        5 : "Jun",
+                        6 : "Jul",
+                        7 : "Aug",
+                        8 : "Sep",
+                        9 : "Oct",
+                        10 : "Nov",
+                        11 : "Dec"} %}
+                        "{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}}" ,
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    ];
+
     var yeardatalabels = [
                     {% for year in range(timeframe|int +1) %}
                     "{{ years + year }}" ,
@@ -517,14 +538,26 @@
                     {% endfor %}];
     
     var ctx = canvas.getContext('2d');
-    // We are only changing the chart type, so let's make that a global variable along with the chart object:
+    
     var chartType = 'line';
     var mylineChart;
-    var data = {
+    var datayear = {
             labels: yeardatalabels,
             datasets: [{
                 label: 'Closing Balances',
                 data: yeardata,
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        };
+    var datamonth = {
+            labels: monthdatalabels,
+            datasets: [{
+                label: 'Closing Balances',
+                data: monthdata,
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
@@ -552,11 +585,20 @@
     // Chart declaration:
         mylineChart = new Chart(ctx, {
             type: chartType,
-            data: data,
+            data: datayear,
             options: options
         });
     }
-
+    function yearChart() {
+        mylineChart.destroy();
+        this.data = datayear;
+        init();
+    }
+    function monthChart() {
+        mylineChart.destroy();
+        this.data = datamonth;
+        init();
+    }
     function barChart() {
         mylineChart.destroy();
         this.chartType = 'bar';
