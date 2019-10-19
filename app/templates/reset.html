@@ -6,7 +6,12 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Reset Password</h1>
     </div>
-
+    {% if error == True %}
+    <p><span style="color:red">Invalid user or password.</span></p>
+    
+    {% elif error2 == True %}
+    <p><span style="color:red">Passwords do not match.</span></p>
+    {% endif %}
             <form class="form form-horizontal" method="post" role="form">        
                {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                 </form>

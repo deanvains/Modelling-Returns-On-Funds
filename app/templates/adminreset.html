@@ -11,9 +11,16 @@
     </div>
 
     <p> Reset passwords for users who have forgotten their passwords. </p>
-
-            <form class="form form-horizontal" method="post" role="form">        {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
+    {% if error == True %}
+    <p><span style="color:red">This user does not exist.</span></p>
+    
+    {% elif error2 == True %}
+    <p><span style="color:red">Passwords do not match.</span></p>
+    {% endif %}
+            <form class="form form-horizontal" method="post" role="form">        
+                {{ wtf.quick_form(form, action=".", method="post", extra_classes=None, role="form", form_type="basic", horizontal_columns=('lg', 2, 10), enctype=None, button_map={'submit':'primary'}, id="")}}
                 </form>
+ 
               
 </main>
 {% endblock %}

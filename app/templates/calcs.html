@@ -8,6 +8,7 @@
         <h1 class="h2">Calculator </h1>
     </div>
 
+    <p> Please select an account type:</p>
     <button type="button" class="btn btn-primary" id="formButton">Capital Account</button>
 
     <button type="button" class="btn btn-primary" id="formButton2">Operating Account</button>
@@ -56,7 +57,7 @@
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
 
                     <p class="font-weight-light"> 
-                        Intrest Classes:
+                        Interest Classes:
                         - Long Term Pool: E, F,G.
                         - Medium Term Pool: H
                         - Short Term Pool: A, N, Q
@@ -86,7 +87,7 @@
                     <p><span style="color: red;">There are errors with the Spending Field, Please check again</span></p>
                 {% endif %}
 
-                <p>Spending profile of the funds over the duration of the timeframe.</p>
+                <p class="font-weight-light">Spending profile of the funds over the duration of the timeframe.</p>
 
             </div>
 
@@ -206,18 +207,20 @@
         </div>
     </div>
 
-    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    <p>Results are shown here after calculation.</p>
 
     {% if error == {} %}
 
+    <div class="container">
+        <div class="row">
+                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+        </div>
+    </div>
 
-    <button type="button" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
-    <button type="button" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
-
-    
-
-    
-
+    <button type="button" onclick="yearChart()" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
+    <button type="button" onclick="monthChart()" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
+    <button type="button" onclick="lineChart()" class="btn btn-primary mb-2" id="LineButton">View as Line Graph</button>
+    <button type="button" onclick="barChart()" class="btn btn-primary mb-2" id="BarButton">View Bar Graph</button>
 
     <div class="table-responsive" id="yeartable">
         <table class="table table table-striped ">
@@ -498,34 +501,72 @@
 <!-- Graphs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [
-            {% for year in range(timeframe|int +1) %}
-                    "{{ years + year }}" ,
+    var canvas = document.getElementById("myChart");
+    var monthdatalabels = [
+            {% if error == {} %}
+                    {% for month in range((timeframe|int *12) + 1) %}
+                    {% if (month) in calc[0].keys() %}
+                        {%  set monthDict = {0 : "Jan",
+                        1 : "Feb",
+                        2 : "Mar",
+                        3 : "Apr",
+                        4 : "May",
+                        5 : "Jun",
+                        6 : "Jul",
+                        7 : "Aug",
+                        8 : "Sep",
+                        9 : "Oct",
+                        10 : "Nov",
+                        11 : "Dec"} %}
+                        "{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}}" ,
+                        {% endif %}
                     {% endfor %}
-            ],
+                    {% endif %}
+                    ];
 
+    var yeardatalabels = [
+                    {% for year in range(timeframe|int +1) %}
+                    "{{ years + year }}" ,
+                    {% endfor %}];
+    var yeardata = [ 
+                    {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
+                    "{{ (calc[1][year]) }}" ,
+                    {% endfor %}];
+    var monthdata = [
+                    {% for month in range((timeframe|int * 12) + 1) %}
+                    "{{ (calc[1][month]) }}" ,
+                    {% endfor %}];
+    
+    var ctx = canvas.getContext('2d');
+    
+    var chartType = 'line';
+    var mylineChart;
+    var datayear = {
+            labels: yeardatalabels,
             datasets: [{
                 label: 'Closing Balances',
-                data: [
-                {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
-                "{{ (calc[1][year]) }}" ,
-                    {% endfor %}
-
-                ],
+                data: yeardata,
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
                 borderWidth: 4,
                 pointBackgroundColor: '#007bff'
             }]
+        };
+    var datamonth = {
+            labels: monthdatalabels,
+            datasets: [{
+                label: 'Closing Balances',
+                data: monthdata,
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        };
 
-            
-        },
-        options: {
+    var options = {
             scales: {
                 yAxes: [{
                     ticks: {
@@ -536,8 +577,40 @@
             legend: {
                 display: true,
             }
-        }
-    });
+        };
+
+    init();
+
+    function init() {
+    // Chart declaration:
+        mylineChart = new Chart(ctx, {
+            type: chartType,
+            data: datayear,
+            options: options
+        });
+    }
+    function yearChart() {
+        mylineChart.destroy();
+        this.data = datayear;
+        init();
+    }
+    function monthChart() {
+        mylineChart.destroy();
+        this.data = datamonth;
+        init();
+    }
+    function barChart() {
+        mylineChart.destroy();
+        this.chartType = 'bar';
+        init();
+    }
+
+    function lineChart() {
+        mylineChart.destroy();
+        this.chartType = 'line';
+        init();
+    }
+
 </script>
 
 {% endblock %}

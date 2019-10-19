@@ -23,7 +23,7 @@ class calculationForm(FlaskForm):
     additionalContribution = StringField('Additional Contribution') 
     timeframe = StringField('Time Frame')
     savedata = BooleanField('Click the box to save your result.')
-    nickname = StringField('If saving this result, assign a nickname for it.')
+    nickname = StringField('If saving this result, assign a title for it.')
     submit = SubmitField(label='Calculate')
     expo = SubmitField(label='Export')
     
@@ -38,27 +38,22 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+        'Repeat Password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError('Please use a different username.')
-			
 
 class ResetPassword(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
 	currentPassword = PasswordField('Current Password', validators=[DataRequired()])
 	newPassword = PasswordField('New Password', validators=[DataRequired()])
-	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired(), EqualTo('newPassword')])
+	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired()])
 	submit = SubmitField('Reset Password')
 	
 	
 class ForgottenPassword(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
 	newPassword = PasswordField('New Password', validators=[DataRequired()])
-	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired(), EqualTo('newPassword')])
+	newPassword2 = PasswordField('Repeat New Password', validators=[DataRequired()])
 	submit = SubmitField('Reset Password')
             
             
@@ -74,7 +69,7 @@ class InterestRatesForm(FlaskForm):
     submit = SubmitField('Submit')
     
 class RemovalForm(FlaskForm):
-    rid = StringField('Which result would you like to remove?')
+    rid = IntegerField('Which result would you like to remove?')
     submit = SubmitField('Submit')
 
 class makeAdmin(FlaskForm):
@@ -82,10 +77,10 @@ class makeAdmin(FlaskForm):
     submit = SubmitField('Submit')
 
 class storedSelect(FlaskForm):
-    storedid = StringField('Which result would you like to view?')
+    storedid = IntegerField('Which result would you like to view?')
     submit = SubmitField('Submit')
 
 class compForm(FlaskForm):
-    stored1 = StringField('Which is the first result you would to view?')
-    stored2 = StringField('Which is the second result you would to view?')
+    stored1 = IntegerField('Which is the first result you would to view?')
+    stored2 = IntegerField('Which is the second result you would to view?')
     submit = SubmitField('Submit')
