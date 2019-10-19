@@ -8,6 +8,7 @@ from reportlab.platypus import Table, TableStyle, Image, SimpleDocTemplate
 from flask import make_response
 from pathlib import Path
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
+from reportlab.graphics.charts.legends import LineLegend
 from PIL import Image
 from math import ceil
 from calculations.ClassH import classH
@@ -190,7 +191,7 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	
 	logo = Image.open(path+"/static/UWA-Logo.png")
 
-	c.drawImage(path+"/static/UWA-Logo.png",100,100)
+	c.drawImage(path+"/static/UWA-Logo.png",100,100,100,100,)
 
 	maxY = 0
 	for i in range(len(calc[0])):
@@ -214,6 +215,8 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	lc.valueAxis.valueStep = round(maxY2/10)
 	lc.lines[0].strokeWidth = 2
 	lc.lines[1].strokeWidth = 1.5
+
+	
 	drawing.add(lc)
 
 	drawing.drawOn(c,100,300)
