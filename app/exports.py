@@ -1,14 +1,15 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch, mm
 from reportlab.lib.utils import ImageReader
+from reportlab.lib.validators import Auto
 from reportlab.graphics.shapes import Rect, Drawing
-from reportlab.lib.colors import Color, blue, red, yellow, green, brown, white, black, HexColor
+from reportlab.lib.colors import Color, blue, red, yellow, green, brown, white, black, HexColor, pink
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import Table, TableStyle, Image, SimpleDocTemplate
 from flask import make_response
 from pathlib import Path
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
-from reportlab.graphics.charts.legends import LineLegend
+from reportlab.graphics.charts.legends import Legend
 from PIL import Image
 from math import ceil
 from calculations.ClassH import classH
@@ -145,23 +146,54 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	#This is getting disgustingly long, bad coding mate
 	#Create the horizontal list of years
 	horiz = [str(year)]
-	for t in range(1,timeframe,1) :
+	for t in range(1,timeframe+1,1) :
 		temp =  year+t
 		horiz.append(str(temp))
 	
-	#The bits we want on the graph, should probably make a table as well
+	#The bits we want on the graph
 	opCalc = []
 	clCalc = []
-	for t in range(0,timeframe*12,12) :
-		opCalc.append(calc[0][intMonth+t])
-		clCalc.append(calc[1][intMonth+t])
+	retCalc = []
+	donCalc = []
+	recCalc = []
+	capCalc = []
+	for t in range(0,timeframe*12+1,12) :
+		opCalc.append(calc[0][t])
+		clCalc.append(calc[1][t])
+		if not calc[2]:
+			retCalc.append(0)
+		else:
+			retCalc.append(calc[2][t])
+		if not calc[3]:
+			donCalc.append(0)
+		else:
+			donCalc.append(calc[3][t])
+		if not calc[4]:
+			recCalc.append(0)
+		else:
+			recCalc.append(calc[4][t])
+		if not calc[5]:
+			capCalc.append(0)
+		else:
+			capCalc.append(calc[5][t])
+
+
 	data = []
+	data2 = []
 	tuple(opCalc)
 	tuple(clCalc)
+	tuple(retCalc)
+	tuple(donCalc)
+	tuple(recCalc)
+	tuple(capCalc)
 	data.append(opCalc)
 	data.append(clCalc)
+	data.append(retCalc)
+	data2.append(donCalc)
+	data2.append(recCalc)
+	data2.append(capCalc)
 	tuple(data)
-
+	tuple(data2)
 	#Create the PDF file
 	import io
 	output = io.BytesIO()
@@ -169,29 +201,55 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	c = canvas.Canvas(output)
 	
 	
-	c.setFillColor(HexColor("#332FA7"))
+	c.setFillColor(HexColor("#27348b")) #UWA Blue
 	c.rect(0, 765, 600, 80, stroke =0, fill = 1)
-	c.setFillColor(HexColor("#FCD433"))
+	c.setFillColor(HexColor("#e2b600")) #UWA Yellow
 	c.rect(0, 755, 600, 10, stroke=0, fill=1)
+	c.rect(0, 0, 600, 15, stroke=0, fill=1)
+	#Put in the footer information
+	c.setFillColor(HexColor("#464646"))
+	c.setFont("Helvetica", 9)
+	c.drawString(10,17,"0410091445")
+	c.drawString(250,17,"Department of great modelling")
+	c.drawString(450,17,"email: someone@uwa.com.au")
 	#Put in a informative paragraph
-	c.setFillColor(black)
 	textobject = c.beginText()
 	textobject.setTextOrigin(inch, 10*inch)
+	#Page title
+	textobject.setFillColor(HexColor("#27348b"))
+	textobject.setFont("Helvetica-Bold",20)
+	textobject.textLine(text = 'Model of Return on Funds')
+	#Intro sentence
 	textobject.setFont("Helvetica", 10)
-	textobject.textLine(text = month)
-	textobject.textLine(text = intclass)
-	textobject.textLine(text = '    Make everything dynamic')
-	textobject.textLine(text = '    Better Graph')
-	textobject.textLine(text = '    UWA logo')
-	textobject.textLine(text = '    Connect to website and check how to download')
-	textobject.setFillGray(0.4)
+	textobject.setFillColor(black)
+	text = 'Thank you for using the Modelling Returns on Funds Online Tool. This tool was developed by University '
+	textobject.textLine(text = text)
+	text = 'students who just wanted to die. These results were generated automatically based on the variables '
+	textobject.textLine(text = text)
+	text = 'outline below. Please direct any queries to whatever office is in charge.'
+	textobject.textLine(text = text)
+	textobject.textLine()
+	#Set the header setting and fill in
+	textobject.setFillColor(HexColor("#313764"))
+	textobject.setFont("Helvetica-Bold",15)
+	textobject.textLine(text = 'Inputs Used')
+	#Set the actual content setting and write in
+	textobject.setFont("Helvetica", 10)
+	textobject.setFillColor(black)
+	textobject.textLine(text = 'Starting Date: ' + month.capitalize() + ' ' + str(year))
+	textobject.textLine(text = 'Interest Class: '+intclass)
+
+	textobject.textLine(text = 'Inital Fund Value: $' + str(value))
+	textobject.textLine(text = 'Fund Time Length: ' + str(timeframe) + ' Years')
+	textobject.textLine(text = 'Other variables')
+
 	c.drawText(textobject)
 
 	path = str(Path(__file__).parent)
 	
 	logo = Image.open(path+"/static/UWA-Logo.png")
-
-	c.drawImage(path+"/static/UWA-Logo.png",100,100,100,100,)
+	width, height = logo.size
+	c.drawImage(path+"/static/UWA-Logo.png",10,780,width/2,height/2,mask='auto')
 
 	maxY = 0
 	for i in range(len(calc[0])):
@@ -204,7 +262,7 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	lc = HorizontalLineChart()
 	lc.x = 50
 	lc.y = 50
-	lc.height = 125
+	lc.height = 200
 	lc.width = 300
 	lc.data = data
 	lc.joinedLines = 1
@@ -213,13 +271,34 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 	lc.valueAxis.valueMin = 0
 	lc.valueAxis.valueMax = maxY2
 	lc.valueAxis.valueStep = round(maxY2/10)
-	lc.lines[0].strokeWidth = 2
-	lc.lines[1].strokeWidth = 1.5
+	lc.lines[0].strokeWidth = 1
+	lc.lines[1].strokeWidth = 1
 
+	lc.lines[2].strokeWidth = 1
+
+
+	#lc.lines[4].strokeWidth = 1
+
+	#lc.lines[5].strokeWidth = 1
+	
+	lc.lineLabelFormat = '%2.0f'
+	for o in range(0,len(data[1])):
+		lc.lineLabels[(1,o)].dy = -20
+		lc.lineLabels[(2,o)].visible = False
+		
 	
 	drawing.add(lc)
 
-	drawing.drawOn(c,100,300)
+	#drawing.drawOn(c,100,300)
+	legend = Legend()
+	legend.alignment = 'right'
+	legend.x = 10
+	legend.y = 10
+	legend.colorNamePairs = ((red,'Opening Balance'),(green,'Closing Balance'),(blue,'Interest Returns'))
+	
+	drawing.add(legend)
+
+	drawing.drawOn(c,100,250)
 
 	#Lets make a table, what could possible go wrong!
 	temp = [str(data[0][0])]
