@@ -27,7 +27,7 @@ from calculations.calcMonth import calcMonths
 from calculations.findMonth import findMonth
 from app.models import User, InterestRates, expected
 
-def pdfGen(month,year,fundvalue,interestClass,donation,spending,recapital,distribution,operatingDist,additionalContribution,timeframe):
+def pdfGen(month,year,fundvalue,interestClass,donation,spend,recapital,distribution,operatingDist,additionalContribution,timeframe):
 	#Check the inputs
 	month = month.strip()
 	intMonth = findMonth(month)
@@ -64,10 +64,10 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recapital,distri
 					yearValue = yearVal
 		donation = calcDyn(donation,month,year,timeframe)
 	#spending = additionalContribution
-	if spending == '' or spending == '0' :
+	if spend == '' or spend == '0' :
 		spending = {}
 	else:
-		dynVal = spending.split(',')
+		dynVal = spend.split(',')
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
@@ -78,7 +78,7 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recapital,distri
 					raise Exception("Year 2 is lower than year 1")
 				else:
 					yearValue = yearVal
-				spending = calcDyn(spending,month,year,timeframe)
+				spending = calcDyn(spend,month,year,timeframe)
 	if recapital == '' or recapital == '0':
 		recap = {}
 	else:
