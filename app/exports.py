@@ -264,7 +264,7 @@ def pdfGen(month,year,fundvalue,interestClass,donation,spending,recapital,distri
 
 	maxY = 0
 	for i in range(len(calc[0])):
-		if calc[1][i] > maxY :
+		if calc[0][i] > maxY :
 			maxY = calc[0][i]
 
 	maxY2 = 50 * ceil(maxY/50)
