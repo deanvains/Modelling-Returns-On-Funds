@@ -77,12 +77,8 @@
         <input type="submit" name='btn' value="View" class="btn btn-primary"> 
     </form>
 
-
-
-
-
      {% if error == False %}
-     <canvas class="my-4 w-100" id="my   " width="900" height="380"></canvas>
+     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
     <button type="button" class="btn btn-primary mb-2" id="YearButton2">View Year Table</button>
     <button type="button" class="btn btn-primary mb-2" id="MonthButton2">View Month Table</button>
     <div class="table-responsive" id="yeartable2">
@@ -300,8 +296,6 @@
         </table>
     </div>
     {% endif %}
-
-
 
     <br>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -816,7 +810,7 @@
 <!-- What if Graph -->
 <script>
     var ctx = document.getElementById("myChart2");
-    var myChart = new Chart(ctx, {
+    var myChart2 = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [
