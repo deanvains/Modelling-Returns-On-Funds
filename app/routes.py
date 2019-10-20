@@ -139,10 +139,10 @@ def calcs():
                     calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
                 elif intclass == "F":
                     thisinterest = interest.ClassF
-                    calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                    calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
                 elif intclass == "G" :
                     thisinterest = interest.ClassG
-                    calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                    calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
                 elif(intclass == "H"):
                     thisinterest = interest.ClassH
                     calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
@@ -462,9 +462,9 @@ def profile():
             if intclass == "E":
                 calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
             elif intclass == "F":
-                calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                calc = classF(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
             elif intclass == "G" :
-                calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,operatingDistribution,timeframe)
+                calc = classG(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
             elif(intclass == "H"):
                 calc = classH(month,year,value,fprofile,intclass,thisinterest,spending,addContribution,timeframe)
             elif intclass == "A":
@@ -590,10 +590,10 @@ def profile():
                 calc3 = classE(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,distribution1,timeframe1)
                 
             elif intclass1 == "F":
-                calc3 = classF(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,operatingDistribution1,timeframe1)
+                calc3 = classF(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,distribution,timeframe1)
                 
             elif intclass1 == "G" :
-                calc3 = classG(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,operatingDistribution1,timeframe1)
+                calc3 = classG(month1,year1,value1,fprofile,intclass1,thisinterest1,donation1,recap1,distribution,timeframe1)
                 
             elif(intclass1 == "H"):
                 calc3 = classH(month1,year1,value1,fprofile,intclass1,thisinterest1,spending1,addContribution1,timeframe1)
@@ -718,10 +718,10 @@ def profile():
                 calc4 = classE(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,distribution2,timeframe2)
                 
             elif intclass2 == "F":
-                calc4 = classF(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,operatingDistribution2,timeframe2)
+                calc4 = classF(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,distribution,timeframe2)
                 
             elif intclass2 == "G" :
-                calc4 = classG(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,operatingDistribution2,timeframe2)
+                calc4 = classG(month2,year2,value2,fprofile,intclass2,thisinterest2,donation2,recap2,distribution,timeframe2)
                 
             elif(intclass2 == "H"):
                 calc4 = classH(month2,year2,value2,fprofile,intclass2,thisinterest2,spending2,addContribution2,timeframe2)
