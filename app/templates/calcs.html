@@ -184,9 +184,7 @@
 				</p>
             </div>
             {% endif %}
-            <div style="width: 20%">
-            <p>{{ form.expo(class="btn btn-primary btn-md btn-block") }}</p>
-            </div>
+            
         </form>
     </div>
 
@@ -198,10 +196,10 @@
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <form action="" method="POST">
-                    <!--<button type="submit" class="btn-sm btn-outline-secondary">Export</button>-->
+                    <!--<button type="submit" class="btn-sm btn-outline-secondary">Export1</button>-->
                 </form>
                 <!--<form>
-                    <<a href=# id=test><button type="submit" class="btn btn-sm btn-outline-secondary">Export</button></a>
+                    <<a href=# id=test><button type="submit" class="btn btn-sm btn-outline-secondary">Export2</button></a>
                 </form>-->
             </div>
         </div>
@@ -218,9 +216,9 @@
     </div>
 
     <button type="button" onclick="yearChart()" class="btn btn-primary mb-2" id="YearButton">View Year Table</button>
-    <button type="button" onclick="monthChart()" class="btn btn-primary mb-2" id="MonthButton">View Month Table</button>
     <button type="button" onclick="lineChart()" class="btn btn-primary mb-2" id="LineButton">View as Line Graph</button>
     <button type="button" onclick="barChart()" class="btn btn-primary mb-2" id="BarButton">View Bar Graph</button>
+    <button type="button" onclick="printpage()" class="btn btn-primary mb-2" id="PrintButton">Print</button>
 
     <div class="table-responsive" id="yeartable">
         <table class="table table table-striped ">
@@ -502,27 +500,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
     var canvas = document.getElementById("myChart");
-    var monthdatalabels = [
-            {% if error == {} %}
-                    {% for month in range((timeframe|int *12) + 1) %}
-                    {% if (month) in calc[0].keys() %}
-                        {%  set monthDict = {0 : "Jan",
-                        1 : "Feb",
-                        2 : "Mar",
-                        3 : "Apr",
-                        4 : "May",
-                        5 : "Jun",
-                        6 : "Jul",
-                        7 : "Aug",
-                        8 : "Sep",
-                        9 : "Oct",
-                        10 : "Nov",
-                        11 : "Dec"} %}
-                        "{{ monthDict[(months + month -1) % 12 ] }} {{ years + month//12}}" ,
-                        {% endif %}
-                    {% endfor %}
-                    {% endif %}
-                    ];
 
     var yeardatalabels = [
                     {% for year in range(timeframe|int +1) %}
@@ -532,10 +509,7 @@
                     {% for year in range(decMonth,timeframe|int * 12 + 1, 12) %}
                     "{{ (calc[1][year]) }}" ,
                     {% endfor %}];
-    var monthdata = [
-                    {% for month in range((timeframe|int * 12) + 1) %}
-                    "{{ (calc[1][month]) }}" ,
-                    {% endfor %}];
+
     
     var ctx = canvas.getContext('2d');
     
@@ -553,18 +527,7 @@
                 pointBackgroundColor: '#007bff'
             }]
         };
-    var datamonth = {
-            labels: monthdatalabels,
-            datasets: [{
-                label: 'Closing Balances',
-                data: monthdata,
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-        };
+    
 
     var options = {
             scales: {
@@ -589,16 +552,11 @@
             options: options
         });
     }
-    function yearChart() {
-        mylineChart.destroy();
-        this.data = datayear;
-        init();
+
+    function printpage() {
+        window.print();
     }
-    function monthChart() {
-        mylineChart.destroy();
-        this.data = datamonth;
-        init();
-    }
+
     function barChart() {
         mylineChart.destroy();
         this.chartType = 'bar';
