@@ -26,17 +26,25 @@ from calculations.calcMonth import calcMonths
 from calculations.findMonth import findMonth
 from app.models import User, InterestRates, expected
 
-def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,operatingDistribution,additionalContribution,timeframe):
+def pdfGen(month,year,fundvalue,interestClass,donation,spending,recapital,distribution,operatingDistribution,additionalContribution,timeframe):
 	#Check the inputs
 	month = month.strip()
 	intMonth = findMonth(month)
+	
 	if len(year) != 4 or year.isdigit() == False :
 		raise Exception("Invalid Years")
 	year = int(year)
-	value = int(value)
+	value =  fundvalue
+	if value.isdigit() == False :
+		raise Exception("Invalid Fund Value")
+	value = int(fundvalue)
 	fprofile = None
 	intclass = interestClass.strip()
 	interest = InterestRates.query.first()
+	
+	timeframe = timeframe
+	if timeframe.isdigit() == False :
+		raise Exception("Invalid Time Frame")
 	timeframe = int(timeframe)
 	
 	if donation == '' or donation == '0':
@@ -54,6 +62,7 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 				else:
 					yearValue = yearVal
 		donation = calcDyn(donation,month,year,timeframe)
+	#spending = additionalContribution
 	if spending == '' or spending == '0' :
 		spending = {}
 	else:
@@ -69,10 +78,10 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 				else:
 					yearValue = yearVal
 				spending = calcDyn(spending,month,year,timeframe)
-	if recap == '' or recap == '0':
+	if recapital == '' or recapital == '0':
 		recap = {}
 	else:
-		dynVal = recap.split(',')
+		dynVal = recapital.split(',')
 		yearValue = 0
 		for group in dynVal:
 			grpLst = group.split("-")
@@ -83,7 +92,7 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 					raise Exception("Year 2 is lower than year 1")
 				else:
 					yearValue = yearVal
-				recap = calcDyn(recap,month,year,timeframe)
+				recap = calcDyn(recapital,month,year,timeframe)
 	if operatingDistribution == '' or operatingDistribution == '0' :
 		operatingDistribution = {}
 	else:
@@ -93,7 +102,7 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 			grpLst = group.split("-")
 			monthVal = grpLst[0].strip().lower()
 			yearVal = grpLst[1].strip()
-		
+			
 			if yearVal.isdigit() == True :
 				if int(yearVal) < int(yearValue) :
 					raise Exception("Year 2 is lower than year 1")
@@ -117,7 +126,9 @@ def pdfGen(month,year,value,interestClass,donation,spending,recap,distribution,o
 				addContribution = calcDyn(additionalContribution,month,year,timeframe)
 	decMonth = findDec(month)
 
-	#Perform the correct calculation
+	
+
+
 	if intclass == "E":
 		thisinterest = interest.ClassE
 		calc = classE(month,year,value,fprofile,intclass,thisinterest,donation,recap,distribution,timeframe)
